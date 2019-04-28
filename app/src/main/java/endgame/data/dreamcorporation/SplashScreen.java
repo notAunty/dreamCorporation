@@ -1,8 +1,10 @@
 package endgame.data.dreamcorporation;
 
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 public class SplashScreen extends Activity {
 
