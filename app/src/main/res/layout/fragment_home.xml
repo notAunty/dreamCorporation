@@ -18,10 +18,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="top"
             android:paddingLeft="12dp"
             android:paddingTop="8dp"
             android:textSize="16sp"
+            android:gravity="top"
+            android:fontFamily="cursive"
             android:text="@string/app_name"
             android:textColor="#A9000000" />
 
