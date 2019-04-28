@@ -2,12 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/grad2"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.CardView
         android:id="@+id/icon_login"
-        android:layout_marginTop="128dp"
+        android:layout_marginTop="116dp"
         android:layout_width="230dp"
         android:layout_height="230dp"
         app:cardBackgroundColor="@color/ic_launcher_background"
@@ -28,9 +28,9 @@
         android:layout_below="@id/icon_login"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="32dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginLeft="32dp"
+        android:layout_marginRight="32dp"
         android:orientation="vertical">
 
         <android.support.design.widget.TextInputLayout
@@ -62,6 +62,33 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"/>
         </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="8dp">
+
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/grad1"
+                android:text="Login"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"/>
+        </android.support.design.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/signup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="2dp"
+            android:text="Sign up"
+            android:textColor="@android:color/primary_text_dark_nodisable"/>
     </LinearLayout>
 
 </RelativeLayout>

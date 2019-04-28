@@ -1,25 +1,25 @@
 package endgame.data.dreamcorporation;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_login);
-//
-//    BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
-//    bottomNav.setOnNavigationItemSelectedListener(navListener);
-//
-//    getSupportFragmentManager().beginTransaction().
-//            setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out).
-//            replace(R.id.fragment_container, new HomeFragment()).commit();
+    setContentView(R.layout.activity_main);
+
+    BottomNavigationView bottomNav = findViewById(R.id.bottom_nav);
+    bottomNav.setOnNavigationItemSelectedListener(navListener);
+
+    getSupportFragmentManager().beginTransaction().
+            setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out).
+            replace(R.id.fragment_container, new HomeFragment()).commit();
   }
 
   private BottomNavigationView.OnNavigationItemSelectedListener navListener =
