@@ -22,7 +22,6 @@
             android:paddingTop="8dp"
             android:textSize="16sp"
             android:gravity="top"
-            android:fontFamily="cursive"
             android:text="@string/app_name"
             android:textColor="#A9000000" />
 
@@ -43,7 +42,7 @@
             android:fontFamily="@font/google_sans_bold"
             android:layout_gravity="bottom"
             android:paddingLeft="15dp"
-            android:paddingBottom="4dp"
+            android:paddingBottom="8dp"
             android:text="RM 99,999.00"
             android:textColor="#F0000000"
             android:textSize="40sp"/>
@@ -53,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/card"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:layout_marginLeft="4dp"
         android:orientation="vertical">
 
