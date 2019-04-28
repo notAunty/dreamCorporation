@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/grad5"
+    android:background="@drawable/grad2"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
@@ -50,6 +50,7 @@
             android:textColorHint="@android:color/white">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signup_userid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -68,6 +69,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signup_userpw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
