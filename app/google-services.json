@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "534245507135",
+    "firebase_url": "https://endgame-data.firebaseio.com",
+    "project_id": "endgame-data",
+    "storage_bucket": "endgame-data.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:534245507135:android:5f22b3c507a24b0b",
+        "android_client_info": {
+          "package_name": "endgame.data.dreamcorporation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "534245507135-66uadgvuk7otsn1dfcjmtpq7tg9bv5bb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDChXBke3Ivi9tOFvt2jrGZKqi1i48SQKc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "534245507135-66uadgvuk7otsn1dfcjmtpq7tg9bv5bb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
