@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "534245507135-itisc57us6omdfd0v2ge9kj7psv8id2r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "endgame.data.dreamcorporation",
+            "certificate_hash": "803ffdde323bafc62414f4c22743b8fdce2d2d6a"
+          }
+        },
+        {
           "client_id": "534245507135-66uadgvuk7otsn1dfcjmtpq7tg9bv5bb.apps.googleusercontent.com",
           "client_type": 3
         }
