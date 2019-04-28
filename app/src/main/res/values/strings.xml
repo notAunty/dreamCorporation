@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Dream Corporation</string>
+    <string name="title_activity_bottom_nav">bottomNav</string>
+    <string name="title_home">Home</string>
+    <string name="title_network">Network</string>
+    <string name="title_profile">Profile</string>
+</resources>
