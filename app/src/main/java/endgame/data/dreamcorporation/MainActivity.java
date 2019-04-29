@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Button login_button = (Button) findViewById(R.id.login_button);
     TextView signup = (TextView) findViewById(R.id.to_signup_screen);
 
+
     login_button.setOnClickListener(new View.OnClickListener() {
       @Override
       //On click function
@@ -44,5 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Initialize Firebase Auth
     mAuth = FirebaseAuth.getInstance();
+
+    onBackPressed();
   }
 }

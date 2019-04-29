@@ -63,16 +63,17 @@
             android:layout_height="wrap_content"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             app:boxStrokeColor="@color/colorAccent"
-            android:layout_marginTop="8dp"
-            android:hint="Password"
             android:textColorHint="@android:color/white"
+            android:layout_marginTop="8dp"
+            app:passwordToggleEnabled="true"
+            android:hint="Password"
             >
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/signup_userpw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:textColor="@android:color/white"/>
         </com.google.android.material.textfield.TextInputLayout>
 
