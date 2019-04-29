@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/grad3">
+    android:background="@color/platinum">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,10 +15,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:background="@drawable/semicircle"/>
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/circle">
+
+            </View>
 
             <TextView
                 android:layout_width="wrap_content"
