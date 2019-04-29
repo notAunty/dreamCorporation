@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/icon_login"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="70dp"
         android:layout_width="230dp"
         android:layout_height="230dp"
         app:cardBackgroundColor="@color/ic_launcher_background"
@@ -50,6 +50,7 @@
             android:textColorHint="@android:color/white">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/login_userid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -68,6 +69,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/login_userpw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
