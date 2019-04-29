@@ -42,7 +42,7 @@ public class SignupActivity extends AppCompatActivity {
 //        Intent intent = new Intent(view.getContext(), HomeActivity.class);
 //        startActivity(intent);
 
-        if (userPw.length() < 8) {
+        if (userPw.length() < 7) {
           Toast.makeText(view.getContext(), "Password longer a bit can ah??",
                   Toast.LENGTH_SHORT).show();
         } else {
@@ -70,7 +70,6 @@ public class SignupActivity extends AppCompatActivity {
                     }
                   });
         }
-
         onBackPressed(); // To close this activity
       }
     });
