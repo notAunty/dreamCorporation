@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/icon_login"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="116dp"
         android:layout_width="230dp"
         android:layout_height="230dp"
         app:cardBackgroundColor="@color/ic_launcher_background"
@@ -36,7 +36,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="Welcome aboard"
             android:textSize="30sp"
             android:layout_marginBottom="4dp"
             android:textColor="@android:color/white"/>
@@ -50,6 +50,7 @@
             android:textColorHint="@android:color/white">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signup_userid"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -68,6 +69,7 @@
             >
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/signup_userpw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -82,23 +84,25 @@
             app:cardCornerRadius="8dp">
 
             <Button
-                android:id="@+id/login_button"
-                android:layout_width="match_parent"
+                android:id="@+id/signup_button"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/grad1"
-                android:text="Login"
+                android:text="Sign Up"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"/>
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
-            android:id="@+id/to_signup_screen"
+            android:id="@+id/to_login_screen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="16dp"
             android:paddingLeft="2dp"
-            android:text="Sign up"
+            android:text="Log in"
             android:textColor="@android:color/primary_text_dark_nodisable"/>
     </LinearLayout>
 
