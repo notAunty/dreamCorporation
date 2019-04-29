@@ -71,7 +71,17 @@
             android:layout_height="wrap_content">
 
         </ListView>
+
+
+
     </LinearLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/semicircle"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" />
 
     <!--<android.support.design.widget.CoordinatorLayout-->
         <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
