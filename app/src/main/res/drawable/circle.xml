@@ -3,13 +3,13 @@
     <item>
         <shape android:shape="oval">
             <gradient
-                android:startColor="#4568DC"
-                android:endColor="#37F5F5"
+                android:startColor="#000F57"
+                android:endColor="#37A9F5"
                 android:type="linear"
                 android:angle="270"/>
             <size
-                android:width="120dp"
-                android:height="120dp"/>
+                android:width="640dp"
+                android:height="640dp"/>
         </shape>
     </item>
 </selector>
