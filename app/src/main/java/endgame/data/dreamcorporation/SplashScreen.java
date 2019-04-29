@@ -3,7 +3,9 @@ package endgame.data.dreamcorporation;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Intent;
+import android.media.Image;
 import android.os.Bundle;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 
 public class SplashScreen extends Activity {
