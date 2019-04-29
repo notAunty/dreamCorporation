@@ -42,11 +42,11 @@ public class SignupActivity extends AppCompatActivity {
 //        Intent intent = new Intent(view.getContext(), HomeActivity.class);
 //        startActivity(intent);
 
-        if (userPw.length() < 7) {
+        if (userPw.length() < 7 || userId.length() < 1) {
           Toast.makeText(view.getContext(), "Password longer a bit can ah??",
                   Toast.LENGTH_SHORT).show();
         } else {
-          mAuth.createUserWithEmailAndPassword(userId + "@gmail.com", userPw)
+          mAuth.createUserWithEmailAndPassword(userId + "@asdfggfdsa.com", userPw)
                   .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

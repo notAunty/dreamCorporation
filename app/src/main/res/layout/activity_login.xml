@@ -77,32 +77,38 @@
                 android:textColor="@android:color/white"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:layout_marginTop="16dp"
-            app:cardCornerRadius="8dp">
-
-            <Button
-                android:id="@+id/login_button"
-                android:layout_width="match_parent"
+            android:orientation="horizontal">
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/grad1"
-                android:text="Login"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"/>
-        </com.google.android.material.card.MaterialCardView>
+                android:background="@color/colorAccent"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="8dp">
 
-        <TextView
-            android:id="@+id/to_signup_screen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:paddingLeft="2dp"
-            android:text="Sign up"
-            android:textColor="@android:color/primary_text_dark_nodisable"/>
+                <Button
+                    android:id="@+id/login_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/grad1"
+                    android:text="Login"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/to_signup_screen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:paddingBottom="4dp"
+                android:paddingLeft="8dp"
+                android:text="Sign up"
+                android:textColor="@android:color/primary_text_dark_nodisable"/>
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>
