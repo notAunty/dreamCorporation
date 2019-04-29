@@ -79,9 +79,12 @@
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/semicircle"
+        android:src="@drawable/ic_add_black_24dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="6dp"
+        app:elevation="2dp"
+        />
 
     <!--<android.support.design.widget.CoordinatorLayout-->
         <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
