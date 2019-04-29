@@ -64,6 +64,7 @@ public class SignupActivity extends AppCompatActivity {
                     // ...
                   }
                 });
+        onBackPressed(); // To close this activity
       }
     });
 
@@ -76,7 +77,5 @@ public class SignupActivity extends AppCompatActivity {
         startActivity(intent);
       }
     });
-
-    onBackPressed();
   }
 }

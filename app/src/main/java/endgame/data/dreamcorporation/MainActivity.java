@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         //Create the intent to start another activity
         Intent intent = new Intent(view.getContext(), HomeActivity.class);
         startActivity(intent);
+
+        onBackPressed(); // To close this activity
       }
     });
 
@@ -46,6 +48,6 @@ public class MainActivity extends AppCompatActivity {
     // Initialize Firebase Auth
     mAuth = FirebaseAuth.getInstance();
 
-    onBackPressed();
+
   }
 }
