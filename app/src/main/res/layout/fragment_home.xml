@@ -77,18 +77,18 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        app:borderWidth="0dp"
-        android:backgroundTint="#FFCC00"
-        app:rippleColor="@android:color/white"
-        android:clickable="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/ic_add"
+        android:backgroundTint="@android:color/holo_red_light"
+        app:rippleColor="@android:color/white"
+        android:clickable="true"
         app:fabSize="normal"
         android:layout_marginBottom="6dp"
         app:elevation="3dp"
+        app:borderWidth="0dp"
         >
     </com.google.android.material.floatingactionbutton.FloatingActionButton>>
 
