@@ -77,6 +77,7 @@
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        app:borderWidth="0dp"
         android:backgroundTint="#FFCC00"
         app:rippleColor="@android:color/white"
         android:clickable="true"
