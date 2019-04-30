@@ -10,6 +10,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
+  private HomeFragment homeF = new HomeFragment();
+  private NetworkFragment networkF = new NetworkFragment();
+  private ProfileFragment profileF = new ProfileFragment();
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -20,7 +24,7 @@ public class HomeActivity extends AppCompatActivity {
 
     getSupportFragmentManager().beginTransaction().
             setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out).
-            replace(R.id.fragment_container, new HomeFragment()).commit();
+            replace(R.id.fragment_container, homeF).commit();
   }
 
   private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -31,15 +35,20 @@ public class HomeActivity extends AppCompatActivity {
 
               switch (menuItem.getItemId()) {
                 case R.id.nav_home:
-                  selectedFragment = new HomeFragment();
+                  selectedFragment = homeF;
                   break;
                 case R.id.nav_network:
-                  selectedFragment = new NetworkFragment();
+                  selectedFragment = networkF;
                   break;
                 case R.id.nav_profile:
-                  selectedFragment = new ProfileFragment();
+                  selectedFragment = profileF;
                   break;
               }
+
+              // PHILEMON SAY THIS IMPLEMETATION IS BAD, as it doesn't save state
+              // Use ViewPager, FragmentPagerAdapter, FragmentStatePagerAdapter
+              // But I'm too lazy haha
+
               getSupportFragmentManager().beginTransaction().
                       setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out).
                       replace(R.id.fragment_container, selectedFragment).commit();
