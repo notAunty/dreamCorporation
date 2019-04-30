@@ -22,10 +22,10 @@ public class ProfileFragment extends Fragment {
     mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Auth // IMPORTANT
     View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
-    TextView fullName = (TextView) view.findViewById(R.id.profile_name);
+    TextView uidField = (TextView) view.findViewById(R.id.uid);
     String tempUID = mAuth.getUid();
 
-    if (!tempUID.isEmpty()) fullName.setText(tempUID);
+    if (!tempUID.isEmpty()) uidField.setText(tempUID);
 
     return view;
   }
