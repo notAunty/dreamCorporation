@@ -2,19 +2,18 @@ package endgame.data.dreamcorporation;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.DatePicker;
-import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class activity_testing_data extends AppCompatActivity {
+
+  private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+  private DatabaseReference myRef = mDatabase.getReference("users");
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -31,25 +30,27 @@ public class activity_testing_data extends AppCompatActivity {
       @Override
       public void onClick(View view) {
 
-        DatePicker datePicker = view.findViewById(R.id.testing_date);
-        TimePicker timePicker = view.findViewById(R.id.testing_time);
+//        DatePicker datePicker = (DatePicker) view.findViewById(R.id.testing_date);
+//        TimePicker timePicker = (TimePicker) view.findViewById(R.id.testing_time);
+//
+//        Calendar cal = new GregorianCalendar(datePicker.getYear(),
+//                datePicker.getMonth(),
+//                datePicker.getDayOfMonth(),
+//                timePicker.getHour(),
+//                timePicker.getMinute());
+//
+//        long time = cal.getTimeInMillis();
+//        String temp = String.valueOf(datePicker.getYear() +
+//                datePicker.getMonth() + datePicker.getDayOfMonth() +
+//                timePicker.getHour() + timePicker.getMinute());
+//        //SimpleDateFormat();
 
-        Calendar cal = new GregorianCalendar(datePicker.getYear(),
-                datePicker.getMonth(),
-                datePicker.getDayOfMonth(),
-                timePicker.getHour(),
-                timePicker.getMinute());
 
-        long time = cal.getTimeInMillis();
-
-        Snackbar.make(view, datePicker.getYear() +
-                        datePicker.getMonth() + datePicker.getDayOfMonth() +
-                        timePicker.getHour() + timePicker.getMinute(), Snackbar.LENGTH_LONG).show();
       }});
 
 
 
-    //dialogView.findViewById(R.id.testing_date).setOnClickListener();
+//    dialogView.findViewById(R.id.testing_date).setOnClickListener();
 //    alertDialog.setView(dialogView);
 //    alertDialog.show();
   }

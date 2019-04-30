@@ -4,6 +4,10 @@
     android:layout_height="match_parent"
     android:background="@drawable/grad2">
 
-
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:src="@drawable/middle"/>
 
 </RelativeLayout>

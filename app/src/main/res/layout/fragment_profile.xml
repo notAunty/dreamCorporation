@@ -36,7 +36,7 @@
             android:layout_marginTop="48dp"
             android:text="Name"
             android:textColor="@android:color/white"
-            android:textSize="40dp" />
+            android:textSize="40sp" />
 
     </FrameLayout>
 

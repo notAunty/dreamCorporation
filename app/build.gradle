@@ -30,9 +30,12 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'androidx.fragment:fragment:1.0.0'
     implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.google.firebase:firebase-auth:16.2.1'
-    implementation 'androidx.fragment:fragment:1.0.0'
+    implementation 'com.google.firebase:firebase-database:16.1.0'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.12'
+//    implementation 'com.github.Kunzisoft:Android-SwitchDateTimePicker:2.0'
 //    implementation 'com.aurelhubert:ahbottomnavigation:0.1.3'
 }
 
