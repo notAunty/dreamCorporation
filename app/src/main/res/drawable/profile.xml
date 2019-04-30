@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:drawable="@drawable/ic_profile">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
         <shape android:shape="oval">
             <gradient
                 android:startColor="#FFDD00"
                 android:endColor="#DD2476"
                 android:type="linear"
-                android:angle="200"/>
+                android:angle="225"/>
             <size
-                android:width="120dp"
-                android:height="120dp"/>
+                android:width="200dp"
+                android:height="200dp"/>
         </shape>
     </item>
-</selector>
+    <item android:width="180dp"
+        android:height="180dp"
+        android:gravity="center"
+        android:drawable="@drawable/ic_profile">
+    </item>
+</layer-list>
