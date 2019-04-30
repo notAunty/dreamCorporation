@@ -13,6 +13,7 @@
         </shape>
         <bitmap
             android:src="@drawable/ic_profile"
-            android:tint="@android:color/white"/>
+            android:tint="@android:color/white"
+            android:gravity="center"/>
     </item>
 </selector>
