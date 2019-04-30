@@ -25,5 +25,7 @@ public class ProfileFragment extends Fragment {
     String tempUID = mAuth.getUid();
 
     if (!tempUID.isEmpty()) fullName.setText(tempUID);
+
+    return view;
   }
 }
