@@ -15,11 +15,18 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".MainActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".activity_testing_data"
+            android:label="@string/title_activity_testing_data"
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <activity android:name=".SignupActivity"
-            android:launchMode="singleTask"/>
+        <activity
+            android:name=".MainActivity"
+            android:launchMode="singleTask" />
+
+        <activity
+            android:name=".SignupActivity"
+            android:launchMode="singleTask" />
 
         <activity android:name=".HomeActivity" />
 
@@ -30,6 +37,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

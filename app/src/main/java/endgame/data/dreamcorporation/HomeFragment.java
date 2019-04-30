@@ -1,5 +1,6 @@
 package endgame.data.dreamcorporation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,8 @@ public class HomeFragment extends Fragment {
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        recent.setText(String.valueOf((int)++counter));
+        Intent i = new Intent(v.getContext(), activity_testing_data.class);
+        startActivity(i);
       }
     });
     // End TESTING

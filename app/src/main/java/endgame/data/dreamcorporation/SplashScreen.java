@@ -17,7 +17,7 @@ public class SplashScreen extends Activity {
       public void run() {
         try {
           super.run();
-          sleep(1000);  //Delay of 1 seconds
+          sleep(250);  //Delay of 1 seconds
         } catch (Exception e) {}
         finally {
           Intent i = new Intent(SplashScreen.this, MainActivity.class);

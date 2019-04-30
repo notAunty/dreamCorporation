@@ -8,7 +8,7 @@ public class Node {
   private String[] downlines;
 
   public Node() {
-    //remove this
+
   }
 
   public Node(String uid, int userId, String upline, String[] downlines) {
