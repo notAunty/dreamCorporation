@@ -19,6 +19,7 @@ public class ProfileFragment extends Fragment {
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Auth // IMPORTANT
     View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
     TextView fullName = (TextView) view.findViewById(R.id.profile_name);
