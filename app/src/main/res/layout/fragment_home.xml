@@ -84,14 +84,15 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="6dp"
-        android:backgroundTint="#FFCC00"
+        android:src="@drawable/ic_add"
+        app:rippleColor="@android:color/white"
+        android:backgroundTint="@color/bright_yellow"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/ic_add"
         app:borderWidth="0dp"
         app:elevation="3dp"
         app:fabSize="normal"
-        app:rippleColor="@android:color/white" />
+        android:onClick="facOnClick"/>
 
     <!--<android.support.design.widget.CoordinatorLayout-->
     <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
