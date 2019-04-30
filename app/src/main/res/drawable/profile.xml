@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
+    <item
+        android:drawable="@drawable/ic_profile">
         <shape android:shape="oval">
             <gradient
                 android:startColor="#FFDD00"
@@ -8,12 +9,8 @@
                 android:type="linear"
                 android:angle="200"/>
             <size
-                android:width="640dp"
-                android:height="640dp"/>
+                android:width="120dp"
+                android:height="120dp"/>
         </shape>
-        <bitmap
-            android:src="@drawable/ic_profile"
-            android:tint="@android:color/white"
-            android:gravity="center"/>
     </item>
 </selector>

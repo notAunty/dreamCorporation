@@ -20,7 +20,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-  private FirebaseAuth mAuth;
+  private FirebaseAuth mAuth; //wp use this
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button login_button = (Button) findViewById(R.id.login_button);
     TextView signup = (TextView) findViewById(R.id.to_signup_screen);
-    mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Auth
+    mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Auth  //wp use this
 
 
     login_button.setOnClickListener(new View.OnClickListener() {
@@ -65,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("login: ", "signInWithEmail:success");
                         FirebaseUser user = mAuth.getCurrentUser();
+
+                        Toast.makeText(view.getContext(), "UID is " + mAuth.getUid(),
+                                Toast.LENGTH_SHORT).show();
 
                         //Create the intent to start another activity
                         Intent intent = new Intent(view.getContext(), HomeActivity.class);
