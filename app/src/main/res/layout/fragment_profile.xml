@@ -21,7 +21,6 @@
         </View>
 
         <ImageView
-            android:id="@+id/opendialog"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
@@ -35,9 +34,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="48dp"
-            android:text="Name"
+            android:text="Tap to Decrypt"
             android:textColor="@android:color/white"
-            android:textSize="40sp" />
+            android:textSize="30sp" />
 
     </FrameLayout>
 
@@ -55,7 +54,6 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:orientation="vertical">
-
 
             <LinearLayout
                 android:id="@+id/llclear"
@@ -90,7 +88,6 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:id="@+id/testing"
                     style="@style/Profile_ShowText_Style"
                     android:text="THIS IS PLACEHOLDER"/>
             </LinearLayout>
