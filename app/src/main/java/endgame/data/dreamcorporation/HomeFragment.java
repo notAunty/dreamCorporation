@@ -35,7 +35,7 @@ public class HomeFragment extends Fragment {
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent i = new Intent(v.getContext(), activity_testing_data.class);
+        Intent i = new Intent(v.getContext(), activityTestingData.class);
         startActivity(i);
       }
     });

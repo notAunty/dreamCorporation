@@ -10,7 +10,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class activity_testing_data extends AppCompatActivity {
+public class activityTestingData extends AppCompatActivity {
 
   private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
   private DatabaseReference myRef = mDatabase.getReference("users");
@@ -22,8 +22,8 @@ public class activity_testing_data extends AppCompatActivity {
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
-//    final View dialogView = View.inflate(activity_testing_data.this, R.layout.activity_testing_data, null);
-//    final AlertDialog alertDialog = new AlertDialog.Builder(activity_testing_data.this).create();
+//    final View dialogView = View.inflate(activityTestingData.this, R.layout.activityTestingData, null);
+//    final AlertDialog alertDialog = new AlertDialog.Builder(activityTestingData.this).create();
 
     FloatingActionButton fab = findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {
