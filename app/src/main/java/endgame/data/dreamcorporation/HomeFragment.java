@@ -22,7 +22,6 @@ public class HomeFragment extends Fragment {
 
   private int counter = 0;
   private TextView recent = null;
-  final Context context = getActivity();
 
   @Nullable
   @Override
