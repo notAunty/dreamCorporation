@@ -65,19 +65,14 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Profile_MainText_Style"
                     android:text="User UID"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
                     android:id="@+id/uid"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="NULL"
-                    android:textSize="20dp" />
+                    style="@style/Profile_ShowText_Style"
+                    android:text="NULL"/>
             </LinearLayout>
 
             <LinearLayout
@@ -89,18 +84,13 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Profile_MainText_Style"
                     android:text="If this helped you"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="THIS IS PLACEHOLDER"
-                    android:textSize="20dp" />
+                    style="@style/Profile_ShowText_Style"
+                    android:text="THIS IS PLACEHOLDER"/>
             </LinearLayout>
 
             <LinearLayout
@@ -112,18 +102,13 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Profile_MainText_Style"
                     android:text="CHANGE TO BETTER ONE, this no ripple then tapped"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="CHANGE TO BETTER ONE, this no ripple then tapped"
-                    android:textSize="20dp" />
+                    style="@style/Profile_ShowText_Style"
+                    android:text="CHANGE TO BETTER ONE, this no ripple then tapped" />
             </LinearLayout>
 
             <LinearLayout
@@ -135,18 +120,13 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Profile_MainText_Style"
                     android:text="We respect your privacy"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="Privacy Policy"
-                    android:textSize="20dp" />
+                    style="@style/Profile_ShowText_Style"
+                    android:text="Privacy Policy"/>
             </LinearLayout>
 
             <LinearLayout
@@ -157,18 +137,13 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Profile_MainText_Style"
                     android:text="Application by"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="FUCKING CHANGE THIS"
-                    android:textSize="20dp" />
+                    style="@style/Profile_ShowText_Style"
+                    android:text="FUCKING CHANGE THIS"/>
             </LinearLayout>
 
             <LinearLayout
@@ -180,18 +155,13 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Profile_MainText_Style"
                     android:text="Application by"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="FUCKING CHANGE THIS"
-                    android:textSize="20dp" />
+                    style="@style/Profile_ShowText_Style"
+                    android:text="FUCKING CHANGE THIS"/>
             </LinearLayout>
 
             <LinearLayout
@@ -202,18 +172,13 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Profile_MainText_Style"
                     android:text="Application by"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="FUCKING CHANGE THIS"
-                    android:textSize="20dp" />
+                    style="@style/Profile_ShowText_Style"
+                    android:text="FUCKING CHANGE THIS"/>
             </LinearLayout>
 
             <LinearLayout
@@ -224,18 +189,13 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Profile_MainText_Style"
                     android:text="Application by"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="FUCKING CHANGE THIS"
-                    android:textSize="20dp" />
+                    style="@style/Profile_ShowText_Style"
+                    android:text="FUCKING CHANGE THIS"/>
             </LinearLayout>
 
             <LinearLayout
@@ -246,18 +206,13 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Profile_MainText_Style"
                     android:text="Application by"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="FUCKING CHANGE THIS"
-                    android:textSize="20dp" />
+                    style="@style/Profile_ShowText_Style"
+                    android:text="FUCKING CHANGE THIS"/>
             </LinearLayout>
 
             <LinearLayout
@@ -268,18 +223,13 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Profile_MainText_Style"
                     android:text="Application by"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="FUCKING CHANGE THIS"
-                    android:textSize="20dp" />
+                    style="@style/Profile_ShowText_Style"
+                    android:text="FUCKING CHANGE THIS"/>
             </LinearLayout>
 
             <LinearLayout
@@ -290,18 +240,13 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Profile_MainText_Style"
                     android:text="Application by"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="FUCKING CHANGE THIS"
-                    android:textSize="20dp" />
+                    style="@style/Profile_ShowText_Style"
+                    android:text="FUCKING CHANGE THIS"/>
             </LinearLayout>
 
             <LinearLayout
@@ -312,18 +257,13 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Profile_MainText_Style"
                     android:text="Application by"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="FUCKING CHANGE THIS"
-                    android:textSize="20dp" />
+                    style="@style/Profile_ShowText_Style"
+                    android:text="FUCKING CHANGE THIS"/>
             </LinearLayout>
 
             <LinearLayout
@@ -334,18 +274,13 @@
                 android:paddingTop="10dp">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    style="@style/Profile_MainText_Style"
                     android:text="Application by"
-                    android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:textSize="13dp" />
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:text="FUCKING CHANGE THIS"
-                    android:textSize="20dp" />
+                    style="@style/Profile_ShowText_Style"
+                    android:text="FUCKING CHANGE THIS"/>
             </LinearLayout>
 
         </LinearLayout>
