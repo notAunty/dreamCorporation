@@ -89,6 +89,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 <TextView
+                    android:id="@+id/testing"
                     style="@style/Profile_ShowText_Style"
                     android:text="THIS IS PLACEHOLDER"/>
             </LinearLayout>

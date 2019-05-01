@@ -1,10 +1,15 @@
 package endgame.data.dreamcorporation;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -17,6 +22,7 @@ public class HomeFragment extends Fragment {
 
   private int counter = 0;
   private TextView recent = null;
+  final Context context = getActivity();
 
   @Nullable
   @Override
@@ -37,4 +43,5 @@ public class HomeFragment extends Fragment {
 
     return v;
   }
+
 }
