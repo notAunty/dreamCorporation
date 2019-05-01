@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -14,6 +15,7 @@ public class activityTestingData extends AppCompatActivity {
 
   private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
   private DatabaseReference myRef = mDatabase.getReference("users");
+  private FirebaseAuth mAuth;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,8 @@ public class activityTestingData extends AppCompatActivity {
     Toolbar toolbar = findViewById(R.id.toolbar);
     setSupportActionBar(toolbar);
 
+    mAuth = FirebaseAuth.getInstance();
+
 //    final View dialogView = View.inflate(activityTestingData.this, R.layout.activityTestingData, null);
 //    final AlertDialog alertDialog = new AlertDialog.Builder(activityTestingData.this).create();
 
@@ -29,6 +33,7 @@ public class activityTestingData extends AppCompatActivity {
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
+
 
 //        DatePicker datePicker = (DatePicker) view.findViewById(R.id.testing_date);
 //        TimePicker timePicker = (TimePicker) view.findViewById(R.id.testing_time);
@@ -44,8 +49,6 @@ public class activityTestingData extends AppCompatActivity {
 //                datePicker.getMonth() + datePicker.getDayOfMonth() +
 //                timePicker.getHour() + timePicker.getMinute());
 //        //SimpleDateFormat();
-
-
       }});
 
 

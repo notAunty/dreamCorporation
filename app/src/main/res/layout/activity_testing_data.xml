@@ -34,25 +34,9 @@
             android:background="#90000000">
 
             <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="64dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:boxStrokeColor="@android:color/white"
-                android:hint="UID"
-                android:textColorHint="@android:color/white">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/testing_uid"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:textColor="@android:color/white"/>
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:boxStrokeColor="@android:color/white"
                 android:hint="Username"
