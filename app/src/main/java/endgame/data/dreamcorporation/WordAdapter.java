@@ -1,10 +1,12 @@
 package endgame.data.dreamcorporation;
 
 import android.app.Activity;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,13 +26,16 @@ public class WordAdapter extends ArrayAdapter<Word> {
         if(listView == null){
             listView = LayoutInflater.from(getContext()).inflate(R.layout.list_item,parent,false);
         }
-        Word currentWord = getItem(position);
+        Word current = getItem(position);
 
         TextView titleTextView = (TextView) listView.findViewById(R.id.title);
-        titleTextView.setText(currentWord.getTitle());
+        titleTextView.setText(current.getTitle());
 
         TextView itemTextView = (TextView) listView.findViewById(R.id.item);
-        itemTextView.setText(currentWord.getItem());
+        itemTextView.setText(current.getItem());
+
+        ImageView imageView = (ImageView)listView.findViewById(R.id.image);
+        imageView.setImageResource(current.getImage());
 
         return listView;
     }

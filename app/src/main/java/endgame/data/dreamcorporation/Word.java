@@ -6,10 +6,13 @@ public class Word {
     private String title;
     //String for word
     private String item;
+    //int image for copy
+    private int image;
 
-    public Word(String title, String item) {
+    public Word(String title, String item, int image) {
         this.title = title;
         this.item = item;
+        this.image = image;
     }
 
     public String getTitle(){
@@ -18,5 +21,9 @@ public class Word {
 
     public String getItem(){
         return this.item;
+    }
+
+    public int getImage(){
+        return this.image;
     }
 }

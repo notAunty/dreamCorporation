@@ -16,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -92,26 +93,30 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        displayList(view);
+
+        return view;
+    }
+
+    public void displayList(View view){
         words = new ArrayList<Word>();
-        words.add(new Word("User UID", tempUID));
-        words.add(new Word("If this helped you","This is placeholder"));
-        words.add(new Word("CHANGE TO BETTER ONE, this no ripple then tapped","CHANGE TO BETTER ONE, this no ripple then tapped"));
-        words.add(new Word("We respect your privacy", "Privacy Policy"));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
+        words.add(new Word("User UID", tempUID, R.drawable.copy_key));
+        words.add(new Word("If this helped you","This is placeholder", 0));
+        words.add(new Word("CHANGE TO BETTER ONE, this no ripple then tapped","CHANGE TO BETTER ONE, this no ripple then tapped", 0));
+        words.add(new Word("We respect your privacy", "Privacy Policy", 0));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
         WordAdapter itemAdapter = new WordAdapter(getActivity(),  words);
         listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(itemAdapter);
-
-        return view;
     }
 
 

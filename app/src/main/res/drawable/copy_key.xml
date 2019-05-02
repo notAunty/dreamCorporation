@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#FFFFFFFF">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/ic_launcher_background"/>
+            <size
+                android:width="30dp"
+                android:height="30dp" />
+        </shape>
+        <color android:color="@color/ic_launcher_background" />
+    </item>
+    <item android:drawable="@drawable/ic_copy_key">
+    </item>
+</ripple>
