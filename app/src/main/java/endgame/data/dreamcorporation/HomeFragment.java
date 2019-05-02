@@ -1,15 +1,10 @@
 package endgame.data.dreamcorporation;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,7 +29,7 @@ public class HomeFragment extends Fragment {
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-        Intent i = new Intent(v.getContext(), activityTestingData.class);
+        Intent i = new Intent(v.getContext(), ActivityTestingData.class);
         startActivity(i);
       }
     });

@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class activityTestingData extends AppCompatActivity {
+public class ActivityTestingData extends AppCompatActivity {
 
   private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
   private DatabaseReference myRef = mDatabase.getReference("users");
@@ -26,8 +26,8 @@ public class activityTestingData extends AppCompatActivity {
 
     mAuth = FirebaseAuth.getInstance();
 
-//    final View dialogView = View.inflate(activityTestingData.this, R.layout.activityTestingData, null);
-//    final AlertDialog alertDialog = new AlertDialog.Builder(activityTestingData.this).create();
+//    final View dialogView = View.inflate(ActivityTestingData.this, R.layout.ActivityTestingData, null);
+//    final AlertDialog alertDialog = new AlertDialog.Builder(ActivityTestingData.this).create();
 
     FloatingActionButton fab = findViewById(R.id.fab);
     fab.setOnClickListener(new View.OnClickListener() {

@@ -16,7 +16,7 @@
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
-            android:name=".activityTestingData"
+            android:name=".ActivityTestingData"
             android:label="@string/title_activity_testing_data"
             android:theme="@style/AppTheme.NoActionBar" />
 
