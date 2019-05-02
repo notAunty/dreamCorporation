@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,50 +19,54 @@ import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+
 public class ProfileFragment extends Fragment {
 
-  private FirebaseAuth mAuth;
-  final Context context = getActivity();
-  private TextView decrypt;
-  private String key;
+    private FirebaseAuth mAuth;
+    final Context context = getActivity();
+    private TextView decrypt;
+    private String key;
+    private ListView listView;
+    private ArrayList<Word> words;
+    private String tempUID = "Null";
 
-  @Nullable
-  @Override
-  public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-    mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Auth // IMPORTANT
-    View view = inflater.inflate(R.layout.fragment_profile, container, false);
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
+        mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Auth // IMPORTANT
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 //    final FragmentManager manager = getFragmentManager();
 
+//        TextView uidField = (TextView) view.findViewById(R.id.uid);
+        if (!tempUID.isEmpty()) tempUID = mAuth.getUid();
 
-    TextView uidField = (TextView) view.findViewById(R.id.uid);
-    String tempUID = mAuth.getUid();
-    if (!tempUID.isEmpty()) uidField.setText(tempUID);
+        decrypt = (TextView) view.findViewById(R.id.profile_name);
 
-    decrypt = (TextView) view.findViewById(R.id.profile_name);
-
-    decrypt.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
+        decrypt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 //        keyDialog.show(getFragmentManager(), "a");
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 
-        // Get the layout inflater
-        LayoutInflater inflater = requireActivity().getLayoutInflater();
+                // Get the layout inflater
+                LayoutInflater inflater = requireActivity().getLayoutInflater();
 
 //        builder.setTitle("Title");
 //        builder.setMessage("Do you want to delete ?");
-
-        builder.setView(inflater.inflate(R.layout.dialog_key, null))
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                  public void onClick(DialogInterface dialog, int which) {
-                    Toast.makeText(getContext(),
-                            "Click-Click!!", Toast.LENGTH_LONG).show();
-                    dialog.cancel();
-                  }
-                });
-        AlertDialog alert = builder.create();
-        alert.show();
+                View temp = inflater.inflate(R.layout.dialog_key, null);
+                final EditText key = (EditText) temp.findViewById(R.id.key);
+                builder.setView(temp)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Toast.makeText(getContext(),
+                                        "Welcome, " + key.getText() + " !", Toast.LENGTH_LONG).show();
+                                decrypt.setText(key.getText());
+                            }
+                        });
+                AlertDialog alert = builder.create();
+                alert.show();
 //        LayoutInflater layoutInflater = LayoutInflater.from(context);
 //        View temp = layoutInflater.inflate(R.layout.dialog,null);
 //        AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -82,11 +89,31 @@ public class ProfileFragment extends Fragment {
 //
 //        // show it
 //        alertDialog.show();
-      }
-    });
+            }
+        });
 
-    return view;
-  }
+        words = new ArrayList<Word>();
+        words.add(new Word("User UID", tempUID));
+        words.add(new Word("If this helped you","This is placeholder"));
+        words.add(new Word("CHANGE TO BETTER ONE, this no ripple then tapped","CHANGE TO BETTER ONE, this no ripple then tapped"));
+        words.add(new Word("We respect your privacy", "Privacy Policy"));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
+        words.add(new Word("Application by", "FUCKING CHANGE THIS"));
+        WordAdapter itemAdapter = new WordAdapter(getActivity(),  words);
+        listView = (ListView) view.findViewById(R.id.listView);
+        listView.setAdapter(itemAdapter);
+
+        return view;
+    }
+
 
 //  public void onCreateDialog() {
 //    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
