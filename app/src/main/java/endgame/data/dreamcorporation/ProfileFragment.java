@@ -1,12 +1,10 @@
 package endgame.data.dreamcorporation;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -16,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -25,7 +22,6 @@ import java.util.ArrayList;
 public class ProfileFragment extends Fragment {
 
     private FirebaseAuth mAuth;
-    final Context context = getActivity();
     private TextView decrypt;
     private String key;
     private ListView listView;
@@ -100,20 +96,20 @@ public class ProfileFragment extends Fragment {
 
     public void displayList(View view){
         words = new ArrayList<Word>();
-        words.add(new Word("User UID", tempUID, R.drawable.copy_key));
-        words.add(new Word("If this helped you","This is placeholder", 0));
-        words.add(new Word("CHANGE TO BETTER ONE, this no ripple then tapped","CHANGE TO BETTER ONE, this no ripple then tapped", 0));
-        words.add(new Word("We respect your privacy", "Privacy Policy", 0));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
-        words.add(new Word("Application by", "FUCKING CHANGE THIS", 0));
+        words.add(new Word(getResources().getString(R.string.user_key), tempUID, R.drawable.copy_key));
+        words.add(new Word(getResources().getString(R.string.example),getResources().getString(R.string.example), 0));
+        words.add(new Word("CHANGE TO BETTER ONE, this no ripple then tapped",getResources().getString(R.string.example), 0));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
         WordAdapter itemAdapter = new WordAdapter(getActivity(),  words);
         listView = (ListView) view.findViewById(R.id.listView);
         listView.setAdapter(itemAdapter);
