@@ -50,9 +50,6 @@ public class ActivityTestingData extends AppCompatActivity {
 //                timePicker.getHour() + timePicker.getMinute());
 //        //SimpleDateFormat();
       }});
-
-
-
 //    dialogView.findViewById(R.id.testing_date).setOnClickListener();
 //    alertDialog.setView(dialogView);
 //    alertDialog.show();
