@@ -35,6 +35,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.2.1'
     implementation 'com.google.firebase:firebase-database:16.1.0'
     implementation 'com.github.Kunzisoft:Android-SwitchDateTimePicker:2.0'
+    implementation 'com.github.bmelnychuk:atv:1.2.9'
+    implementation 'com.github.johnkil.print:print:1.2.2'
 //    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.12'
 //    implementation 'com.github.Kunzisoft:Android-SwitchDateTimePicker:2.0'
 //    implementation 'com.aurelhubert:ahbottomnavigation:0.1.3'

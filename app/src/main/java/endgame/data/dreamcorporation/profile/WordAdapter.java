@@ -1,7 +1,6 @@
-package endgame.data.dreamcorporation;
+package endgame.data.dreamcorporation.profile;
 
 import android.app.Activity;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+
+import endgame.data.dreamcorporation.R;
 
 public class WordAdapter extends ArrayAdapter<Word> {
 

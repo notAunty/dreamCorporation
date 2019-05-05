@@ -19,6 +19,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
+import endgame.data.dreamcorporation.profile.Word;
+import endgame.data.dreamcorporation.profile.WordAdapter;
+
 public class ProfileFragment extends Fragment {
 
     private FirebaseAuth mAuth;
@@ -111,7 +114,7 @@ public class ProfileFragment extends Fragment {
         words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
         words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
         WordAdapter itemAdapter = new WordAdapter(getActivity(),  words);
-        listView = (ListView) view.findViewById(R.id.listView);
+        listView = (ListView) view.findViewById(R.id.profile_listView);
         listView.setAdapter(itemAdapter);
     }
 

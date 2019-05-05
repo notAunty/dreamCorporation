@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/treeContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="8dp"
@@ -11,11 +12,10 @@
         android:paddingTop="16dp"
         android:orientation="vertical">
 
-        <ExpandableListView
-            android:id="@+id/network_root"
-            android:layout_height="match_parent"
-            android:layout_width="match_parent">
-        </ExpandableListView>
+        <!--<ExpandableListView-->
+            <!--android:id="@+id/network_root"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_width="match_parent">-->
+        <!--</ExpandableListView>-->
     </LinearLayout>
-
 </ScrollView>

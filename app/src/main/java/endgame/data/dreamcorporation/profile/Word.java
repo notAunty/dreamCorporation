@@ -1,4 +1,4 @@
-package endgame.data.dreamcorporation;
+package endgame.data.dreamcorporation.profile;
 
 public class Word {
 

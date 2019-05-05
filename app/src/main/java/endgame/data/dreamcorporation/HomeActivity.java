@@ -23,6 +23,7 @@ public class HomeActivity extends AppCompatActivity {
     bottomNav.setOnNavigationItemSelectedListener(navListener);
 
     getSupportFragmentManager().beginTransaction().
+//            setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).
             replace(R.id.fragment_container, homeF).commit();
   }
 
@@ -35,14 +36,17 @@ public class HomeActivity extends AppCompatActivity {
               switch (menuItem.getItemId()) {
                 case R.id.nav_home:
                   getSupportFragmentManager().beginTransaction().
+                          setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out).
                           replace(R.id.fragment_container, homeF).commit();
                   break;
                 case R.id.nav_network:
                   getSupportFragmentManager().beginTransaction().
+                          setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out).
                           replace(R.id.fragment_container, networkF).commit();
                   break;
                 case R.id.nav_profile:
                   getSupportFragmentManager().beginTransaction().
+                          setCustomAnimations(android.R.anim.fade_in, android.R.anim.fade_out).
                           replace(R.id.fragment_container, profileF).commit();
                   break;
               }
