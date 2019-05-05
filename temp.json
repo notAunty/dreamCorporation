@@ -1,0 +1,45 @@
+{
+	"users": {
+		"EyiVfJ338MWTvFDBtHfhA9TDF5d2": {
+			"uN": "abc",
+			"pw": "fdslfiohdsioghfas",
+			"fN": "hnfuiaafdpjsafidaig",
+			"b": 500,
+			"t": ["dsabngiurbgrbeu"],
+			"upId": "fyiVfJ338MWTvFDBtHfhA9TDF5d2",
+			"dwId": ["ujbHgNvjHJNugUIGyuGUYgnui", "ujbHgNvjHJNugUIGyuGUYgnui"]
+		},
+		"ujbHgNvjHJNugUIGyuGUYgnui": {
+			"uN": "def",
+			"pw": "agreswhewsjhts",
+			"fN": "htrrsnjgfsngfs",
+			"b": 100,
+			"t": [
+				"grewthwejwrjfgs",
+				"wbhguiregiurewghur"
+			],
+			"upId": "EyiVfJ338MWTvFDBtHfhA9TDF5d2",
+			"dwId": [
+				"ujbHgNvjHJNugUIGyuGUYgnui",
+				"ujbHgNvjHJNugUIGyuGUYgnui"
+			]
+		}
+	},
+	"transactions": {
+		"dsabngiurbgrbeu": {
+			"upId": "fyiVfJ338MWTvFDBtHfhA9TDF5d2",
+			"dwId": "EyiVfJ338MWTvFDBtHfhA9TDF5d2",
+			"tS": 9381478931265891
+		},
+		"grewthwejwrjfgs": {
+			"upId": "EyiVfJ338MWTvFDBtHfhA9TDF5d2",
+			"dwId": "ujbHgNvjHJNugUIGyuGUYgnui",
+			"tS": 242478931265891
+		},
+		"wbhguiregiurewghur": {
+			"upId": "ujbHgNvjHJNugUIGyuGUYgnui",
+			"dwId": "ujbHgNvjHJNugUIGyuGUYgnui",
+			"tS": 51965189545659
+		}
+	}
+}
