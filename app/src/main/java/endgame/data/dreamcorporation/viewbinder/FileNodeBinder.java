@@ -3,8 +3,8 @@ package endgame.data.dreamcorporation.viewbinder;
 import android.view.View;
 import android.widget.TextView;
 
-import tellh.com.recyclertreeview.R;
-import tellh.com.recyclertreeview.bean.File;
+import endgame.data.dreamcorporation.R;
+import endgame.data.dreamcorporation.network.File;
 import tellh.com.recyclertreeview_lib.TreeNode;
 import tellh.com.recyclertreeview_lib.TreeViewBinder;
 
