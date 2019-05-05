@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/ic_launcher_background"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="210dp">
+
+
+        <View
+            android:layout_width="490dp"
+            android:layout_height="410dp"
+            android:background="@drawable/circle"
+            android:layout_gravity="center_horizontal"
+            android:translationY="-205dp">
+
+        </View>
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/profile"/>
+
+
+        <TextView
+            android:id="@+id/profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="48dp"
+            android:text="Tap to Decrypt"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
+
+    </FrameLayout>
+
+    <!--<ScrollView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:fitsSystemWindows="true">-->
+
+        <!--placeholder, changed everything in this SCROLLVIEW-->
+
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:orientation="vertical"/>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="8dp"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:orientation="vertical">-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/llclear"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp">-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_MainText_Style"-->
+                    <!--android:text="User UID"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"/>-->
+
+                <!--<TextView-->
+                    <!--android:id="@+id/uid"-->
+                    <!--style="@style/Profile_ShowText_Style"-->
+                    <!--android:text="NULL"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/llstar"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp">-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_MainText_Style"-->
+                    <!--android:id="@+id/name"-->
+                    <!--android:text="If this helped you"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"/>-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_ShowText_Style"-->
+                    <!--android:text="THIS IS PLACEHOLDER"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/llaboutpbin"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp">-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_MainText_Style"-->
+                    <!--android:text="CHANGE TO BETTER ONE, this no ripple then tapped"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"/>-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_ShowText_Style"-->
+                    <!--android:text="CHANGE TO BETTER ONE, this no ripple then tapped" />-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/llpolicy"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp">-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_MainText_Style"-->
+                    <!--android:text="We respect your privacy"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"/>-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_ShowText_Style"-->
+                    <!--android:text="Privacy Policy"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp">-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_MainText_Style"-->
+                    <!--android:text="Application by"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"/>-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_ShowText_Style"-->
+                    <!--android:text="FUCKING CHANGE THIS"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:id="@+id/llaboutpdev"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp">-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_MainText_Style"-->
+                    <!--android:text="Application by"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"/>-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_ShowText_Style"-->
+                    <!--android:text="FUCKING CHANGE THIS"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp">-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_MainText_Style"-->
+                    <!--android:text="Application by"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"/>-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_ShowText_Style"-->
+                    <!--android:text="FUCKING CHANGE THIS"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp">-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_MainText_Style"-->
+                    <!--android:text="Application by"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"/>-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_ShowText_Style"-->
+                    <!--android:text="FUCKING CHANGE THIS"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp">-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_MainText_Style"-->
+                    <!--android:text="Application by"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"/>-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_ShowText_Style"-->
+                    <!--android:text="FUCKING CHANGE THIS"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp">-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_MainText_Style"-->
+                    <!--android:text="Application by"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"/>-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_ShowText_Style"-->
+                    <!--android:text="FUCKING CHANGE THIS"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp">-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_MainText_Style"-->
+                    <!--android:text="Application by"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"/>-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_ShowText_Style"-->
+                    <!--android:text="FUCKING CHANGE THIS"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp">-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_MainText_Style"-->
+                    <!--android:text="Application by"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"/>-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_ShowText_Style"-->
+                    <!--android:text="FUCKING CHANGE THIS"/>-->
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="vertical"-->
+                <!--android:paddingBottom="10dp"-->
+                <!--android:paddingTop="10dp">-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_MainText_Style"-->
+                    <!--android:text="Application by"-->
+                    <!--android:textAppearance="?android:attr/textAppearanceMedium"/>-->
+
+                <!--<TextView-->
+                    <!--style="@style/Profile_ShowText_Style"-->
+                    <!--android:text="FUCKING CHANGE THIS"/>-->
+            <!--</LinearLayout>-->
+
+        <!--</LinearLayout>-->
+    <!--</ScrollView>-->
+</LinearLayout>

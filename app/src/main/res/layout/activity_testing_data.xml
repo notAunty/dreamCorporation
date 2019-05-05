@@ -13,108 +13,149 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
-            app:title="Testing - Add Node"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Testing - Add Node" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom">
+        android:layout_height="675dp"
+        android:layout_gravity="bottom"
+        android:background="#006F00"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:orientation="vertical"
-            android:background="#90000000">
+        <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/walao_username"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:boxStrokeColor="@android:color/white"
                 android:hint="Username"
-                android:textColorHint="@android:color/white">
+                android:textColorHint="@android:color/white"
+                app:boxStrokeColor="@android:color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/testing_username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:textColor="@android:color/white"/>
+                    android:textColor="@android:color/white" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <!--<com.google.android.material.textfield.TextInputLayout-->
+                <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+                <!--android:layout_toRightOf="@id/walao_username"-->
+                <!--android:layout_width="128dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="Counter"-->
+                <!--android:textColorHint="@android:color/white"-->
+                <!--app:boxStrokeColor="@android:color/white">-->
+
+                <!--<com.google.android.material.textfield.TextInputEditText-->
+                    <!--android:id="@+id/testing_counter"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:inputType="text"-->
+                    <!--android:textColor="@android:color/white" />-->
+            <!--</com.google.android.material.textfield.TextInputLayout>-->
+        <!--</RelativeLayout>-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Full Name"
+            android:textColorHint="@android:color/white"
+            app:boxStrokeColor="@android:color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/testing_fullName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:boxStrokeColor="@android:color/white"
-                android:hint="Password"
-                android:textColorHint="@android:color/white">
+                android:inputType="text"
+                android:textColor="@android:color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/testing_pw"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:textColor="@android:color/white"/>
-            </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:textColorHint="@android:color/white"
+            app:boxStrokeColor="@android:color/white"
+            app:passwordToggleEnabled="true">
 
-            <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/testing_pw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:boxStrokeColor="@android:color/white"
-                android:hint="Upline UID"
-                android:textColorHint="@android:color/white">
+                android:inputType="textPassword"
+                android:textColor="@android:color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/testing_upline"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:textColor="@android:color/white"/>
-            </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Upline UID"
+            android:textColorHint="@android:color/white"
+            app:boxStrokeColor="@android:color/white">
 
-            <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/testing_upline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:boxStrokeColor="@android:color/white"
-                android:hint="Downlines UID"
-                android:textColorHint="@android:color/white">
+                android:inputType="text"
+                android:textColor="@android:color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/testing_downline"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:textColor="@android:color/white"/>
-            </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Downlines UID"
+            android:textColorHint="@android:color/white"
+            app:boxStrokeColor="@android:color/white">
 
-            <DatePicker
-                android:id="@+id/testing_date"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/testing_downline"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:calendarViewShown="true"
-                android:spinnersShown="false"/>
+                android:inputType="text"
+                android:textColor="@android:color/white" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-            <TimePicker
-                android:id="@+id/testing_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"/>
-        </LinearLayout>
-    </ScrollView>
+        <Button
+            android:id="@+id/testing_dateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:text="Date and time" />
+        <!--<DatePicker-->
+        <!--android:id="@+id/testing_date"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:calendarViewShown="true"-->
+        <!--android:spinnersShown="false"/>-->
+
+        <!--<TimePicker-->
+        <!--android:id="@+id/testing_time"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="8dp"/>-->
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/testing_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
