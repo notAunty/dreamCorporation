@@ -3,10 +3,10 @@ package endgame.data.dreamcorporation.network;
 import endgame.data.dreamcorporation.R;
 import tellh.com.recyclertreeview_lib.LayoutItemType;
 
-public class Dir implements LayoutItemType {
+public class NodeDir implements LayoutItemType {
   public String dirName;
 
-  public Dir(String dirName) {
+  public NodeDir(String dirName) {
     this.dirName = dirName;
   }
 

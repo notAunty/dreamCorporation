@@ -3,19 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/treeContainer"
+    <android.support.v7.widget.RecyclerView
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
-        android:paddingTop="16dp"
-        android:orientation="vertical">
+        tools:context="tellh.com.recyclertreeview.MainActivity">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <!--<LinearLayout-->
+        <!--android:id="@+id/treeContainer"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingLeft="8dp"-->
+        <!--android:paddingRight="8dp"-->
+        <!--android:paddingTop="16dp"-->
+        <!--android:orientation="vertical">-->
 
         <!--<ExpandableListView-->
             <!--android:id="@+id/network_root"-->
             <!--android:layout_height="match_parent"-->
             <!--android:layout_width="match_parent">-->
         <!--</ExpandableListView>-->
-    </LinearLayout>
+    <!--</LinearLayout>-->
 </ScrollView>
