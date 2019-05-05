@@ -13,9 +13,7 @@ import androidx.fragment.app.Fragment;
 import com.unnamed.b.atv.model.TreeNode;
 import com.unnamed.b.atv.view.AndroidTreeView;
 
-import endgame.data.dreamcorporation.network.ArrowExpandSelectableHeaderHolder;
 import endgame.data.dreamcorporation.network.IconTreeItemHolder;
-import endgame.data.dreamcorporation.network.NodeStyle;
 
 public class NetworkFragment extends Fragment {
 
