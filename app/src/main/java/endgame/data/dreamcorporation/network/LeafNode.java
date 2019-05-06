@@ -7,15 +7,15 @@ import tellh.com.recyclertreeview_lib.LayoutItemType;
  * Created by tlh on 2016/10/1 :)
  */
 
-public class File implements LayoutItemType {
-    public String fileName;
+public class LeafNode implements LayoutItemType {
+    public String leafName;
 
-    public File(String fileName) {
-        this.fileName = fileName;
+    public LeafNode(String leafName) {
+        this.leafName = leafName;
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.item_file;
+        return R.layout.network_leaf;
     }
 }

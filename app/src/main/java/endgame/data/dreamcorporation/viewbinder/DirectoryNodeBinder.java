@@ -5,7 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import endgame.data.dreamcorporation.R;
-import endgame.data.dreamcorporation.network.NodeDir;
+import endgame.data.dreamcorporation.network.ParentNode;
 import tellh.com.recyclertreeview_lib.TreeNode;
 import tellh.com.recyclertreeview_lib.TreeViewBinder;
 
@@ -25,8 +25,8 @@ public class DirectoryNodeBinder extends TreeViewBinder<DirectoryNodeBinder.View
         holder.ivArrow.setImageResource(R.drawable.ic_keyboard_arrow_right_black_18dp);
         int rotateDegree = node.isExpand() ? 90 : 0;
         holder.ivArrow.setRotation(rotateDegree);
-        NodeDir nodeDirNode = (NodeDir) node.getContent();
-        holder.tvName.setText(nodeDirNode.dirName);
+        ParentNode nodeDirParentNode = (ParentNode) node.getContent();
+        holder.tvName.setText(nodeDirParentNode.parentName);
         if (node.isLeaf())
             holder.ivArrow.setVisibility(View.INVISIBLE);
         else holder.ivArrow.setVisibility(View.VISIBLE);
@@ -34,7 +34,7 @@ public class DirectoryNodeBinder extends TreeViewBinder<DirectoryNodeBinder.View
 
     @Override
     public int getLayoutId() {
-        return R.layout.item_dir;
+        return R.layout.network_parent;
     }
 
     public static class ViewHolder extends TreeViewBinder.ViewHolder {

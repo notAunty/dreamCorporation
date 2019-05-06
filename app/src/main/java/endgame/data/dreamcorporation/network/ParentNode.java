@@ -3,15 +3,15 @@ package endgame.data.dreamcorporation.network;
 import endgame.data.dreamcorporation.R;
 import tellh.com.recyclertreeview_lib.LayoutItemType;
 
-public class NodeDir implements LayoutItemType {
-  public String dirName;
+public class ParentNode implements LayoutItemType {
+  public String parentName;
 
-  public NodeDir(String dirName) {
-    this.dirName = dirName;
+  public ParentNode(String parentName) {
+    this.parentName = parentName;
   }
 
   @Override
   public int getLayoutId() {
-    return R.layout.item_dir;
+    return R.layout.network_parent;
   }
 }

@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import endgame.data.dreamcorporation.R;
-import endgame.data.dreamcorporation.network.File;
+import endgame.data.dreamcorporation.network.LeafNode;
 import tellh.com.recyclertreeview_lib.TreeNode;
 import tellh.com.recyclertreeview_lib.TreeViewBinder;
 
@@ -20,13 +20,13 @@ public class FileNodeBinder extends TreeViewBinder<FileNodeBinder.ViewHolder> {
 
     @Override
     public void bindView(ViewHolder holder, int position, TreeNode node) {
-        File fileNode = (File) node.getContent();
-        holder.tvName.setText(fileNode.fileName);
+        LeafNode leafNodeNode = (LeafNode) node.getContent();
+        holder.tvName.setText(leafNodeNode.leafName);
     }
 
     @Override
     public int getLayoutId() {
-        return R.layout.item_file;
+        return R.layout.network_leaf;
     }
 
     public class ViewHolder extends TreeViewBinder.ViewHolder {

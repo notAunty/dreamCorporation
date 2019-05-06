@@ -8,6 +8,7 @@
         android:id="@+id/iv_arrow"
         android:layout_width="18dp"
         android:layout_height="18dp"
+        android:layout_marginLeft="8dp"
         android:layout_gravity="center_vertical"
         android:src="@drawable/ic_keyboard_arrow_right_black_18dp" />
 
