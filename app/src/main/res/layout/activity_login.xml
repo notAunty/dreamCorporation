@@ -11,7 +11,8 @@
         android:layout_centerInParent="true">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/icon_login"
+            android:id="@+id/welcome_icon"
+            android:transitionName="icon_transition"
             android:layout_width="230dp"
             android:layout_height="230dp"
             app:cardBackgroundColor="@color/ic_launcher_background"
@@ -28,7 +29,7 @@
         </androidx.cardview.widget.CardView>
 
         <LinearLayout
-            android:layout_below="@id/icon_login"
+            android:layout_below="@id/welcome_icon"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
