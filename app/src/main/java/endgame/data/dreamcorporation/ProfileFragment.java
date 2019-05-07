@@ -3,10 +3,12 @@ package endgame.data.dreamcorporation;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -18,14 +20,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.zxing.WriterException;
 
 import java.util.ArrayList;
 
+import androidmads.library.qrgenearator.QRGContents;
+import androidmads.library.qrgenearator.QRGEncoder;
 import endgame.data.dreamcorporation.profile.Word;
 import endgame.data.dreamcorporation.profile.WordAdapter;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
+
+
 
 public class ProfileFragment extends Fragment {
 
@@ -36,7 +44,10 @@ public class ProfileFragment extends Fragment {
     private ArrayList<Word> words;
     private String tempUID = "Null";
     private ClipboardManager clipboardManager;
-    private ImageView copy_key;
+    private ImageView copy_key, qrImage;
+    private FloatingActionButton floatingActionButton;
+    private Button done;
+    private QRGEncoder qrgEncoder;
 
     @Nullable
     @Override
@@ -121,7 +132,37 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        floatingActionButton = view.findViewById(R.id.qr_code);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                LayoutInflater inflater = requireActivity().getLayoutInflater();
+                View temp = inflater.inflate(R.layout.qr_code, null);
 
+                done = (Button) temp.findViewById(R.id.back);
+                qrImage = (ImageView) temp.findViewById(R.id.qr_image);
+                String word = "TAN WEI PENG";
+                qrgEncoder = new QRGEncoder(word,null, QRGContents.Type.TEXT,800);
+                builder.setView(temp);
+                try {
+                    Bitmap bitmap = qrgEncoder.encodeAsBitmap();
+                    qrImage.setImageBitmap(bitmap);
+                } catch (WriterException e) {
+                    Toast.makeText(getContext(),"No QR",Toast.LENGTH_SHORT);
+                }
+                final AlertDialog alertDialog = builder.create();
+                done.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+
+                alertDialog.show();
+            }
+        });
 
         return view;
     }
