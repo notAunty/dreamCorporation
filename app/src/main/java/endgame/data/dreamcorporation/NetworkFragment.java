@@ -34,7 +34,6 @@ public class NetworkFragment extends Fragment {
     View view = inflater.inflate(R.layout.fragment_network, container, false);
 
     rv = (RecyclerView) view.findViewById(R.id.rv);
-
 //    initView();
     initData();
 
@@ -42,8 +41,6 @@ public class NetworkFragment extends Fragment {
   }
 
   private void initData() {
-
-
     List<TreeNode> nodes = new ArrayList<>();
     TreeNode<ParentNode> app = new TreeNode<>(new ParentNode("Mike Jones"));
     nodes.add(app);
@@ -83,6 +80,7 @@ public class NetworkFragment extends Fragment {
     adapter = new TreeViewAdapter(nodes, Arrays.asList(new LeafNodeBinder(), new ParentNodeBinder()));
     // whether collapse child nodes when their parent node was close.
 //        adapter.ifCollapseChildWhileCollapseParent(true);
+
     adapter.setOnTreeNodeListener(new TreeViewAdapter.OnTreeNodeListener() {
       @Override
       public boolean onClick(TreeNode node, RecyclerView.ViewHolder holder) {
@@ -106,6 +104,8 @@ public class NetworkFragment extends Fragment {
     });
     rv.setAdapter(adapter);
   }
+
+
 
 //  private void initView() {
 //    rv = (RecyclerView) getView().findViewById(R.id.rv);
