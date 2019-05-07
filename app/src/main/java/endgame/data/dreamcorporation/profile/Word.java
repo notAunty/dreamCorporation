@@ -1,5 +1,9 @@
 package endgame.data.dreamcorporation.profile;
 
+import android.widget.ImageView;
+
+import endgame.data.dreamcorporation.R;
+
 public class Word {
 
     //String for Title

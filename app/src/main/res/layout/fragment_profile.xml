@@ -15,14 +15,15 @@
             android:layout_height="410dp"
             android:background="@drawable/circle"
             android:layout_gravity="center_horizontal"
-            android:translationY="-205dp"/>
+            android:translationY="-205dp" />
 
         <ImageView
+            android:id="@+id/profile"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_marginBottom="16dp"
-            android:src="@drawable/profile"/>
+            android:src="@drawable/profile" />
 
 
         <TextView
@@ -33,21 +34,61 @@
             android:layout_marginTop="48dp"
             android:text="Tap to Decrypt"
             android:textColor="@android:color/white"
-            android:textSize="30sp"/>
+            android:textSize="30sp" />
+
     </FrameLayout>
 
     <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:fitsSystemWindows="true">-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_marginTop="16dp"-->
+    <!--android:fitsSystemWindows="true">-->
 
-        <!--placeholder, changed everything in this SCROLLVIEW-->
+    <!--placeholder, changed everything in this SCROLLVIEW-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"
+        android:background="@drawable/grad3"
+        android:elevation="2dp">
 
-        <ListView
-            android:id="@+id/profile_listView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="10dp"
-            android:orientation="vertical"/>
+
+        <TextView
+            android:id="@+id/title"
+            android:text="User Key"
+            android:paddingLeft="10dp"
+            style="@style/Profile_MainText_Style"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/user_key"
+            android:layout_below="@+id/title"
+            android:paddingLeft="10dp"
+            style="@style/Profile_ShowText_Style" />
+
+        <ImageView
+            android:id="@+id/clipboard"
+            android:src="@drawable/copy_key"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="10dp"
+            android:clickable="true" />
+
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/profile_listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        android:background="@android:color/white"
+        android:elevation="2dp"></ListView>
 </LinearLayout>

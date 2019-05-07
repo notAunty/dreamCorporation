@@ -1,11 +1,16 @@
 package endgame.data.dreamcorporation;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,14 +27,18 @@ import java.util.ArrayList;
 import endgame.data.dreamcorporation.profile.Word;
 import endgame.data.dreamcorporation.profile.WordAdapter;
 
+import static android.content.Context.CLIPBOARD_SERVICE;
+
 public class ProfileFragment extends Fragment {
 
     private FirebaseAuth mAuth;
-    private TextView decrypt;
-    private String key;
+    private TextView decrypt, user_key;
+    private String text;
     private ListView listView;
     private ArrayList<Word> words;
     private String tempUID = "Null";
+    private ClipboardManager clipboardManager;
+    private ImageView copy_key;
 
     @Nullable
     @Override
@@ -38,8 +47,9 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 //    final FragmentManager manager = getFragmentManager();
 
+        user_key = (TextView) view.findViewById(R.id.user_key);
 //        TextView uidField = (TextView) view.findViewById(R.id.uid);
-        if (!tempUID.isEmpty()) tempUID = mAuth.getUid();
+        if (!tempUID.isEmpty()) user_key.setText(mAuth.getUid());
 
         decrypt = (TextView) view.findViewById(R.id.profile_name);
 
@@ -60,9 +70,16 @@ public class ProfileFragment extends Fragment {
                 builder.setView(temp)
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(getContext(),
-                                        "Welcome, " + key.getText() + " !", Toast.LENGTH_LONG).show();
-                                decrypt.setText(key.getText());
+//                                Toast.makeText(getContext(),
+//                                        "Welcome, " + key.getText() + " !", Toast.LENGTH_LONG).show();
+//                                decrypt.setText(key.getText());
+                                if(key.getText().toString().equals(mAuth.getUid())){
+                                    Toast.makeText(getContext(),
+                                            "Welcome, " + "TAN WEI PENG" + " !", Toast.LENGTH_LONG).show();
+                                    decrypt.setText("TAN WEI PENG");
+                                }else
+                                    Toast.makeText(getContext(),
+                                            "Wrong! Please try again!", Toast.LENGTH_SHORT).show();
                             }
                         });
                 AlertDialog alert = builder.create();
@@ -94,12 +111,27 @@ public class ProfileFragment extends Fragment {
 
         displayList(view);
 
+        clipboardManager = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
+        copy_key = (ImageView) view.findViewById(R.id.clipboard);
+        copy_key.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                text = mAuth.getUid();
+                ClipData clipData = ClipData.newPlainText("Text", text);
+                clipboardManager.setPrimaryClip(clipData);
+                Toast.makeText(getContext(),"Copied to clipboard", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
         return view;
     }
 
+
     public void displayList(View view){
         words = new ArrayList<Word>();
-        words.add(new Word(getResources().getString(R.string.user_key), tempUID, R.drawable.copy_key));
+//        words.add(new Word(getResources().getString(R.string.user_key), tempUID, R.drawable.copy_key));
         words.add(new Word(getResources().getString(R.string.example),getResources().getString(R.string.example), 0));
         words.add(new Word("CHANGE TO BETTER ONE, this no ripple then tapped",getResources().getString(R.string.example), 0));
         words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
