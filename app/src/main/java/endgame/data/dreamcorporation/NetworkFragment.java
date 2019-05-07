@@ -18,8 +18,8 @@ import java.util.List;
 
 import endgame.data.dreamcorporation.network.LeafNode;
 import endgame.data.dreamcorporation.network.ParentNode;
-import endgame.data.dreamcorporation.viewbinder.DirectoryNodeBinder;
-import endgame.data.dreamcorporation.viewbinder.FileNodeBinder;
+import endgame.data.dreamcorporation.viewbinder.ParentNodeBinder;
+import endgame.data.dreamcorporation.viewbinder.LeafNodeBinder;
 import tellh.com.recyclertreeview_lib.TreeNode;
 import tellh.com.recyclertreeview_lib.TreeViewAdapter;
 
@@ -42,6 +42,8 @@ public class NetworkFragment extends Fragment {
   }
 
   private void initData() {
+
+
     List<TreeNode> nodes = new ArrayList<>();
     TreeNode<ParentNode> app = new TreeNode<>(new ParentNode("Mike Jones"));
     nodes.add(app);
@@ -78,7 +80,7 @@ public class NetworkFragment extends Fragment {
             )
     );
     rv.setLayoutManager(new LinearLayoutManager(getContext()));
-    adapter = new TreeViewAdapter(nodes, Arrays.asList(new FileNodeBinder(), new DirectoryNodeBinder()));
+    adapter = new TreeViewAdapter(nodes, Arrays.asList(new LeafNodeBinder(), new ParentNodeBinder()));
     // whether collapse child nodes when their parent node was close.
 //        adapter.ifCollapseChildWhileCollapseParent(true);
     adapter.setOnTreeNodeListener(new TreeViewAdapter.OnTreeNodeListener() {
@@ -95,7 +97,7 @@ public class NetworkFragment extends Fragment {
 
       @Override
       public void onToggle(boolean isExpand, RecyclerView.ViewHolder holder) {
-        DirectoryNodeBinder.ViewHolder dirViewHolder = (DirectoryNodeBinder.ViewHolder) holder;
+        ParentNodeBinder.ViewHolder dirViewHolder = (ParentNodeBinder.ViewHolder) holder;
         final ImageView ivArrow = dirViewHolder.getIvArrow();
         int rotateDegree = isExpand ? 90 : -90;
         ivArrow.animate().rotationBy(rotateDegree)

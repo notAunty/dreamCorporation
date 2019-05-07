@@ -16,11 +16,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
 
   private FirebaseAuth mAuth;
+  private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+  private DatabaseReference usersRef = mDatabase.getReference("users");
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +38,9 @@ public class SignupActivity extends AppCompatActivity {
       @Override
       //On click function
       public void onClick(final View view) {
-        String userId = ((EditText) findViewById(R.id.signup_userid)).getText().toString();
-        String userPw = ((EditText) findViewById(R.id.signup_userpw)).getText().toString();
+        final String userFn = ((EditText) findViewById(R.id.signup_fullName)).getText().toString();
+        String userId = ((EditText) findViewById(R.id.signup_userId)).getText().toString();
+        String userPw = ((EditText) findViewById(R.id.signup_userPw)).getText().toString();
 
 //        //Create the intent to start another activity
 //        Intent intent = new Intent(view.getContext(), HomeActivity.class);
@@ -51,11 +55,19 @@ public class SignupActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                       if (task.isSuccessful()) {
+                        // Add to database
+                        String tempEncFn = Encryption.encode(userFn);
+                        usersRef.child(mAuth.getUid()).child("fN").setValue(tempEncFn);
+                        usersRef.child(mAuth.getUid()).child("b").setValue(0);
+                        Toast.makeText(view.getContext(), tempEncFn, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(view.getContext(), Encryption.decode(tempEncFn, mAuth.getUid()),
+                                Toast.LENGTH_LONG).show();
+
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("signup: ", "createUserWithEmail:success");
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        Toast.makeText(view.getContext(), "Signup completed. You may now login.",
-                                Toast.LENGTH_SHORT).show();
+//                        FirebaseUser user = mAuth.getCurrentUser();
+//                        Toast.makeText(view.getContext(), "Signup completed. You may now login.",
+//                                Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(view.getContext(), MainActivity.class);
                         startActivity(intent);
                         onBackPressed(); // To close this activity

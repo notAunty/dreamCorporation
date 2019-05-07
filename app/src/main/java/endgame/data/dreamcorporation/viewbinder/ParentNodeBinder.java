@@ -13,7 +13,7 @@ import tellh.com.recyclertreeview_lib.TreeViewBinder;
  * Created by tlh on 2016/10/1 :)
  */
 
-public class DirectoryNodeBinder extends TreeViewBinder<DirectoryNodeBinder.ViewHolder> {
+public class ParentNodeBinder extends TreeViewBinder<ParentNodeBinder.ViewHolder> {
     @Override
     public ViewHolder provideViewHolder(View itemView) {
         return new ViewHolder(itemView);

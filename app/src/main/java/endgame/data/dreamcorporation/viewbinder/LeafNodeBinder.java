@@ -12,7 +12,7 @@ import tellh.com.recyclertreeview_lib.TreeViewBinder;
  * Created by tlh on 2016/10/1 :)
  */
 
-public class FileNodeBinder extends TreeViewBinder<FileNodeBinder.ViewHolder> {
+public class LeafNodeBinder extends TreeViewBinder<LeafNodeBinder.ViewHolder> {
     @Override
     public ViewHolder provideViewHolder(View itemView) {
         return new ViewHolder(itemView);
