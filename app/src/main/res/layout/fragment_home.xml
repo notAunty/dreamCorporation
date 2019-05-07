@@ -36,14 +36,14 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/balance"
+            android:id="@+id/home_balance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:fontFamily="@font/google_sans_bold"
             android:paddingLeft="15dp"
             android:paddingBottom="8dp"
-            android:text="RM 99,999.00"
+            android:text="..."
             android:textColor="#F0000000"
             android:textSize="40sp" />
     </androidx.cardview.widget.CardView>

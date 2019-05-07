@@ -59,7 +59,6 @@ public class SignupActivity extends AppCompatActivity {
                         String tempEncFn = Encryption.encode(userFn);
                         usersRef.child(mAuth.getUid()).child("fN").setValue(tempEncFn);
                         usersRef.child(mAuth.getUid()).child("b").setValue(0);
-                        Toast.makeText(view.getContext(), tempEncFn, Toast.LENGTH_SHORT).show();
                         Toast.makeText(view.getContext(), Encryption.decode(tempEncFn, mAuth.getUid()),
                                 Toast.LENGTH_LONG).show();
 

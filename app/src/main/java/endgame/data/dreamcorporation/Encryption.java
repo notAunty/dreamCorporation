@@ -6,15 +6,14 @@ import java.util.Random;
 
 public class Encryption {
 
-  private static FirebaseAuth mAuth;
   private static int key;
   private static String customername;
   private static String encry = "";
   private static String dencry = "";
-  private static String uid;
+  private static String uid = FirebaseAuth.getInstance().getUid();
 
   public static String encode(String name) {
-    key = new Random().nextInt(99) + 2;
+    key = new Random().nextInt(101)+55;
     String temp = name;
     char[] c = new char[temp.length()];
     for (int shu = 1; shu <= key; shu++) {
@@ -34,16 +33,15 @@ public class Encryption {
         temp += c[count];
       }
     }
-    for (int i = 0; i < c.length; i++)
-      encry += c[i];
+    for(int i=0;i<c.length;i++)
+      c[i]+=key;
+    for(int i=0;i<c.length;i++)
+      encry+=c[i];
     return encry;
   }
 
   public static String decode(String cipher, String check) {
-    mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Auth
-    uid = mAuth.getUid();
-
-    if (check.equals(uid)) {
+    if(check.equals(uid)){
       String temp = cipher;
       char[] c = new char[temp.length()];
       for (int shu = 1; shu <= key; shu++) {
@@ -65,8 +63,10 @@ public class Encryption {
           temp += c[count];
         }
       }
-      for (int i = 0; i < c.length; i++)
-        dencry += c[i];
+      for(int i=0;i<c.length;i++)
+        c[i]-=key;
+      for(int i=0;i<c.length;i++)
+        dencry+=c[i];
       return dencry;
     }
     return "";
