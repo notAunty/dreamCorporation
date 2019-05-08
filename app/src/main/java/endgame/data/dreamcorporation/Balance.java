@@ -64,8 +64,26 @@ public class Balance {
       usersRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-          oldBalance[temp] =(double) dataSnapshot.getValue();
-          temp++;
+//          oldBalance[temp] =(double) dataSnapshot.getValue();
+//          temp++;
+
+
+
+
+
+
+
+          // PLZ FIX
+
+
+
+
+
+
+
+
+
+
         }
 
         @Override
