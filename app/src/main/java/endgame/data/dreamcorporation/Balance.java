@@ -23,6 +23,7 @@ public class Balance {
   private static double first = 0.5;
   private static double second = 0.12 + 0.03;
   private static double fee;
+  private static double temporary;
 
   public static void calcRev() {
     // Sum the value and add to upline
@@ -33,7 +34,22 @@ public class Balance {
     for (int i = 0; i < 5; i++) {
       oldBalance[i]=oldBalance[i]+commission[i];
       usersRef.child(uplines[i]).child("b").setValue(oldBalance[i]);
+      if (uplines[i]==adminUid){
+          usersRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
+              @Override
+              public void onDataChange(DataSnapshot dataSnapshot) {
+                  temporary = Double.parseDouble(dataSnapshot.getValue().toString());
 
+              }
+
+              @Override
+              public void onCancelled(@NonNull DatabaseError databaseError) {
+              }
+              temporary=temporary+commission[i];
+
+          });
+         usersRef.child().child().setValue(temporary);
+      }
 
     }
   }
@@ -64,6 +80,9 @@ public class Balance {
         int temp=0;
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
+            if (dataSnapshot.getValue()==null){
+                uplines[temp]=adminUid;
+            }
           uplines[temp] = dataSnapshot.getValue().toString();
           temp++;
         }
