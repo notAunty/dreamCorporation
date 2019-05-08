@@ -142,14 +142,14 @@ public class ProfileFragment extends Fragment {
 
                 done = (Button) temp.findViewById(R.id.back);
                 qrImage = (ImageView) temp.findViewById(R.id.qr_image);
-                String word = "TAN WEI PENG";
+                String word = mAuth.getUid();
                 qrgEncoder = new QRGEncoder(word,null, QRGContents.Type.TEXT,800);
                 builder.setView(temp);
                 try {
                     Bitmap bitmap = qrgEncoder.encodeAsBitmap();
                     qrImage.setImageBitmap(bitmap);
                 } catch (WriterException e) {
-                    Toast.makeText(getContext(),"No QR",Toast.LENGTH_SHORT);
+                    Toast.makeText(getContext(),"No QR Code",Toast.LENGTH_SHORT);
                 }
                 final AlertDialog alertDialog = builder.create();
                 done.setOnClickListener(new View.OnClickListener() {
@@ -170,20 +170,20 @@ public class ProfileFragment extends Fragment {
 
     public void displayList(View view){
         words = new ArrayList<Word>();
-//        words.add(new Word(getResources().getString(R.string.user_key), tempUID, R.drawable.copy_key));
-        words.add(new Word(getResources().getString(R.string.example),getResources().getString(R.string.example), 0));
-        words.add(new Word("CHANGE TO BETTER ONE, this no ripple then tapped",getResources().getString(R.string.example), 0));
-        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
-        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
-        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
-        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
-        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
-        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
-        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
-        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
-        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
-        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
-        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example), 0));
+//        words.add(new Word(getResources().getString(R.string.user_key), tempUID));
+        words.add(new Word(getResources().getString(R.string.example),getResources().getString(R.string.example)));
+        words.add(new Word("CHANGE TO BETTER ONE, this no ripple then tapped",getResources().getString(R.string.example)));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+        words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
         WordAdapter itemAdapter = new WordAdapter(getActivity(),  words);
         listView = (ListView) view.findViewById(R.id.profile_listView);
         listView.setAdapter(itemAdapter);

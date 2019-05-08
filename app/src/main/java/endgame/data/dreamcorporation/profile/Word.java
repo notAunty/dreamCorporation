@@ -1,9 +1,5 @@
 package endgame.data.dreamcorporation.profile;
 
-import android.widget.ImageView;
-
-import endgame.data.dreamcorporation.R;
-
 public class Word {
 
     //String for Title
@@ -11,12 +7,13 @@ public class Word {
     //String for word
     private String item;
     //int image for copy
-    private int image;
+//    private int image;
 
-    public Word(String title, String item, int image) {
+    public Word(String title, String item) {
+//            , int image
         this.title = title;
         this.item = item;
-        this.image = image;
+//        this.image = image;
     }
 
     public String getTitle(){
@@ -27,7 +24,7 @@ public class Word {
         return this.item;
     }
 
-    public int getImage(){
-        return this.image;
-    }
+//    public int getImage(){
+//        return this.image;
+//    }
 }

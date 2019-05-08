@@ -71,4 +71,33 @@ public class Encryption {
     }
     return "";
   }
+
+  public static String decodeDirectly(String cipher) {
+    String temp = cipher;
+    char[] c = new char[temp.length()];
+    for (int shu = 1; shu <= key; shu++) {
+      int j = 0;
+      int k = temp.length() / 2;
+      for (int i = 0; i < temp.length(); i++) {
+        if (i % 2 == 0 && i != temp.length() - 1) {
+          c[j] = (char) (temp.charAt(i));
+          j++;
+        } else {
+          c[k] = (char) (temp.charAt(i));
+          k++;
+        }
+      }
+
+      int total = temp.length();
+      temp = "";
+      for (int count = 0; count < total; count++) {
+        temp += c[count];
+      }
+    }
+    for (int i = 0; i < c.length; i++)
+      c[i] -= key;
+    for (int i = 0; i < c.length; i++)
+      dencry += c[i];
+    return dencry;
+  }
 }

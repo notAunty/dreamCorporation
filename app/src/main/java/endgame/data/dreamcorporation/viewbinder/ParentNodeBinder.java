@@ -41,6 +41,7 @@ public class ParentNodeBinder extends TreeViewBinder<ParentNodeBinder.ViewHolder
         private ImageView ivArrow;
         private TextView tvName;
 
+
         public ViewHolder(View rootView) {
             super(rootView);
             this.ivArrow = (ImageView) rootView.findViewById(R.id.iv_arrow);

@@ -22,6 +22,7 @@ public class LeafNodeBinder extends TreeViewBinder<LeafNodeBinder.ViewHolder> {
     public void bindView(ViewHolder holder, int position, TreeNode node) {
         LeafNode leafNodeNode = (LeafNode) node.getContent();
         holder.tvName.setText(leafNodeNode.leafName);
+        holder.tvName.setText(leafNodeNode.leafName);
     }
 
     @Override
