@@ -10,14 +10,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class Balance {
-
   private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
   private static FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
   private static DatabaseReference usersRef = mDatabase.getReference("users");
   private static DatabaseReference transRef = mDatabase.getReference("transactions");
   private static DatabaseReference adminRef = mDatabase.getReference("admin");
+
   private static String[] uplines = new String[5];
-  private static double[] commission_rate= new double[5];
+  private static double[] commission= new double[5];
   private static double[] oldBalance= new double[5];
   private static double first = 0.5;
   private static double second = 0.12 + 0.03;
@@ -30,22 +30,30 @@ public class Balance {
     calculate();
 
     for (int i = 0; i < 5; i++) {
-      usersRef.child(uplines[i]).child("b").setValue(oldBalance[i] + 12.5);
+      oldBalance[i]=oldBalance[i]+commission[i];3
+      usersRef.child(uplines[i]).child("b").setValue(oldBalance[i]);
+
+
     }
   }
 
   public static void getOldBalance() {
     // mAuth.getUid() will get current logged in user punya UID
     // This block of code will get the latest balance of the user from Firebase
-    usersRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
-      @Override
-      public void onDataChange(DataSnapshot dataSnapshot) {
-        oldBalance[] = (double) dataSnapshot.getValue();
-      }
+    for (int i = 0; i < 5; i++){
+      int temp=0;
+      usersRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+          oldBalance[temp] =(double) dataSnapshot.getValue();
+          temp++;
+        }
 
-      @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {}
-    });
+        @Override
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+        }
+      });
+  }
   }
 
   public static void getUplines(String uid) {
@@ -83,10 +91,10 @@ public class Balance {
     for (int i = 0; i < 5; i++) {
       switch (i) {
         case 0:
-          commission_rate[i] = fee*first;
+          commission[i] = fee*first;
           break;
         default:
-          commission_rate[i] = fee * (second - (i * 0.03));
+          commission[i] = fee * (second - (i * 0.03));
           break;
       }
     }

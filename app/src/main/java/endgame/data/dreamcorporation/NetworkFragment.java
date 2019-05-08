@@ -35,6 +35,7 @@ public class NetworkFragment extends Fragment {
   private DatabaseReference transRef = mDatabase.getReference("transaction");
   private FirebaseAuth mAuth = FirebaseAuth.getInstance();
   private String uid = mAuth.getUid();
+  private ArrayList<Boolean> tempHaveChild;
   private RecyclerView rv;
   private TreeViewAdapter adapter;
   private Level lines;
@@ -130,7 +131,7 @@ public class NetworkFragment extends Fragment {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
         ArrayList<String> tempDw = new ArrayList();
-        ArrayList<Boolean> tempHaveChild;
+
         tempDw = (ArrayList<String>) dataSnapshot.getValue();
 
         for (String a: tempDw) {
@@ -138,7 +139,7 @@ public class NetworkFragment extends Fragment {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
               if (dataSnapshot.getValue() != null) {
-//                tempHaveChild.add(true);
+                tempHaveChild.add(true);
               }
             }
 
