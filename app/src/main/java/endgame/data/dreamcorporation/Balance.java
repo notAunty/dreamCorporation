@@ -16,6 +16,7 @@ public class Balance {
   private static DatabaseReference transRef = mDatabase.getReference("transactions");
   private static DatabaseReference adminRef = mDatabase.getReference("admin");
 
+  private static String adminUid = "SpLQZFmB8KYkrq4h8NeuUfqQNW03";
   private static String[] uplines = new String[5];
   private static double[] commission= new double[5];
   private static double[] oldBalance= new double[5];
@@ -30,7 +31,7 @@ public class Balance {
     calculate();
 
     for (int i = 0; i < 5; i++) {
-      oldBalance[i]=oldBalance[i]+commission[i];3
+      oldBalance[i]=oldBalance[i]+commission[i];
       usersRef.child(uplines[i]).child("b").setValue(oldBalance[i]);
 
 
