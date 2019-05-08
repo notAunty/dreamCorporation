@@ -24,6 +24,7 @@ public class Balance {
   private static double second = 0.12 + 0.03;
   private static double fee;
   private static double temporary;
+  private static int tempbaby;
 
   public static void calcRev() {
     // Sum the value and add to upline
@@ -32,23 +33,24 @@ public class Balance {
     calculate();
 
     for (int i = 0; i < 5; i++) {
+      tempbaby=i;
       oldBalance[i]=oldBalance[i]+commission[i];
       usersRef.child(uplines[i]).child("b").setValue(oldBalance[i]);
-      if (uplines[i]==adminUid){
+      if (uplines[i].equalsIgnoreCase(adminUid)){
           usersRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
               @Override
               public void onDataChange(DataSnapshot dataSnapshot) {
                   temporary = Double.parseDouble(dataSnapshot.getValue().toString());
-
+                temporary=temporary+commission[tempbaby];
               }
 
               @Override
               public void onCancelled(@NonNull DatabaseError databaseError) {
               }
-              temporary=temporary+commission[i];
+
 
           });
-         usersRef.child().child().setValue(temporary);
+         usersRef.child("SpLQZFmB8KYkrq4h8NeuUfqQNW03").child("b").setValue(temporary);
       }
 
     }
