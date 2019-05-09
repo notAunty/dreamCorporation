@@ -124,7 +124,7 @@ public class ProfileFragment extends Fragment {
       }
     });
 
-    displayList(view);
+//    displayList(view);
 
     clipboardManager = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
     copy_key = (ImageView) view.findViewById(R.id.clipboard);
@@ -174,26 +174,26 @@ public class ProfileFragment extends Fragment {
   }
 
 
-  public void displayList(View view) {
-    words = new ArrayList<Word>();
-//        words.add(new Word(getResources().getString(R.string.user_key), tempUID));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word("CHANGE TO BETTER ONE, this no ripple then tapped", getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    WordAdapter itemAdapter = new WordAdapter(getActivity(), words);
-    listView = (ListView) view.findViewById(R.id.profile_listView);
-    listView.setAdapter(itemAdapter);
-  }
+//  public void displayList(View view) {
+//    words = new ArrayList<Word>();
+////        words.add(new Word(getResources().getString(R.string.user_key), tempUID));
+//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+//    words.add(new Word("CHANGE TO BETTER ONE, this no ripple then tapped", getResources().getString(R.string.example)));
+//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+//    WordAdapter itemAdapter = new WordAdapter(getActivity(), words);
+//    listView = (ListView) view.findViewById(R.id.profile_listView);
+//    listView.setAdapter(itemAdapter);
+//  }
 
 
 //  public void onCreateDialog() {
