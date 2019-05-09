@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import endgame.data.dreamcorporation.network.LeafNode;
+import endgame.data.dreamcorporation.network.ParentNode;
 import endgame.data.dreamcorporation.viewbinder.LeafNodeBinder;
 import endgame.data.dreamcorporation.viewbinder.ParentNodeBinder;
 import tellh.com.recyclertreeview_lib.TreeNode;
@@ -37,16 +39,28 @@ public class NetworkFragment extends Fragment {
   private String uid = mAuth.getUid();
   private RecyclerView rv;
   private TreeViewAdapter adapter;
-  private Level lines;
+  private TreeNode<ParentNode> root;
+//  private Node node, tempNode;
 
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     View view = inflater.inflate(R.layout.fragment_network, container, false);
-
-//    generateLine(mAuth.getUid());
-
     rv = (RecyclerView) view.findViewById(R.id.rv);
+
+//     // Store UID as arrayList
+//    usersRef.child(uid).child("dwId").addListenerForSingleValueEvent(new ValueEventListener() {
+//      @Override
+//      public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//        ArrayList<String> temp = (ArrayList<String>) dataSnapshot.getValue();
+//
+//        for (String a: temp) Log.e("UID: ", a);
+//        }
+//
+//      @Override
+//      public void onCancelled(@NonNull DatabaseError databaseError) {}});
+
 //    initView();
     initData();
 
@@ -54,31 +68,17 @@ public class NetworkFragment extends Fragment {
   }
 
   private void initData() {
-    List<TreeNode> nodes = new ArrayList<>();
+    List<TreeNode> treeNodes = new ArrayList<>();
 
+    root = new TreeNode<>(new ParentNode(GetName.getNameDirectly(uid)));
+    treeNodes.add(root);
 
+    generateLine(uid, root);
+//    addTreeNode(node);
 
-//    // Upline
-//    final String tempUpline[] = new String[1];
-//    usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-//      @Override
-//      public void onDataChange(DataSnapshot dataSnapshot) {
-//        tempUpline[0] = dataSnapshot.child("upId").getValue().toString();
-//      }
-//      @Override
-//      public void onCancelled(@NonNull DatabaseError databaseError) {}});
-//
-//    TreeNode<ParentNode> upline = new TreeNode<>(new ParentNode(tempUpline[0]));
-//    nodes.add(upline);
-//
-//    // Current
-//    upline.addChild();
-
-
-
-//    List<TreeNode> nodes = new ArrayList<>();
+//    List<TreeNode> treeNodes = new ArrayList<>();
 //    TreeNode<ParentNode> app = new TreeNode<>(new ParentNode("Mike Jones"));
-//    nodes.add(app);
+//    treeNodes.add(app);
 //    app.addChild(
 //            new TreeNode<>(new ParentNode("manifests"))
 //                    .addChild(new TreeNode<>(new LeafNode("Abby Jones")))
@@ -96,9 +96,26 @@ public class NetworkFragment extends Fragment {
 //            )
 //    );
 
+
+//    Upline
+//    final String tempUpline[] = new String[1];
+//    usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+//      @Override
+//      public void onDataChange(DataSnapshot dataSnapshot) {
+//        tempUpline[0] = dataSnapshot.child("upId").getValue().toString();
+//      }
+//      @Override
+//      public void onCancelled(@NonNull DatabaseError databaseError) {}});
+//
+//    TreeNode<ParentNode> upline = new TreeNode<>(new ParentNode(tempUpline[0]));
+//    treeNodes.add(upline);
+//
+//    // Current
+//    upline.addChild();
+
     rv.setLayoutManager(new LinearLayoutManager(getContext()));
-    adapter = new TreeViewAdapter(nodes, Arrays.asList(new LeafNodeBinder(), new ParentNodeBinder()));
-    // whether collapse child nodes when their parent node was close.
+    adapter = new TreeViewAdapter(treeNodes, Arrays.asList(new LeafNodeBinder(), new ParentNodeBinder()));
+    // whether collapse child treeNodes when their parent node was close.
 //        adapter.ifCollapseChildWhileCollapseParent(true);
 
     adapter.setOnTreeNodeListener(new TreeViewAdapter.OnTreeNodeListener() {
@@ -125,30 +142,123 @@ public class NetworkFragment extends Fragment {
     rv.setAdapter(adapter);
   }
 
-  private void generateLine(String uid) {
-    usersRef.child(uid).child("dwId").addListenerForSingleValueEvent(new ValueEventListener() {
+//  private void addTreeNode(Node node) {
+//    ArrayList<Node> tempDownline = node.getDownlinesNode();
+//
+//
+//    for (Node a: tempDownline) {
+//      if (node.downlines.isEmpty()) root.addChild(new TreeNode<>(new LeafNode((String) node.getUid())));
+//      else {
+//        root.addChild(new TreeNode<>(new LeafNode((String) node.getUid())));
+//      }
+//    }
+//  }
+
+  private void generateLine(String userId, TreeNode ref) {
+    final TreeNode tempRef = ref;
+    final String uid = userId;
+
+    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
-        ArrayList<String> tempDw = new ArrayList();
-        ArrayList<Boolean> tempHaveChild;
-        tempDw = (ArrayList<String>) dataSnapshot.getValue();
-
-        for (String a: tempDw) {
-          usersRef.child(a).child("dwId").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-              if (dataSnapshot.getValue() != null) {
-//                tempHaveChild.add(true);
-              }
+        if (dataSnapshot.child(uid).child("dwId").exists()) {
+          ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
+          for (String a: tempDw) {
+            if (dataSnapshot.child(a).child("dwId").exists()) {
+              TreeNode r = new TreeNode<>(new ParentNode(GetName.getNameDirectly(a)));
+              tempRef.addChild(r);
+              generateLine(a, r);
+            } else {
+//              ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
+//              for (String a : tempDw) {
+                TreeNode r = new TreeNode<>(new LeafNode(GetName.getNameDirectly(a)));
+                tempRef.addChild(r);
+//              }
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {}});
+          }
         }
       }
       @Override
       public void onCancelled(@NonNull DatabaseError databaseError) {}});
   }
+
+//  private void generateLine(String userId, TreeNode ref) {
+//    final TreeNode tempRef = ref;
+//    final String uid = userId;
+//
+//    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//      @Override
+//      public void onDataChange(DataSnapshot dataSnapshot) {
+//        if (dataSnapshot.child(uid).child("dwId").exists()) {
+//          ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child("dwId").getValue();
+//          for (String a: tempDw) {
+//            if (dataSnapshot.child("dwId").exists()) {}
+//            TreeNode r = new TreeNode<>(new ParentNode(a));
+//            tempRef.addChild(r);
+//            generateLine(a, r);
+//          }
+//        } else {
+//          TreeNode r = new TreeNode<>(new LeafNode(dataSnapshot.getKey()));
+//          tempRef.addChild(r);
+//        }
+//      }
+//      @Override
+//      public void onCancelled(@NonNull DatabaseError databaseError) {}});
+//  }
+
+//  private void generateLine(String uid) {
+//    usersRef.child(uid).child("dwId").addListenerForSingleValueEvent(new ValueEventListener() {
+//      @Override
+//      public void onDataChange(DataSnapshot dataSnapshot) {
+//        ArrayList<String> tempDw = new ArrayList();
+//
+//        node = new Node(mAuth.getUid(), tempDw);
+//
+//        for (String a: tempDw) {
+//          final String tempCurrent = a;
+//          usersRef.child(tempCurrent).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//              if (dataSnapshot.child("dwId").exists()) {
+//                root.addChild(
+//                        new TreeNode<>(new ParentNode((String) node.getUid()));
+//                );
+//                node.addDownlinesNode(generateLineAgain(tempCurrent));
+//              } else root.addChild( new TreeNode<>(new LeafNode((String) node.getUid())); );
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {}});
+//        }
+//      }
+//      @Override
+//      public void onCancelled(@NonNull DatabaseError databaseError) {}});
+//  }
+//
+//  private Node generateLineAgain(String uid) {
+//    usersRef.child(uid).child("dwId").addListenerForSingleValueEvent(new ValueEventListener() {
+//      @Override
+//      public void onDataChange(DataSnapshot dataSnapshot) {
+//        ArrayList<String> tempDw = new ArrayList();
+//
+//        tempNode = new Node(mAuth.getUid(), tempDw);
+//
+//        for (final String a: tempDw) {
+//          final String tempCurrent = a;
+//          usersRef.child(tempCurrent).addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//              if (dataSnapshot.child("dwId").exists()) {
+//                node.addDownlinesNode(generateLineAgain(tempCurrent));
+//              }
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {}});
+//        }
+//      }
+//      @Override
+//      public void onCancelled(@NonNull DatabaseError databaseError) {}});
+//    return tempNode;
+//  }
 
 
 //  private void generateLine(String uid) {
