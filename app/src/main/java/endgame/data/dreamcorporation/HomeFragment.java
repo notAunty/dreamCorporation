@@ -19,8 +19,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.leinardi.android.speeddial.SpeedDialActionItem;
+import com.leinardi.android.speeddial.SpeedDialView;
 
 import java.util.ArrayList;
+
+import com.google.zxing.integration.android.IntentIntegrator;
 
 import endgame.data.dreamcorporation.profile.Word;
 import endgame.data.dreamcorporation.profile.WordAdapter;
@@ -34,6 +38,7 @@ public class HomeFragment extends Fragment {
   private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
   private DatabaseReference usersRef = mDatabase.getReference("users");
   private DatabaseReference transRef = mDatabase.getReference("transactions");
+  private SpeedDialView speedDial;
 
   @Nullable
   @Override
@@ -52,24 +57,34 @@ public class HomeFragment extends Fragment {
       public void onCancelled(@NonNull DatabaseError databaseError) {}
     });
 
-
-
-    // FAB
-    FloatingActionButton fab = v.findViewById(R.id.home_fab);
-
-    // Begin TESTING
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        Intent i = new Intent(v.getContext(), ActivityTestingData.class);
-        startActivity(i);
-      }
-    });
-    // End TESTING
-
     displayList(v);
 
+    speedDial = v.findViewById(R.id.home_fab);
+    speedDial.inflate(R.menu.menu_fab);
+
+    speedDial.setOnActionSelectedListener(new SpeedDialView.OnActionSelectedListener() {
+      @Override
+      public boolean onActionSelected(SpeedDialActionItem speedDialActionItem) {
+        switch (speedDialActionItem.getId()) {
+          case R.id.fabScanQR:
+            scanQRCode();
+            return false;
+          case R.id.fabEnterDetails:
+            return false;
+          default:
+            return false;
+        }
+      }
+    });
+
     return v;
+  }
+
+  private void scanQRCode(){
+    new IntentIntegrator(getActivity())
+            .setOrientationLocked(false)
+            .setBeepEnabled(false)
+            .initiateScan();
   }
 
   public void displayList(View view){

@@ -42,6 +42,8 @@ dependencies {
 //    implementation 'com.github.Kunzisoft:Android-SwitchDateTimePicker:2.0'
 //    implementation 'com.aurelhubert:ahbottomnavigation:0.1.3'
     implementation 'androidmads.library.qrgenearator:QRGenearator:1.0.3'
+    implementation "com.leinardi.android:speed-dial:1.0.1"
+    implementation "com.journeyapps:zxing-android-embedded:3.6.0"
 }
 
 apply plugin: 'com.google.gms.google-services'
