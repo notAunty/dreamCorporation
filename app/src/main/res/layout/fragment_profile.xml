@@ -32,6 +32,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="48dp"
             android:text="Tap to Decrypt"
+            android:textStyle="bold"
             android:textColor="@android:color/white"
             android:textSize="30sp" />
 
