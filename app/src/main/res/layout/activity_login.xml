@@ -96,7 +96,7 @@
                         android:id="@+id/login_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/grad1"
+                        android:background="@drawable/ripple_grad1"
                         android:text="Login"
                         android:textSize="18sp"
                         android:textStyle="bold"

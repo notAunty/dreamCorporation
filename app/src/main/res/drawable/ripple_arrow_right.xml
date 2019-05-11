@@ -10,6 +10,6 @@
                 android:height="40dp" />
         </shape>
     </item>
-    <item android:drawable="@drawable/ic_copy_key">
+    <item android:drawable="@drawable/arrow_right">
     </item>
 </ripple>

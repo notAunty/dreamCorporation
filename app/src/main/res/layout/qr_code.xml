@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="16dp"
     android:orientation="vertical"
     android:gravity="center_horizontal">
@@ -10,15 +11,21 @@
         android:id="@+id/qr_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-
-    <Button
-        android:id="@+id/back"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Done"
-        android:textSize="18dp"
-        android:clickable="true"
-        android:background="@drawable/grad4"
-        android:textStyle="bold"/>
+        app:cardCornerRadius="8dp">
+
+        <Button
+            android:id="@+id/back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:textSize="18dp"
+            android:background="@drawable/ripple_grad4"
+            android:textStyle="bold"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
 
 </LinearLayout>
