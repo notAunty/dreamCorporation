@@ -57,8 +57,8 @@ public class SignupActivity extends AppCompatActivity {
                       if (task.isSuccessful()) {
                         // Add to database
                         String tempEncFn = Encryption.encode(userFn);
-                        usersRef.child(mAuth.getUid()).push().child("fN").push().setValue(tempEncFn);
-                        usersRef.child(mAuth.getUid()).push().child("b").push().setValue(0);
+                        usersRef.child(mAuth.getUid()).child("fN").setValue(tempEncFn);
+                        usersRef.child(mAuth.getUid()).child("b").setValue(0);
                         Toast.makeText(view.getContext(), Encryption.decode(tempEncFn, mAuth.getUid()),
                                 Toast.LENGTH_LONG).show();
 

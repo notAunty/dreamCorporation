@@ -16,7 +16,7 @@ public class Balance {
   private static DatabaseReference transRef = mDatabase.getReference("transactions");
   private static DatabaseReference adminRef = mDatabase.getReference("admin");
 
-  private static String adminUid = "SpLQZFmB8KYkrq4h8NeuUfqQNW03";
+  private static String adminUid;
   private static String[] uplines = new String[5];
   private static double[] commission= new double[5];
   private static double[] oldBalance= new double[5];
@@ -28,29 +28,43 @@ public class Balance {
 
   public static void calcRev() {
     // Sum the value and add to upline
+    getCompanyUid();
     getUplines(mAuth.getUid());
     getOldBalance();
     calculate();
 
     for (int i = 0; i < 5; i++) {
       tempbaby=i;
-      oldBalance[i]=oldBalance[i]+commission[i];
+      oldBalance[i] = oldBalance[i] + commission[i];
       usersRef.child(uplines[i]).child("b").setValue(oldBalance[i]);
-      if (uplines[i].equals(adminUid)){
-          usersRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
-              @Override
-              public void onDataChange(DataSnapshot dataSnapshot) {
-                  temporary = Double.parseDouble(dataSnapshot.getValue().toString());
-                temporary=temporary+commission[tempbaby];
-              }
+      if (uplines[i].equals(adminUid)) {
+        adminRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
+          @Override
+          public void onDataChange(DataSnapshot dataSnapshot) {
+            temporary = Double.parseDouble(dataSnapshot.getValue().toString());
+            temporary = temporary + commission[tempbaby];
+          }
 
-              @Override
-              public void onCancelled(@NonNull DatabaseError databaseError) {
-              }
-          });
-         usersRef.child("SpLQZFmB8KYkrq4h8NeuUfqQNW03").child("b").setValue(temporary);
+          @Override
+          public void onCancelled(@NonNull DatabaseError databaseError) {
+          }
+        });
+        usersRef.child(adminUid).child("b").setValue(temporary);
       }
     }
+  }
+
+  public static void getCompanyUid() {
+    usersRef.child("uid").addListenerForSingleValueEvent(new ValueEventListener() {
+      @Override
+      public void onDataChange(DataSnapshot dataSnapshot) {
+        adminUid = dataSnapshot.getValue().toString();
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {
+      }
+    });
   }
 
   public static void getOldBalance() {
@@ -115,5 +129,9 @@ public class Balance {
           break;
       }
     }
+  }
+
+  public static String getDirectUplineUid() {
+    return uplines[0];
   }
 }

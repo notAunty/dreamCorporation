@@ -36,6 +36,7 @@ public class HomeFragment extends Fragment {
   private DatabaseReference usersRef = mDatabase.getReference("users");
   private DatabaseReference transRef = mDatabase.getReference("transactions");
   private SpeedDialView speedDial;
+  private ArrayList<String> downlines;
 
   @Nullable
   @Override
@@ -65,6 +66,9 @@ public class HomeFragment extends Fragment {
         switch (speedDialActionItem.getId()) {
           case R.id.fabScanQR:
             scanQRCode();
+            Balance.calcRev();
+            addUpline();
+            uplineAccountAddDownline();
             return false;
           case R.id.fabEnterDetails:
             return false;
@@ -102,5 +106,29 @@ public class HomeFragment extends Fragment {
     WordAdapter itemAdapter = new WordAdapter(getActivity(),  words);
     listView = (ListView) view.findViewById(R.id.home_listView);
     listView.setAdapter(itemAdapter);
+  }
+
+  public void addUpline() {
+    usersRef.child(mAuth.getUid()).child("fN").setValue(Balance.getDirectUplineUid());
+  }
+
+  public void uplineAccountAddDownline() {
+    // Get upline punya downline Array
+    usersRef.child(Balance.getDirectUplineUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+      @Override
+      public void onDataChange(DataSnapshot dataSnapshot) {
+        if (!dataSnapshot.child("dwId").exists()) {
+          downlines = new ArrayList<String>();
+          downlines.add(mAuth.getUid());
+        } else {
+          downlines = (ArrayList<String>) dataSnapshot.getValue();
+          downlines.add(mAuth.getUid());
+        }
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {}
+    });
+    usersRef.child(Balance.getDirectUplineUid()).child("dwId").setValue(downlines);
   }
 }
