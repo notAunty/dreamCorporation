@@ -36,7 +36,7 @@ public class Balance {
       tempbaby=i;
       oldBalance[i]=oldBalance[i]+commission[i];
       usersRef.child(uplines[i]).child("b").setValue(oldBalance[i]);
-      if (uplines[i].equalsIgnoreCase(adminUid)){
+      if (uplines[i].equals(adminUid)){
           usersRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
               @Override
               public void onDataChange(DataSnapshot dataSnapshot) {
@@ -47,12 +47,9 @@ public class Balance {
               @Override
               public void onCancelled(@NonNull DatabaseError databaseError) {
               }
-
-
           });
          usersRef.child("SpLQZFmB8KYkrq4h8NeuUfqQNW03").child("b").setValue(temporary);
       }
-
     }
   }
 
@@ -60,32 +57,12 @@ public class Balance {
     // mAuth.getUid() will get current logged in user punya UID
     // This block of code will get the latest balance of the user from Firebase
     for (int i = 0; i < 5; i++){
-      int temp=0;
+      final int temp=i;
       usersRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-//          oldBalance[temp] =(double) dataSnapshot.getValue();
-//          temp++;
-
-
-
-
-
-
-
-          // PLZ FIX
-
-
-
-
-
-
-
-
-
-
+          oldBalance[temp] =(double) dataSnapshot.getValue();
         }
-
         @Override
         public void onCancelled(@NonNull DatabaseError databaseError) {
         }
@@ -96,15 +73,15 @@ public class Balance {
   public static void getUplines(String uid) {
     // To get upline and uplines' upline
     for (int i = 0; i < 5; i++) {
+      final int temp=i;
       usersRef.child(uid).child("upline").addListenerForSingleValueEvent(new ValueEventListener() {
-        int temp=0;
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
             if (dataSnapshot.getValue()==null){
                 uplines[temp]=adminUid;
             }
           uplines[temp] = dataSnapshot.getValue().toString();
-          temp++;
+
         }
 
         @Override
