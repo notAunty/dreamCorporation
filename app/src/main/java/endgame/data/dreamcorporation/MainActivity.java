@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
           //Create the intent to start another activity
           Intent intent = new Intent(view.getContext(), HomeActivity.class);
           startActivity(intent);
-          overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
 
           onBackPressed(); // To close this activity
         }

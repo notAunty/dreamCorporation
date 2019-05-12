@@ -2,8 +2,6 @@ package endgame.data.dreamcorporation;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Random;
-
 public class Encryption {
 
   private static int key;
@@ -13,7 +11,7 @@ public class Encryption {
   private static String uid = FirebaseAuth.getInstance().getUid();
 
   public static String encode(String name) {
-    key = new Random().nextInt(101)+55;
+    key = Integer.parseInt(uid.replaceAll("[^0-9]", ""));
     String temp = name;
     char[] c = new char[temp.length()];
     for (int shu = 1; shu <= key; shu++) {
@@ -41,6 +39,7 @@ public class Encryption {
   }
 
   public static String decode(String cipher, String check) {
+    key = Integer.parseInt(check.replaceAll("[^0-9]", ""));
     if(check.equals(uid)){
       String temp = cipher;
       char[] c = new char[temp.length()];
@@ -73,6 +72,7 @@ public class Encryption {
   }
 
   public static String decodeDirectly(String cipher) {
+    key = Integer.parseInt(uid.replaceAll("[^0-9]", ""));
     String temp = cipher;
     char[] c = new char[temp.length()];
     for (int shu = 1; shu <= key; shu++) {
