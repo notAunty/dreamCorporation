@@ -1,26 +1,19 @@
 package endgame.data.dreamcorporation;
 
-import android.Manifest;
 import android.app.AlertDialog;
-import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,8 +22,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.zxing.Result;
-import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
 
@@ -39,29 +30,28 @@ import java.util.ArrayList;
 import endgame.data.dreamcorporation.profile.Word;
 import endgame.data.dreamcorporation.profile.WordAdapter;
 
-import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
-import com.dlazaro66.qrcodereaderview.QRCodeReaderView.OnQRCodeReadListener;
+public class HomeFragment extends Fragment {
 
-import static android.app.Activity.RESULT_OK;
-
-public class HomeFragment extends Fragment{
-
+  private View v;
+  private EditText key;
+  private TextView title;
   private int counter = 0;
   private ListView listView;
+  private String tempUpline;
   private ArrayList<Word> words;
+  private SpeedDialView speedDial;
+  private ArrayList<String> downlines;
+
+
   private FirebaseAuth mAuth = FirebaseAuth.getInstance();
   private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
   private DatabaseReference usersRef = mDatabase.getReference("users");
   private DatabaseReference transRef = mDatabase.getReference("transactions");
-  private SpeedDialView speedDial;
-  private ArrayList<String> downlines;
-  private TextView title;
-  private EditText key;
 
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    View v = inflater.inflate(R.layout.fragment_home, container, false);
+    v = inflater.inflate(R.layout.fragment_home, container, false);
 
     // Balance
     final TextView balance = v.findViewById(R.id.home_balance);
@@ -75,8 +65,6 @@ public class HomeFragment extends Fragment{
       public void onCancelled(@NonNull DatabaseError databaseError) {}
     });
 
-    displayList(v);
-
     speedDial = v.findViewById(R.id.home_fab);
     speedDial.inflate(R.menu.menu_fab);
 
@@ -85,7 +73,9 @@ public class HomeFragment extends Fragment{
       public boolean onActionSelected(SpeedDialActionItem speedDialActionItem) {
         switch (speedDialActionItem.getId()) {
           case R.id.fabScanQR:
-            scanQRCode();
+//            scanQR();
+            Intent toQr = new Intent(getActivity(), dialogQrScanner.class);
+            startActivity(toQr);
 //            Balance.calcRev();
 //            addUpline();
 //            uplineAccountAddDownline();
@@ -99,18 +89,45 @@ public class HomeFragment extends Fragment{
       }
     });
 
+    displayList(v);
 
     return v;
   }
 
-  private void scanQRCode(){
+//  private void scanQRCode(){
 //    new IntentIntegrator(getActivity())
 //            .setOrientationLocked(false)
 //            .setBeepEnabled(false)
 //            .initiateScan();
-//    zXingScannerView = new ZXingScannerView(getActivity());
-//    view.addView(zXingScannerView);
-  }
+//  }
+
+//  public void scanQR() {
+//    Intent intent = new Intent("com.google.zxing.client.android.SCAN");
+//    intent.setAction(Intents.Scan.ACTION);
+//    intent.putExtra(Intents.Scan.PROMPT_MESSAGE, "Scan upline's QR Code");
+//    intent.putExtra(Intents.Scan.CAMERA_ID, 0);
+//    intent.putExtra(Intents.Scan.BEEP_ENABLED, true);
+//    intent.putExtra(Intents.Scan.BARCODE_IMAGE_ENABLED, false);
+////            intent.putExtra("Scan uplines's QR Code", "QR_CODE_MODE");
+//    getActivity().startActivityForResult(intent, 0);
+//  }
+//
+//  @Override
+//  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+//    IntentResult scanResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
+//    if (scanResult != null) {
+//      tempUpline = scanResult.getContents();
+//      Toast.makeText(getContext(), scanResult.getContents(), Toast.LENGTH_LONG).show();
+//
+//      Balance.calcRev();
+//      addUpline();
+//      uplineAccountAddDownline();
+////      Toast.makeText(this, scanResult.getContents(), Toast.LENGTH_LONG).show();
+//    } else {
+//      super.onActivityResult(requestCode, resultCode, data);
+//      Toast.makeText(getContext(), scanResult.getContents(), Toast.LENGTH_LONG).show();
+//    }
+//  }
 
   private void enterUID(){
     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
@@ -133,7 +150,6 @@ public class HomeFragment extends Fragment{
     alert.show();
   }
 
-
   public void displayList(View view){
     words = new ArrayList<Word>();
     words.add(new Word(getResources().getString(R.string.example),getResources().getString(R.string.example)));
@@ -155,7 +171,7 @@ public class HomeFragment extends Fragment{
   }
 
   public void addUpline() {
-    usersRef.child(mAuth.getUid()).child("fN").setValue(Balance.getDirectUplineUid());
+    usersRef.child(mAuth.getUid()).child("upId").setValue(Balance.getDirectUplineUid());
   }
 
   public void uplineAccountAddDownline() {
