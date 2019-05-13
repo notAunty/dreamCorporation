@@ -84,6 +84,8 @@ public class SignupActivity extends AppCompatActivity {
       }
     });
 
+
+
     login.setOnClickListener(new View.OnClickListener() {
       @Override
       //On click function

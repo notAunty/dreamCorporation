@@ -1,14 +1,26 @@
 package endgame.data.dreamcorporation;
 
+import android.Manifest;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,7 +29,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.Result;
+import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
 
@@ -26,7 +39,12 @@ import java.util.ArrayList;
 import endgame.data.dreamcorporation.profile.Word;
 import endgame.data.dreamcorporation.profile.WordAdapter;
 
-public class HomeFragment extends Fragment {
+import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
+import com.dlazaro66.qrcodereaderview.QRCodeReaderView.OnQRCodeReadListener;
+
+import static android.app.Activity.RESULT_OK;
+
+public class HomeFragment extends Fragment{
 
   private int counter = 0;
   private ListView listView;
@@ -37,6 +55,8 @@ public class HomeFragment extends Fragment {
   private DatabaseReference transRef = mDatabase.getReference("transactions");
   private SpeedDialView speedDial;
   private ArrayList<String> downlines;
+  private TextView title;
+  private EditText key;
 
   @Nullable
   @Override
@@ -66,11 +86,12 @@ public class HomeFragment extends Fragment {
         switch (speedDialActionItem.getId()) {
           case R.id.fabScanQR:
             scanQRCode();
-            Balance.calcRev();
-            addUpline();
-            uplineAccountAddDownline();
+//            Balance.calcRev();
+//            addUpline();
+//            uplineAccountAddDownline();
             return false;
           case R.id.fabEnterDetails:
+            enterUID();
             return false;
           default:
             return false;
@@ -78,15 +99,40 @@ public class HomeFragment extends Fragment {
       }
     });
 
+
     return v;
   }
 
   private void scanQRCode(){
-    new IntentIntegrator(getActivity())
-            .setOrientationLocked(false)
-            .setBeepEnabled(false)
-            .initiateScan();
+//    new IntentIntegrator(getActivity())
+//            .setOrientationLocked(false)
+//            .setBeepEnabled(false)
+//            .initiateScan();
+//    zXingScannerView = new ZXingScannerView(getActivity());
+//    view.addView(zXingScannerView);
   }
+
+  private void enterUID(){
+    AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+    LayoutInflater inflater = requireActivity().getLayoutInflater();
+    View temp = inflater.inflate(R.layout.dialog_key,null);
+    title = temp.findViewById(R.id.title);
+    final TextView tempTitle = title;
+    key = temp.findViewById(R.id.key);
+    final EditText tempKey = key;
+    String uplineUID = mAuth.getUid();
+    tempTitle.setText("Enter upline UID");
+    builder.setView(temp).setPositiveButton("OK", new DialogInterface.OnClickListener() {
+      @Override
+      public void onClick(DialogInterface dialog, int which) {
+        String tempInput = tempKey.getText().toString();
+        Toast.makeText(getContext(), "Fuck you! 妈的，叫你填啦，干你！JIBAI！", Toast.LENGTH_LONG).show();
+      }
+    });
+    AlertDialog alert = builder.create();
+    alert.show();
+  }
+
 
   public void displayList(View view){
     words = new ArrayList<Word>();
