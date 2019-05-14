@@ -44,7 +44,8 @@
         <item name="android:windowBackground">@drawable/splash</item>
     </style>
 
-    <style name="QrDialogTheme" parent="Theme.AppCompat.Dialog">
+    <style name="QrDialogTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:dialogCornerRadius">12dp</item>
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>

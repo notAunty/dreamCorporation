@@ -167,7 +167,7 @@ public class NetworkFragment extends Fragment {
             if (dataSnapshot.child(a).child("dwId").exists()) {
               TreeNode r = new TreeNode<>(new ParentNode(GetName.getNameDirectly(a)));
               tempRef.addChild(r);
-              generateLine(a, r);
+              generateLine(a, r); // Recursive
             } else {
 //              ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
 //              for (String a : tempDw) {

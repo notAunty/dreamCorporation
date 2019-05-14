@@ -17,11 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
 
@@ -37,33 +34,36 @@ public class HomeFragment extends Fragment {
   private TextView title;
   private int counter = 0;
   private ListView listView;
-  private String tempUpline;
   private ArrayList<Word> words;
   private SpeedDialView speedDial;
-  private ArrayList<String> downlines;
 
 
   private FirebaseAuth mAuth = FirebaseAuth.getInstance();
   private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
   private DatabaseReference usersRef = mDatabase.getReference("users");
   private DatabaseReference transRef = mDatabase.getReference("transactions");
+  private GetFirebase firebase = new GetFirebase();
 
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     v = inflater.inflate(R.layout.fragment_home, container, false);
 
-    // Balance
-    final TextView balance = v.findViewById(R.id.home_balance);
-    usersRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
-      @Override
-      public void onDataChange(DataSnapshot dataSnapshot) {
-        balance.setText(getString(R.string.currency) + " " + dataSnapshot.getValue().toString());
-      }
+//    mDatabase.setPersistenceEnabled(true);
 
-      @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {}
-    });
+    // Balance
+    TextView balance = v.findViewById(R.id.home_balance);
+    balance.setText(getString(R.string.currency) + " " + firebase.getUserBalance(mAuth.getUid()));
+
+//    usersRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
+//      @Override
+//      public void onDataChange(DataSnapshot dataSnapshot) {
+//        balance.setText(getString(R.string.currency) + " " + dataSnapshot.getValue().toString());
+//      }
+//
+//      @Override
+//      public void onCancelled(@NonNull DatabaseError databaseError) {}
+//    });
 
     speedDial = v.findViewById(R.id.home_fab);
     speedDial.inflate(R.menu.menu_fab);
@@ -74,11 +74,8 @@ public class HomeFragment extends Fragment {
         switch (speedDialActionItem.getId()) {
           case R.id.fabScanQR:
 //            scanQR();
-            Intent toQr = new Intent(getActivity(), dialogQrScanner.class);
+            Intent toQr = new Intent(getActivity(), DialogQrScanner.class);
             startActivity(toQr);
-//            Balance.calcRev();
-//            addUpline();
-//            uplineAccountAddDownline();
             return false;
           case R.id.fabEnterDetails:
             enterUID();
@@ -168,29 +165,5 @@ public class HomeFragment extends Fragment {
     WordAdapter itemAdapter = new WordAdapter(getActivity(),  words);
     listView = (ListView) view.findViewById(R.id.home_listView);
     listView.setAdapter(itemAdapter);
-  }
-
-  public void addUpline() {
-    usersRef.child(mAuth.getUid()).child("upId").setValue(Balance.getDirectUplineUid());
-  }
-
-  public void uplineAccountAddDownline() {
-    // Get upline punya downline Array
-    usersRef.child(Balance.getDirectUplineUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-      @Override
-      public void onDataChange(DataSnapshot dataSnapshot) {
-        if (!dataSnapshot.child("dwId").exists()) {
-          downlines = new ArrayList<String>();
-          downlines.add(mAuth.getUid());
-        } else {
-          downlines = (ArrayList<String>) dataSnapshot.getValue();
-          downlines.add(mAuth.getUid());
-        }
-      }
-
-      @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {}
-    });
-    usersRef.child(Balance.getDirectUplineUid()).child("dwId").setValue(downlines);
   }
 }

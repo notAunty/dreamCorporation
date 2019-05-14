@@ -6,45 +6,63 @@
     android:background="@color/ic_launcher_background"
     android:orientation="vertical">
 
-    <FrameLayout
+    <com.github.florent37.shapeofview.shapes.ArcView
         android:layout_width="match_parent"
-        android:layout_height="210dp">
+        android:layout_height="210dp"
+        android:elevation="4dp"
+        app:shape_arc_height="20dp"
+        app:shape_arc_position="bottom">
 
         <View
-            android:layout_width="490dp"
-            android:layout_height="410dp"
-            android:background="@drawable/circle"
-            android:layout_gravity="center_horizontal"
-            android:translationY="-205dp" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/grad2" />
 
-        <ImageView
-            android:id="@+id/profile"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/profile" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
+            <ImageView
+                android:id="@+id/profile"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/profile"/>
 
-        <TextView
-            android:id="@+id/profile_name"
-            android:layout_width="280dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textAlignment="center"
-            android:layout_marginTop="48dp"
-            android:text="Tap to Decrypt"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:ellipsize="end"
-            android:singleLine="true"/>
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:text="Tap to Decrypt"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
-    </FrameLayout>
+
+    </com.github.florent37.shapeofview.shapes.ArcView>
+
+    <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="210dp">-->
+
+        <!--<View-->
+            <!--android:layout_width="490dp"-->
+            <!--android:layout_height="410dp"-->
+            <!--android:background="@drawable/circle"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:translationY="-205dp" />-->
+        <!---->
+    <!--</FrameLayout>-->
 
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="5dp">
 
         <ScrollView

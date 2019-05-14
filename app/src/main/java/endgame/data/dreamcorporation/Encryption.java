@@ -4,7 +4,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Encryption {
 
-  private static int key;
+  private static int key = 6969;
   private static String customername;
   private static String encry = "";
   private static String dencry = "";
@@ -12,7 +12,6 @@ public class Encryption {
 
   public static String encode(String name) {
 //    key = Integer.parseInt(uid.replaceAll("[^0-9]", ""));
-    key = 6969;
     String temp = name;
     char[] c = new char[temp.length()];
     for (int shu = 1; shu <= key; shu++) {
@@ -41,7 +40,6 @@ public class Encryption {
 
   public static String decode(String cipher, String check) {
 //    key = Integer.parseInt(check.replaceAll("[^0-9]", ""));
-    key = 6969;
     if(check.equals(uid)){
       String temp = cipher;
       char[] c = new char[temp.length()];
@@ -75,7 +73,6 @@ public class Encryption {
 
   public static String decodeDirectly(String cipher) {
 //    key = Integer.parseInt(uid.replaceAll("[^0-9]", ""));
-    key = 6969;
     String temp = cipher;
     char[] c = new char[temp.length()];
     for (int shu = 1; shu <= key; shu++) {

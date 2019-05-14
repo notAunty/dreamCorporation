@@ -1,5 +1,7 @@
 package endgame.data.dreamcorporation;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,16 +28,27 @@ public class Balance {
   private static double temporary;
   private static int tempbaby;
 
-  public static void calcRev() {
+  public static void calcRev(String scannedUpId) {
     // Sum the value and add to upline
+
     getCompanyUid();
+    setUpId(scannedUpId);
     getUplines(mAuth.getUid());
     getOldBalance();
     calculate();
+    addBalance();
 
+//    For debugging
+//    for (int i = 0; i < 5; i++) {
+//      Log.e("upId", i + ": " + uplines[i]);
+//    }
+  }
+
+  public static void addBalance() {
     for (int i = 0; i < 5; i++) {
       tempbaby=i;
       oldBalance[i] = oldBalance[i] + commission[i];
+//      Log.e("soh", String.valueOf(oldBalance[i]));
       usersRef.child(uplines[i]).child("b").setValue(oldBalance[i]);
       if (uplines[i].equals(adminUid)) {
         adminRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -55,16 +68,22 @@ public class Balance {
   }
 
   public static void getCompanyUid() {
-    usersRef.child("uid").addListenerForSingleValueEvent(new ValueEventListener() {
+    final String[] tempUid = new String[1];
+
+    adminRef.child("uid").addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
-        adminUid = dataSnapshot.getValue().toString();
+        tempUid[0] = dataSnapshot.getValue().toString();
       }
 
       @Override
       public void onCancelled(@NonNull DatabaseError databaseError) {
       }
     });
+
+    adminUid = tempUid[0];
+    Log.e("adminUid", String.valueOf(tempUid[0]));
+    Log.e("adminUid", String.valueOf(adminUid));
   }
 
   public static void getOldBalance() {
@@ -84,27 +103,45 @@ public class Balance {
   }
   }
 
-  public static void getUplines(String uid) {
+  public static void getUplines(String u) {
+    String uid = u;
     // To get upline and uplines' upline
     for (int i = 0; i < 5; i++) {
-      final int temp=i;
-      usersRef.child(uid).child("upline").addListenerForSingleValueEvent(new ValueEventListener() {
+      final int temp = i;
+
+      Log.e("i", String.valueOf(temp));
+
+      usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            if (dataSnapshot.getValue()==null){
-                uplines[temp]=adminUid;
-            }
-          uplines[temp] = dataSnapshot.getValue().toString();
+          if (!dataSnapshot.child("upId").exists()) {
+            uplines[temp] = adminUid;
+          } else {
+            Log.e("test", dataSnapshot.child("upId").getValue().toString());
+            uplines[temp] = dataSnapshot.child("upId").getValue().toString();
+          }
 
+//          if (dataSnapshot.getValue() == adminUid) {
+//            uplines[temp] = adminUid;
+//            for (int j = temp; j < 5; j++) {
+//              uplines[j] = adminUid;
+//            }
+//
+//          } else uplines[temp] = dataSnapshot.getValue().toString();
         }
 
         @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {}
+        public void onCancelled(@NonNull DatabaseError databaseError) {
+        }
       });
       uid = uplines[i];
+      Log.e("uid",uplines[i]);
+      System.out.println(uplines[i]);
+    }
+    for (int i=0;i<uplines.length;i++){
+      System.out.println(uplines[i]);
     }
   }
-
 
 
   public static void calculate(){
@@ -131,7 +168,10 @@ public class Balance {
     }
   }
 
-  public static String getDirectUplineUid() {
-    return uplines[0];
+  public static void setUpId(String scannedUpId) {
+    usersRef.child(mAuth.getUid()).child("upId").setValue(scannedUpId);
   }
+//  public static String getDirectUplineUid() {
+//    return uplines[0];
+//  }
 }

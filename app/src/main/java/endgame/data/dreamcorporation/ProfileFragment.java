@@ -29,35 +29,46 @@ import java.util.ArrayList;
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 import endgame.data.dreamcorporation.profile.Word;
-import endgame.data.dreamcorporation.profile.WordAdapter;
 
 import static android.content.Context.CLIPBOARD_SERVICE;
 
 
 public class ProfileFragment extends Fragment {
 
-  private FirebaseAuth mAuth;
-  private TextView decrypt, user_key;
   private String text;
+  private String tempUID = "null";
+  final String[] tempEncryptedFullName = new String[1];
+
+  private Button done;
   private ListView listView;
   private ArrayList<Word> words;
-  private String tempUID = "Null";
-  private ClipboardManager clipboardManager;
-  private ImageView copy_key, qrImage;
-  private FloatingActionButton floatingActionButton;
-  private Button done;
   private QRGEncoder qrgEncoder;
+  private TextView decrypt, user_key;
+  private ImageView copy_key, qrImage;
+  private ClipboardManager clipboardManager;
+  private FloatingActionButton floatingActionButton;
+
+  private FirebaseAuth mAuth;
+  private GetFirebase firebase = new GetFirebase();
+
 
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
-    mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Auth // IMPORTANT
+    mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Auth, IMPORTANT
     View view = inflater.inflate(R.layout.fragment_profile, container, false);
 //    final FragmentManager manager = getFragmentManager();
 
     user_key = (TextView) view.findViewById(R.id.user_key);
 //        TextView uidField = (TextView) view.findViewById(R.id.uid);
     if (!tempUID.isEmpty()) user_key.setText(mAuth.getUid());
+
+    firebase.getFullName(mAuth.getUid(), new GetFirebase.GetFullNameCallback() {
+      @Override
+      public void onCallback(String fullName) {
+        tempEncryptedFullName[0] = fullName;
+      }
+    });
 
     decrypt = (TextView) view.findViewById(R.id.profile_name);
 
@@ -75,13 +86,15 @@ public class ProfileFragment extends Fragment {
 //        builder.setMessage("Do you want to delete ?");
         View temp = inflater.inflate(R.layout.dialog_key, null);
         final EditText key = (EditText) temp.findViewById(R.id.key);
+
         builder.setView(temp).setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                  public void onClick(DialogInterface dialog, int which) {
-                    String tempDec = GetName.getName(mAuth.getUid(), key.getText().toString());
-                    if (tempDec.equalsIgnoreCase("")) {
-                      Toast.makeText(getContext(),
-                              "Wrong! Please try again!", Toast.LENGTH_SHORT).show();
-                    } else decrypt.setText(tempDec);
+          public void onClick(DialogInterface dialog, int which) {
+
+            String tempDec = Encryption.decodeDirectly(tempEncryptedFullName[0]);
+            if (tempDec.equals("")) {
+              Toast.makeText(getContext(),
+                      "Wrong! Please try again!", Toast.LENGTH_SHORT).show();
+            } else decrypt.setText(tempDec);
 
 //                    if (key.getText().toString().equals(mAuth.getUid())) {
 //                      Toast.makeText(getContext(),
@@ -95,8 +108,9 @@ public class ProfileFragment extends Fragment {
 //                                Toast.makeText(getContext(),
 //                                        "Welcome, " + key.getText() + " !", Toast.LENGTH_LONG).show();
 //                                decrypt.setText(key.getText());
-                  }
-                });
+          }
+        });
+
         AlertDialog alert = builder.create();
         alert.show();
 //        LayoutInflater layoutInflater = LayoutInflater.from(context);
