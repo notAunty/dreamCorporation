@@ -14,11 +14,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
 
@@ -39,9 +39,6 @@ public class HomeFragment extends Fragment {
 
 
   private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-  private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-  private DatabaseReference usersRef = mDatabase.getReference("users");
-  private DatabaseReference transRef = mDatabase.getReference("transactions");
   private GetFirebase firebase = new GetFirebase();
 
   @Nullable
@@ -52,13 +49,28 @@ public class HomeFragment extends Fragment {
 //    mDatabase.setPersistenceEnabled(true);
 
     // Balance
-    TextView balance = v.findViewById(R.id.home_balance);
-    balance.setText(getString(R.string.currency) + " " + firebase.getUserBalance(mAuth.getUid()));
+    TextView balanceTextView = v.findViewById(R.id.home_balance);
+    CardView cardView = v.findViewById(R.id.card);
+    TextView levelTextView = v.findViewById(R.id.level);
+    double balance = firebase.getUserBalance(mAuth.getUid());
+    balanceTextView.setText(getString(R.string.currency) + " " + balance);
+
+    if (balance < 50) {
+    } else if (balance < 150) {
+      cardView.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.silver));
+      levelTextView.setText("Silver");
+    } else if (balance < 300) {
+      cardView.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gold));
+      levelTextView.setText("Gold");
+    } else if (balance > 500) {
+      cardView.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.platinum));
+      levelTextView.setText("Platinum");
+    }
 
 //    usersRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
 //      @Override
 //      public void onDataChange(DataSnapshot dataSnapshot) {
-//        balance.setText(getString(R.string.currency) + " " + dataSnapshot.getValue().toString());
+//        balanceTextView.setText(getString(R.string.currency) + " " + dataSnapshot.getValue().toString());
 //      }
 //
 //      @Override

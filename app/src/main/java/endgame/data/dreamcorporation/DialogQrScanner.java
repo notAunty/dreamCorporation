@@ -53,6 +53,7 @@ public class DialogQrScanner extends AppCompatActivity{
     if (result != null) {
       if (result.getContents() == null) {
         Toast.makeText(this, "Scan cancelled.", Toast.LENGTH_LONG).show();
+        onBackPressed();
       } else {
         tempUpline = result.getContents();
 

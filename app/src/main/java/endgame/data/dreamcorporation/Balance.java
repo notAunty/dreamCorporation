@@ -17,6 +17,7 @@ public class Balance {
   private static DatabaseReference usersRef = mDatabase.getReference("users");
   private static DatabaseReference transRef = mDatabase.getReference("transactions");
   private static DatabaseReference adminRef = mDatabase.getReference("admin");
+  private static GetFirebase firebase = new GetFirebase();
 
   private static String adminUid;
   private static String[] uplines = new String[5];
@@ -29,10 +30,18 @@ public class Balance {
   private static int tempbaby;
 
   public static void calcRev(String scannedUpId) {
-    // Sum the value and add to upline
 
-    getCompanyUid();
-    setUpId(scannedUpId);
+    // Get latest fee
+    fee = firebase.getFee();
+    Log.e("Fee", String.valueOf(fee));
+
+    // Get admin uid
+    adminUid = firebase.getCompanyUid();
+
+    // To set current user upId
+    usersRef.child(mAuth.getUid()).child("upId").setValue(scannedUpId);
+
+
     getUplines(mAuth.getUid());
     getOldBalance();
     calculate();
@@ -67,25 +76,6 @@ public class Balance {
     }
   }
 
-  public static void getCompanyUid() {
-    final String[] tempUid = new String[1];
-
-    adminRef.child("uid").addListenerForSingleValueEvent(new ValueEventListener() {
-      @Override
-      public void onDataChange(DataSnapshot dataSnapshot) {
-        tempUid[0] = dataSnapshot.getValue().toString();
-      }
-
-      @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {
-      }
-    });
-
-    adminUid = tempUid[0];
-    Log.e("adminUid", String.valueOf(tempUid[0]));
-    Log.e("adminUid", String.valueOf(adminUid));
-  }
-
   public static void getOldBalance() {
     // mAuth.getUid() will get current logged in user punya UID
     // This block of code will get the latest balance of the user from Firebase
@@ -103,59 +93,59 @@ public class Balance {
   }
   }
 
-  public static void getUplines(String u) {
-    String uid = u;
+  public static void getUplines(String uid) {
     // To get upline and uplines' upline
     for (int i = 0; i < 5; i++) {
       final int temp = i;
-
-      Log.e("i", String.valueOf(temp));
-
-      usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+      final String tempUid = uid;
+      firebase.haveUpline(uid, new GetFirebase.HaveUplineCallback() {
         @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-          if (!dataSnapshot.child("upId").exists()) {
-            uplines[temp] = adminUid;
-          } else {
-            Log.e("test", dataSnapshot.child("upId").getValue().toString());
-            uplines[temp] = dataSnapshot.child("upId").getValue().toString();
-          }
-
-//          if (dataSnapshot.getValue() == adminUid) {
-//            uplines[temp] = adminUid;
-//            for (int j = temp; j < 5; j++) {
-//              uplines[j] = adminUid;
-//            }
-//
-//          } else uplines[temp] = dataSnapshot.getValue().toString();
-        }
-
-        @Override
-        public void onCancelled(@NonNull DatabaseError databaseError) {
+        public void onCallback(boolean haveDownline) {
+          if (haveDownline) {
+            firebase.getUpId(tempUid, new GetFirebase.GetUpIdCallback() {
+              @Override
+              public void onCallback(String upId) {
+                uplines[temp] = upId;
+              }
+            });
+          } else uplines[temp] = adminUid;
         }
       });
+
+//      usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
+//        @Override
+//        public void onDataChange(DataSnapshot dataSnapshot) {
+//          if (!dataSnapshot.child("upId").exists()) {
+//            uplines[temp] = adminUid;
+//          } else {
+////            Log.e("test", dataSnapshot.child("upId").getValue().toString());
+//            uplines[temp] = dataSnapshot.child("upId").getValue().toString();
+//          }
+//
+////          if (dataSnapshot.getValue() == adminUid) {
+////            uplines[temp] = adminUid;
+////            for (int j = temp; j < 5; j++) {
+////              uplines[j] = adminUid;
+////            }
+////
+////          } else uplines[temp] = dataSnapshot.getValue().toString();
+//        }
+//
+//        @Override
+//        public void onCancelled(@NonNull DatabaseError databaseError) {
+//        }
+//      });
       uid = uplines[i];
-      Log.e("uid",uplines[i]);
-      System.out.println(uplines[i]);
+//      Log.e("uid",uplines[i]);
+//      System.out.println(uplines[i]);
     }
-    for (int i=0;i<uplines.length;i++){
-      System.out.println(uplines[i]);
-    }
+//    for (int i=0;i<uplines.length;i++){
+//      System.out.println(uplines[i]);
+//    }
   }
 
 
   public static void calculate(){
-    // This block of code will get the latest fee
-    adminRef.child("fee").addListenerForSingleValueEvent(new ValueEventListener() {
-      @Override
-      public void onDataChange(DataSnapshot dataSnapshot) {
-        fee = (double) dataSnapshot.getValue();
-      }
-
-      @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {}
-    });
-
     for (int i = 0; i < 5; i++) {
       switch (i) {
         case 0:
@@ -166,10 +156,6 @@ public class Balance {
           break;
       }
     }
-  }
-
-  public static void setUpId(String scannedUpId) {
-    usersRef.child(mAuth.getUid()).child("upId").setValue(scannedUpId);
   }
 //  public static String getDirectUplineUid() {
 //    return uplines[0];

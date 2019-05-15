@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/ic_launcher_background"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <com.github.florent37.shapeofview.shapes.ArcView
@@ -33,6 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/profile"
+                android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="Tap to Decrypt"
@@ -85,7 +86,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:background="@drawable/ripple"
+                        android:background="@color/ic_launcher_background"
                         android:elevation="2dp"
                         android:clickable="true"
                         android:focusable="true">
@@ -136,7 +137,7 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:background="@drawable/ripple"
+                        android:background="@color/ic_launcher_background"
                         android:elevation="2dp"
                         android:clickable="true"
                         android:focusable="true">
@@ -184,7 +185,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:background="@drawable/ripple"
+                            android:background="@color/ic_launcher_background"
                             android:elevation="2dp"
                             android:clickable="true"
                             android:focusable="true">
@@ -218,7 +219,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="55dp"
-                            android:background="@drawable/ripple"
+                            android:background="@color/ic_launcher_background"
                             android:elevation="2dp"
                             android:clickable="true"
                             android:focusable="true">
@@ -252,7 +253,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="55dp"
-                            android:background="@drawable/ripple"
+                            android:background="@color/ic_launcher_background"
                             android:elevation="2dp"
                             android:clickable="true"
                             android:focusable="true">
@@ -286,7 +287,7 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:background="@drawable/ripple"
+                            android:background="@color/ic_launcher_background"
                             android:elevation="2dp"
                             android:clickable="true"
                             android:focusable="true">

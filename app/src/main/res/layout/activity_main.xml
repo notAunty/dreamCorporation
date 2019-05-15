@@ -17,8 +17,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/bottom_nav" >
+        android:background="@color/colorPrimary"
+        app:menu="@menu/bottom_nav"
+        app:itemIconTint="@drawable/nav_item_color_state"
+        app:itemTextColor="@drawable/nav_item_color_state">
         <!--app:itemIconTint="@color/colorAccent"-->
         <!--app:itemTextColor="@color/colorAccent" -->
     </com.google.android.material.bottomnavigation.BottomNavigationView>
