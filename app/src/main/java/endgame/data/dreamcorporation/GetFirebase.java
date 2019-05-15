@@ -13,30 +13,57 @@ import com.google.firebase.database.ValueEventListener;
 
 public class GetFirebase {
 
+  private double balance;
+
   private FirebaseAuth mAuth = FirebaseAuth.getInstance();
   private static FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
   private DatabaseReference adminRef = mDatabase.getReference("admin");
   private DatabaseReference usersRef = mDatabase.getReference("users");
   private DatabaseReference transRef = mDatabase.getReference("transactions");
 
-  public static void getFirebase() { mDatabase.setPersistenceEnabled(true); }
+  public static void getFirebase() {
+    mDatabase.setPersistenceEnabled(true);
+  }
 
 
 
-  public double getUserBalance(String uid) {
-    final double[] temp = new double[1];
+//  public double getUserBalance(String uid) {
+////    usersRef.keepSynced(true);
+//    final double[] temp = new double[1];
+//    usersRef.child(uid).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
+//      @Override
+//      public void onDataChange(DataSnapshot dataSnapshot) {
+//        Log.e("Double", dataSnapshot.getValue().toString());
+//        temp[0] = Double.valueOf(dataSnapshot.getValue().toString());
+//      }
+//
+//      @Override
+//      public void onCancelled(@NonNull DatabaseError databaseError) {}
+//    });
+//    Log.e("temp0", String.valueOf(temp[0]));
+//    return temp[0];
+//  }
+
+  public void getBalance(String uid, final GetBalanceCallback getBalanceCallback) {
+//    usersRef.keepSynced(true);
+//    Log.d("get b", "start");
     usersRef.child(uid).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
-      public void onDataChange(DataSnapshot dataSnapshot) {
-        Log.e("Double", dataSnapshot.getValue().toString());
-        temp[0] = Double.valueOf(dataSnapshot.getValue().toString());
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        Log.e("datasnapshot to string", dataSnapshot.getValue().toString());
+        Log.e("double value of", Double.valueOf(dataSnapshot.getValue().toString()).toString());
+        getBalanceCallback.onCallback(Double.valueOf(dataSnapshot.getValue().toString()));
       }
 
       @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {}
+      public void onCancelled(@NonNull DatabaseError databaseError) {
+        Log.e("Database Err", databaseError.getMessage());
+      }
     });
+  }
 
-    return temp[0];
+  public interface GetBalanceCallback {
+    void onCallback(double balance);
   }
 
 
@@ -81,9 +108,9 @@ public class GetFirebase {
     usersRef.child(uid).child("fN").addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
+        Log.e("fN: ", dataSnapshot.getValue().toString());
         getFullNameCallback.onCallback(dataSnapshot.getValue().toString());
 
-//        Log.e("fN: ", dataSnapshot.getValue().toString());
 //        tempFullName[0] = dataSnapshot.getValue().toString();
       }
 
@@ -138,25 +165,6 @@ public class GetFirebase {
   }
 
 
-
-  public void getBalance(String uid, final GetBalanceCallback getBalanceCallback) {
-    usersRef.child(uid).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
-      @Override
-      public void onDataChange(DataSnapshot dataSnapshot) {
-        getBalanceCallback.onCallback((Double) dataSnapshot.getValue());
-
-//        Log.e("fN: ", dataSnapshot.getValue().toString());
-//        tempFullName[0] = dataSnapshot.getValue().toString();
-      }
-
-      @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {}
-    });
-  }
-
-  public interface GetBalanceCallback {
-    void onCallback(double balance);
-  }
 //  public void getDownlines(String uid, final GetDownlinesCallback getDownlinesCallback) {
 //    usersRef.child(uid).child("dwId").addListenerForSingleValueEvent(new ValueEventListener() {
 //      @Override

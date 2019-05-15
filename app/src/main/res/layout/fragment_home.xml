@@ -25,7 +25,7 @@
             android:paddingLeft="12dp"
             android:paddingTop="8dp"
             android:text="@string/app_name"
-            android:textColor="#A9000000"
+            android:textColor="#D0000000"
             android:textSize="16sp" />
 
         <TextView
@@ -36,7 +36,7 @@
             android:paddingTop="8dp"
             android:paddingRight="12dp"
             android:text="Member"
-            android:textColor="#A9000000"
+            android:textColor="#D0000000"
             android:textSize="16sp" />
 
         <TextView

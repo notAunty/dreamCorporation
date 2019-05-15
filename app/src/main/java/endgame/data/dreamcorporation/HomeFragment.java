@@ -19,6 +19,8 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
 
@@ -36,14 +38,22 @@ public class HomeFragment extends Fragment {
   private ListView listView;
   private ArrayList<Word> words;
   private SpeedDialView speedDial;
+  final double[] tempBalance = new double[1];
 
-
+  private static FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+  private static DatabaseReference usersRef = mDatabase.getReference("users");
   private FirebaseAuth mAuth = FirebaseAuth.getInstance();
   private GetFirebase firebase = new GetFirebase();
 
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    firebase.getBalance(mAuth.getUid(), new GetFirebase.GetBalanceCallback() {
+      @Override
+      public void onCallback(double balance) {
+        tempBalance[0] = balance;
+      }
+    });
     v = inflater.inflate(R.layout.fragment_home, container, false);
 
 //    mDatabase.setPersistenceEnabled(true);
@@ -52,17 +62,16 @@ public class HomeFragment extends Fragment {
     TextView balanceTextView = v.findViewById(R.id.home_balance);
     CardView cardView = v.findViewById(R.id.card);
     TextView levelTextView = v.findViewById(R.id.level);
-    double balance = firebase.getUserBalance(mAuth.getUid());
-    balanceTextView.setText(getString(R.string.currency) + " " + balance);
+    balanceTextView.setText(getString(R.string.currency) + " " + tempBalance[0]);
 
-    if (balance < 50) {
-    } else if (balance < 150) {
+    if (tempBalance[0] < 50) {
+    } else if (tempBalance[0] < 150) {
       cardView.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.silver));
       levelTextView.setText("Silver");
-    } else if (balance < 300) {
+    } else if (tempBalance[0] < 300) {
       cardView.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gold));
       levelTextView.setText("Gold");
-    } else if (balance > 500) {
+    } else if (tempBalance[0] > 500) {
       cardView.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.platinum));
       levelTextView.setText("Platinum");
     }
@@ -97,6 +106,19 @@ public class HomeFragment extends Fragment {
         }
       }
     });
+
+//    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//      @Override
+//      public void onDataChange(DataSnapshot dataSnapshot) {
+//        Log.e("users", dataSnapshot.getValue().toString());
+//        HashMap<String, String> a = (HashMap<String, String>) dataSnapshot.getValue();
+//
+//        Log.e("individual", a.toString());
+//      }
+//      @Override
+//      public void onCancelled(@NonNull DatabaseError databaseError) {
+//      }
+//    });
 
     displayList(v);
 
