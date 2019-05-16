@@ -12,8 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -22,15 +20,15 @@ import java.util.ArrayList;
 
 public class DialogQrScanner extends AppCompatActivity{
 
-  private String tempUpline;
+  private String scannedUpline;
   private ArrayList<String> downlines;
 //  SurfaceView qrPreview;
 
 
   private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-  private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-  private DatabaseReference usersRef = mDatabase.getReference("users");
-  private DatabaseReference transRef = mDatabase.getReference("transactions");
+//  private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+//  private DatabaseReference usersRef = mDatabase.getReference("users");
+//  private DatabaseReference transRef = mDatabase.getReference("transactions");
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +53,7 @@ public class DialogQrScanner extends AppCompatActivity{
         Toast.makeText(this, "Scan cancelled.", Toast.LENGTH_LONG).show();
         onBackPressed();
       } else {
-        tempUpline = result.getContents();
+        scannedUpline = result.getContents();
 
         new AlertDialog.Builder(DialogQrScanner.this)
                 .setTitle("Pay RM50?")  //TODO make the amount dynamic
@@ -65,8 +63,8 @@ public class DialogQrScanner extends AppCompatActivity{
                 // The dialog is automatically dismissed when a dialog button is clicked.
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                   public void onClick(DialogInterface dialog, int which) {
-                    Balance.calcRev(tempUpline);
-                    addUpline();
+                    Balance.calcRev(scannedUpline);
+//                    addUpline();
                     uplineAccountAddDownline();
 
                     onBackPressed();
@@ -88,13 +86,13 @@ public class DialogQrScanner extends AppCompatActivity{
     }
   }
 
-  public void addUpline() {
-    usersRef.child(mAuth.getUid()).child("upId").setValue(tempUpline);
-  }
+//  public void addUpline() {
+//    usersRef.child(mAuth.getUid()).child("upId").setValue(scannedUpline);
+//  }
 
   public void uplineAccountAddDownline() {
     // Get upline punya downline Array
-    usersRef.child(tempUpline).addListenerForSingleValueEvent(new ValueEventListener() {
+    GetFirebase.usersRef.child(scannedUpline).addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
         if (!dataSnapshot.child("dwId").exists()) {
@@ -109,6 +107,6 @@ public class DialogQrScanner extends AppCompatActivity{
       @Override
       public void onCancelled(@NonNull DatabaseError databaseError) {}
     });
-    usersRef.child(tempUpline).child("dwId").setValue(downlines);
+    GetFirebase.usersRef.child(scannedUpline).child("dwId").setValue(downlines);
   }
 }

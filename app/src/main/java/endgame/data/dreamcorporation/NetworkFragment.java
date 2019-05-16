@@ -13,17 +13,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import endgame.data.dreamcorporation.network.LeafNode;
 import endgame.data.dreamcorporation.network.ParentNode;
 import endgame.data.dreamcorporation.viewbinder.LeafNodeBinder;
 import endgame.data.dreamcorporation.viewbinder.ParentNodeBinder;
@@ -32,9 +26,6 @@ import tellh.com.recyclertreeview_lib.TreeViewAdapter;
 
 public class NetworkFragment extends Fragment {
 
-  private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-  private DatabaseReference usersRef = mDatabase.getReference("users");
-  private DatabaseReference transRef = mDatabase.getReference("transaction");
   private FirebaseAuth mAuth = FirebaseAuth.getInstance();
   private String uid = mAuth.getUid();
   private RecyclerView rv;
@@ -70,7 +61,7 @@ public class NetworkFragment extends Fragment {
   private void initData() {
     List<TreeNode> treeNodes = new ArrayList<>();
 
-    root = new TreeNode<>(new ParentNode(GetName.getNameDirectly(uid)));
+    root = new TreeNode<>(new ParentNode(getNameDirectly(uid)));
     treeNodes.add(root);
 
     generateLine(uid, root);
@@ -155,31 +146,47 @@ public class NetworkFragment extends Fragment {
 //  }
 
   private void generateLine(String userId, TreeNode ref) {
-    final TreeNode tempRef = ref;
-    final String uid = userId;
+    TreeNode tempRef = ref;
+    String uid = userId;
 
-    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-      @Override
-      public void onDataChange(DataSnapshot dataSnapshot) {
-        if (dataSnapshot.child(uid).child("dwId").exists()) {
-          ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
-          for (String a: tempDw) {
-            if (dataSnapshot.child(a).child("dwId").exists()) {
-              TreeNode r = new TreeNode<>(new ParentNode(GetName.getNameDirectly(a)));
-              tempRef.addChild(r);
-              generateLine(a, r); // Recursive
-            } else {
-//              ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
-//              for (String a : tempDw) {
-                TreeNode r = new TreeNode<>(new LeafNode(GetName.getNameDirectly(a)));
-                tempRef.addChild(r);
-//              }
-            }
-          }
-        }
-      }
-      @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {}});
+    ArrayList<String> tempDw = GetFirebase.getUsers(userId).getDownlineUid();
+
+//    if (tempDw == null) return;
+//    for (String a: tempDw) {
+//      if
+//    }
+
+//    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//      @Override
+//      public void onDataChange(DataSnapshot dataSnapshot) {
+//        if (dataSnapshot.child(uid).child("dwId").exists()) {
+//          ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
+//          for (String a: tempDw) {
+//            if (dataSnapshot.child(a).child("dwId").exists()) {
+//              TreeNode r = new TreeNode<>(new ParentNode(GetName.getNameDirectly(a)));
+//              tempRef.addChild(r);
+//              generateLine(a, r); // Recursive
+//            } else {
+////              ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
+////              for (String a : tempDw) {
+//                TreeNode r = new TreeNode<>(new LeafNode(GetName.getNameDirectly(a)));
+//                tempRef.addChild(r);
+////              }
+//            }
+//          }
+//        }
+//      }
+//      @Override
+//      public void onCancelled(@NonNull DatabaseError databaseError) {}
+//    });
+  }
+
+  protected static String getNameDirectly(String uid) {
+    String tempFullName;
+//    Log.e("uid: ", uid);
+    tempFullName = GetFirebase.getUsers(uid).getFullName();
+    tempFullName = Encryption.decodeDirectly(tempFullName);
+    return tempFullName;
   }
 
 //  private void generateLine(String userId, TreeNode ref) {

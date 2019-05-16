@@ -37,7 +37,7 @@ public class ProfileFragment extends Fragment {
 
   private String text;
   private String tempUID = "null";
-  final String[] tempEncryptedFullName = new String[1];
+  private String encryptedFullName;
 
   private Button done;
   private ListView listView;
@@ -63,12 +63,7 @@ public class ProfileFragment extends Fragment {
 //        TextView uidField = (TextView) view.findViewById(R.id.uid);
     if (!tempUID.isEmpty()) user_key.setText(mAuth.getUid());
 
-    firebase.getFullName(mAuth.getUid(), new GetFirebase.GetFullNameCallback() {
-      @Override
-      public void onCallback(String fullName) {
-        tempEncryptedFullName[0] = fullName;
-      }
-    });
+    encryptedFullName = GetFirebase.getUsers(mAuth.getUid()).getFullName();
 
     decrypt = (TextView) view.findViewById(R.id.profile_name);
 
@@ -90,7 +85,7 @@ public class ProfileFragment extends Fragment {
         builder.setView(temp).setPositiveButton("OK", new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int which) {
 
-            String tempDec = Encryption.decodeDirectly(tempEncryptedFullName[0]);
+            String tempDec = Encryption.decodeDirectly(encryptedFullName);
             if (tempDec.equals("")) {
               Toast.makeText(getContext(),
                       "Wrong! Please try again!", Toast.LENGTH_SHORT).show();
