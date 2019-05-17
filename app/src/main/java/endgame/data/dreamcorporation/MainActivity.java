@@ -121,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
       //On click function
       public void onClick(View view) {
         //Create the intent to start another activity
+        onBackPressed();
         Intent intent = new Intent(view.getContext(), SignupActivity.class);
         startActivity(intent);
       }

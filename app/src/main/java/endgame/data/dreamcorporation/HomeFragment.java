@@ -17,7 +17,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -47,6 +46,7 @@ public class HomeFragment extends Fragment {
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
     v = inflater.inflate(R.layout.fragment_home, container, false);
+    GetFirebase.updateBalance();
 
 //    firebase.getBalance(mAuth.getUid(), new GetFirebase.GetBalanceCallback() {
 //      @Override

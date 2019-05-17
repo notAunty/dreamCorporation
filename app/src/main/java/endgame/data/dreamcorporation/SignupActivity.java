@@ -61,8 +61,6 @@ public class SignupActivity extends AppCompatActivity {
                         String tempEncFn = encryption.encode(userFn);
                         usersRef.child(mAuth.getUid()).child("fN").setValue(tempEncFn);
                         usersRef.child(mAuth.getUid()).child("b").setValue(0);
-                        Toast.makeText(view.getContext(), encryption.decode(tempEncFn, mAuth.getUid()),
-                                Toast.LENGTH_LONG).show();
 
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("signup: ", "createUserWithEmail:success");

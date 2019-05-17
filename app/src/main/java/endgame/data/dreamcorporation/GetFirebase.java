@@ -34,7 +34,6 @@ public class GetFirebase {
   public static void getFirebase() {
     fetchAdmin();
     fetchUsers();
-    updateBalance();
   }
 
   public static void fetchAdmin() {
@@ -200,5 +199,9 @@ public class GetFirebase {
       public void onCancelled(@NonNull DatabaseError databaseError) {
       }
     });
+  }
+
+  public static boolean existUser(String uid) {
+    return (usersUid.contains(uid));
   }
 }
