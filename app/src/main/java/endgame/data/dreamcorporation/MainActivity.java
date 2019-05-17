@@ -66,13 +66,14 @@ public class MainActivity extends AppCompatActivity {
         String userId = ((EditText) findViewById(R.id.login_userid)).getText().toString();
         String userPw = ((EditText) findViewById(R.id.login_userpw)).getText().toString();
 
-//        if (userPw.length() == 0 || userId.length() == 0) {
-//          //Create the intent to start another activity
-//          Intent intent = new Intent(view.getContext(), HomeActivity.class);
-//          startActivity(intent);
-//
-//          onBackPressed(); // To close this activity
-//        }
+        // TODO remove this
+        if (userPw.length() == 0 || userId.length() == 0) {
+          //Create the intent to start another activity
+          Intent intent = new Intent(view.getContext(), HomeActivity.class);
+          startActivity(intent);
+
+          onBackPressed(); // To close this activity
+        }
 
         if (userPw.length() < 6 || userId.length() < 1) {
           Toast.makeText(view.getContext(), "Invalid username or password.",

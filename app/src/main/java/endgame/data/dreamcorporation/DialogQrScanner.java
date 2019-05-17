@@ -3,6 +3,7 @@ package endgame.data.dreamcorporation;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,7 +22,6 @@ import java.util.ArrayList;
 public class DialogQrScanner extends AppCompatActivity{
 
   private String scannedUpline;
-  private ArrayList<String> downlines;
 //  SurfaceView qrPreview;
 
 
@@ -91,10 +91,15 @@ public class DialogQrScanner extends AppCompatActivity{
 //  }
 
   public void uplineAccountAddDownline() {
+    // TODO fix this shit
+
     // Get upline punya downline Array
     GetFirebase.usersRef.child(scannedUpline).addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(DataSnapshot dataSnapshot) {
+        Log.e("in uplineAddDownline", dataSnapshot.toString());
+        ArrayList<String> downlines;
+
         if (!dataSnapshot.child("dwId").exists()) {
           downlines = new ArrayList<String>();
           downlines.add(mAuth.getUid());
@@ -102,11 +107,12 @@ public class DialogQrScanner extends AppCompatActivity{
           downlines = (ArrayList<String>) dataSnapshot.getValue();
           downlines.add(mAuth.getUid());
         }
+
+        GetFirebase.usersRef.child(scannedUpline).child("dwId").setValue(downlines);
       }
 
       @Override
       public void onCancelled(@NonNull DatabaseError databaseError) {}
     });
-    GetFirebase.usersRef.child(scannedUpline).child("dwId").setValue(downlines);
   }
 }
