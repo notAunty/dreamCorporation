@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -85,7 +86,7 @@ public class GetFirebase {
           if (tempUser.containsKey("dwId")) {
             ArrayList<String> tempDwArray = new ArrayList<>();
 
-            for (String tempDwId: ((HashMap<Object, String>) tempUser.get("dwId")).values()) {
+            for (String tempDwId: ((ArrayList<String>) tempUser.get("dwId"))) {
               tempDwArray.add(tempDwId);
             }
 
