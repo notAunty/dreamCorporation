@@ -88,6 +88,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
           public void onClick(DialogInterface dialog, int which) {
 
             String tempDec = encryption.decodeDirectly(encryptedFullName);
+            encryption = new Encryption();
             if (!key.getText().toString().equals(mAuth.getUid())) {
               Toast.makeText(getContext(),
                       "Wrong! Please try again!", Toast.LENGTH_SHORT).show();
