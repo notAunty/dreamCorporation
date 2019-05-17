@@ -10,7 +10,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -27,8 +26,8 @@ public class GetFirebase {
   private static double fee;
   private static ArrayList<String> usersUid = new ArrayList<>();
   private static ArrayList<Users> users = new ArrayList<>();
-  private ArrayList<String> transactionId = new ArrayList<>();
-  private ArrayList<Users> transactions = new ArrayList<>();
+  private static ArrayList<String> transactionId = new ArrayList<>();
+  private static ArrayList<Users> transactions = new ArrayList<>();
 
   public static void prepareFirebase() { mDatabase.setPersistenceEnabled(true); }
 
@@ -81,6 +80,54 @@ public class GetFirebase {
 
           if (tempUser.containsKey("upId")) {
             users.get(users.size() - 1).setUplineUid(String.valueOf(tempUser.get("upId")));
+          }
+
+          if (tempUser.containsKey("dwId")) {
+            ArrayList<String> tempDwArray = new ArrayList<>();
+
+            for (String tempDwId: ((ArrayList<String>) tempUser.get("dwId"))) {
+              tempDwArray.add(tempDwId);
+            }
+
+            users.get(users.size() - 1).setDownlineUid(tempDwArray);
+          }
+        }
+      }
+
+      @Override
+      public void onCancelled(@NonNull DatabaseError databaseError) {
+
+      }
+    });
+  }
+
+  public static void fetchTransactions() {
+//    Log.e("At", "fetchUsers outside");
+    transRef.addListenerForSingleValueEvent(new ValueEventListener() {
+      @Override
+      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+      HashMap<String, HashMap<String, Object>> tempTrans = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
+
+        for (String tempTran : tempTrans.keySet()) {
+//          Log.e("added userId", tempTran);
+          transactionId.add(tempTran);
+        }
+
+        for (HashMap<String, Object> tempUser : tempTrans.values()) {
+          users.add(new Users(((String) tempUser.get("fN")), Double.valueOf(String.valueOf(tempUser.get("b")))));
+
+          if (tempUser.containsKey("upId")) {
+            users.get(users.size() - 1).setUplineUid(String.valueOf(tempUser.get("upId")));
+          }
+
+          if (tempUser.containsKey("dwId")) {
+            ArrayList<String> tempDwArray = new ArrayList<>();
+
+            for (String tempDwId: ((ArrayList<String>) tempUser.get("dwId"))) {
+              tempDwArray.add(tempDwId);
+            }
+
+            users.get(users.size() - 1).setDownlineUid(tempDwArray);
           }
 
           if (tempUser.containsKey("dwId")) {

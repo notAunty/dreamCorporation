@@ -11,4 +11,16 @@ public class Transactions {
     this.downlinesId = downlinesId;
     this.timeStamp = timeStamp;
   }
+
+  public String getUplineId() {
+    return uplineId;
+  }
+
+  public String getDownlinesId() {
+    return downlinesId;
+  }
+
+  public long getTimeStamp() {
+    return timeStamp;
+  }
 }

@@ -25,6 +25,8 @@ public class SignupActivity extends AppCompatActivity {
   private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
   private DatabaseReference usersRef = mDatabase.getReference("users");
 
+  private Encryption encryption = new Encryption();
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -56,10 +58,10 @@ public class SignupActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                       if (task.isSuccessful()) {
                         // Add to database
-                        String tempEncFn = Encryption.encode(userFn);
+                        String tempEncFn = encryption.encode(userFn);
                         usersRef.child(mAuth.getUid()).child("fN").setValue(tempEncFn);
                         usersRef.child(mAuth.getUid()).child("b").setValue(0);
-                        Toast.makeText(view.getContext(), Encryption.decode(tempEncFn, mAuth.getUid()),
+                        Toast.makeText(view.getContext(), encryption.decode(tempEncFn, mAuth.getUid()),
                                 Toast.LENGTH_LONG).show();
 
                         // Sign in success, update UI with the signed-in user's information

@@ -13,6 +13,8 @@ public class Users {
   public Users(String fullName, double balance) {
     this.fullName = fullName;
     this.balance = balance;
+    this.downlineUid = new ArrayList<>();
+    this.transactions = new ArrayList<>();
   }
 
   public String getFullName() {

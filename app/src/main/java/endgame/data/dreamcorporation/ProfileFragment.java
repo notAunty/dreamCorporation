@@ -40,6 +40,7 @@ public class ProfileFragment extends Fragment {
   private String encryptedFullName;
 
   private Button done;
+  private Encryption encryption = new Encryption();
   private ListView listView;
   private ArrayList<Word> words;
   private QRGEncoder qrgEncoder;
@@ -85,7 +86,7 @@ public class ProfileFragment extends Fragment {
         builder.setView(temp).setPositiveButton("OK", new DialogInterface.OnClickListener() {
           public void onClick(DialogInterface dialog, int which) {
 
-            String tempDec = Encryption.decodeDirectly(encryptedFullName);
+            String tempDec = encryption.decodeDirectly(encryptedFullName);
             if (tempDec.equals("")) {
               Toast.makeText(getContext(),
                       "Wrong! Please try again!", Toast.LENGTH_SHORT).show();

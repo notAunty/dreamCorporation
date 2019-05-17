@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,7 +17,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -59,6 +59,7 @@ public class HomeFragment extends Fragment {
     // Balance
     TextView balanceTextView = v.findViewById(R.id.home_balance);
     CardView cardView = v.findViewById(R.id.card);
+    ImageView cardBg = v.findViewById(R.id.card_background);
     TextView levelTextView = v.findViewById(R.id.level);
     
     balance = GetFirebase.getUsers(mAuth.getUid()).getBalance();
@@ -66,14 +67,15 @@ public class HomeFragment extends Fragment {
     balanceTextView.setText(getString(R.string.currency) + " " + balance);
 
     if (balance < 50) {
+      cardBg.setImageResource(R.drawable.bronze);
     } else if (balance < 150) {
-      cardView.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.silver));
+      cardBg.setImageResource(R.drawable.silver);
       levelTextView.setText("Silver");
     } else if (balance < 300) {
-      cardView.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.gold));
+      cardBg.setImageResource(R.drawable.gold);
       levelTextView.setText("Gold");
-    } else if (balance > 500) {
-      cardView.setCardBackgroundColor(ContextCompat.getColor(getContext(), R.color.platinum));
+    } else if (balance >= 300) {
+      cardBg.setImageResource(R.drawable.platinum);
       levelTextView.setText("Platinum");
     }
 

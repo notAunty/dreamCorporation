@@ -1,6 +1,7 @@
 package endgame.data.dreamcorporation;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,10 +28,12 @@ import tellh.com.recyclertreeview_lib.TreeViewAdapter;
 public class NetworkFragment extends Fragment {
 
   private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-  private String uid = mAuth.getUid();
+
   private RecyclerView rv;
+  private Encryption encryption = new Encryption();
   private TreeViewAdapter adapter;
   private TreeNode<ParentNode> root;
+  private String uid = mAuth.getUid();
 //  private Node node, tempNode;
 
   @Nullable
@@ -151,6 +154,12 @@ public class NetworkFragment extends Fragment {
 
     ArrayList<String> tempDw = GetFirebase.getUsers(userId).getDownlineUid();
 
+    if (tempDw.isEmpty()) {
+
+    } else {
+
+    }
+
 //    if (tempDw == null) return;
 //    for (String a: tempDw) {
 //      if
@@ -181,11 +190,13 @@ public class NetworkFragment extends Fragment {
 //    });
   }
 
-  protected static String getNameDirectly(String uid) {
+  protected String getNameDirectly(String uid) {
+    Log.e("getNameDirectly uid: ", uid);
     String tempFullName;
 //    Log.e("uid: ", uid);
     tempFullName = GetFirebase.getUsers(uid).getFullName();
-    tempFullName = Encryption.decodeDirectly(tempFullName);
+    Log.e("getNameD tempFullName: ", tempFullName);
+    tempFullName = encryption.decodeDirectly(tempFullName);
     return tempFullName;
   }
 
