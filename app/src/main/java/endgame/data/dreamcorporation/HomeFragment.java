@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -174,7 +175,13 @@ public class HomeFragment extends Fragment {
       @Override
       public void onClick(DialogInterface dialog, int which) {
         String tempInput = tempKey.getText().toString();
-        Toast.makeText(getContext(), "Fuck you! 妈的，叫你填啦，干你！JIBAI！", Toast.LENGTH_LONG).show();
+        Log.v("tempInput: ", tempInput);
+        if(!tempInput.equals(mAuth.getUid()))
+          Toast.makeText(getContext(), "Fuck you! 妈的，叫你填啦，干你！JIBAI！", Toast.LENGTH_LONG).show();
+        else if(!tempInput.equals(mAuth.getUid())&&tempInput.length()!=0)
+          Toast.makeText(getContext(),"妈的！是不会放对的是吗？！干你！",Toast.LENGTH_LONG).show();
+        else if(tempInput.equals(mAuth.getUid()))
+          Toast.makeText(getContext(),"终于对了！恭喜恭喜",Toast.LENGTH_LONG).show();
       }
     });
     AlertDialog alert = builder.create();
