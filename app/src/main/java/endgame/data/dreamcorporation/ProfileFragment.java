@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +34,7 @@ import endgame.data.dreamcorporation.profile.Word;
 import static android.content.Context.CLIPBOARD_SERVICE;
 
 
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
   private String text;
   private String tempUID = "null";
@@ -87,10 +88,13 @@ public class ProfileFragment extends Fragment {
           public void onClick(DialogInterface dialog, int which) {
 
             String tempDec = encryption.decodeDirectly(encryptedFullName);
-            if (tempDec.equals("")) {
+            if (!key.getText().toString().equals(mAuth.getUid())) {
               Toast.makeText(getContext(),
                       "Wrong! Please try again!", Toast.LENGTH_SHORT).show();
-            } else decrypt.setText(tempDec);
+            } else {
+              decrypt.setText(tempDec);
+              decrypt.setEnabled(false);
+            }
 
 //                    if (key.getText().toString().equals(mAuth.getUid())) {
 //                      Toast.makeText(getContext(),
@@ -181,6 +185,11 @@ public class ProfileFragment extends Fragment {
     });
 
     return view;
+  }
+
+  @Override
+  public void onRefresh() {
+    
   }
 
 

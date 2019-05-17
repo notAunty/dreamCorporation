@@ -1,202 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
 
-    <com.github.florent37.shapeofview.shapes.ArcView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="210dp"
-        android:elevation="4dp"
-        app:shape_arc_height="20dp"
-        app:shape_arc_position="bottom">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <View
+        <com.github.florent37.shapeofview.shapes.ArcView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/grad2" />
+            android:layout_height="210dp"
+            android:elevation="4dp"
+            app:shape_arc_height="20dp"
+            app:shape_arc_position="bottom">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="180dp">
-            <ImageView
-                android:id="@+id/profile"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/profile"/>
-
-            <TextView
-                android:id="@+id/profile_name"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/profile"
-                android:layout_marginTop="4dp"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="Tap to Decrypt"
-                android:textAlignment="center"
-                android:textColor="@android:color/white"
-                android:textSize="30sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
+                android:layout_height="match_parent"
+                android:background="@drawable/grad2" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp">
+                <ImageView
+                    android:id="@+id/profile"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/profile"/>
+
+                <TextView
+                    android:id="@+id/profile_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="Tap to Decrypt"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/white"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
 
-    </com.github.florent37.shapeofview.shapes.ArcView>
+        </com.github.florent37.shapeofview.shapes.ArcView>
 
-    <!--<FrameLayout-->
+        <!--<FrameLayout-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="210dp">-->
 
         <!--<View-->
-            <!--android:layout_width="490dp"-->
-            <!--android:layout_height="410dp"-->
-            <!--android:background="@drawable/circle"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:translationY="-205dp" />-->
+        <!--android:layout_width="490dp"-->
+        <!--android:layout_height="410dp"-->
+        <!--android:background="@drawable/circle"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:translationY="-205dp" />-->
         <!---->
-    <!--</FrameLayout>-->
+        <!--</FrameLayout>-->
 
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="5dp">
-
-        <ScrollView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="5dp">
 
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp">
+                android:layout_height="match_parent">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp">
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@color/ic_launcher_background"
-                        android:elevation="2dp"
-                        android:clickable="true"
-                        android:focusable="true">
-
-
-                        <TextView
-                            android:id="@+id/title"
-                            android:text="User ID"
-                            android:paddingLeft="10dp"
-                            android:textStyle="bold"
-                            android:layout_marginTop="5dp"
-                            style="@style/Profile_MainText_Style"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                        <TextView
-                            android:id="@+id/user_key"
-                            android:layout_below="@+id/title"
-                            android:paddingLeft="10dp"
-                            style="@style/Profile_ShowText_Style" />
-
-                        <ImageView
-                            android:id="@+id/clipboard"
-                            android:src="@drawable/copy_key"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:paddingRight="10dp"
-                            android:clickable="true" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_alignParentBottom="true"
-                            android:background="@android:color/darker_gray"/>
-
-                    </RelativeLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@color/ic_launcher_background"
-                        android:elevation="2dp"
-                        android:clickable="true"
-                        android:focusable="true">
-
-                        <TextView
-                            android:text="My Bank Card(s)"
-                            android:paddingLeft="10dp"
-                            android:textStyle="bold"
-                            android:layout_centerVertical="true"
-                            style="@style/Profile_MainText_Style"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="2dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_alignParentBottom="true"
-                            android:background="@android:color/darker_gray"/>
-
-                        <ImageView
-                            android:src="@drawable/ripple_arrow_right"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:paddingRight="10dp"
-                            android:clickable="true" />
-
-                    </RelativeLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    app:cardCornerRadius="10dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        app:cardCornerRadius="10dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:background="@color/ic_launcher_background"
+                            android:background="@drawable/ripple"
                             android:elevation="2dp"
                             android:clickable="true"
                             android:focusable="true">
 
+
                             <TextView
-                                android:text="Settings"
+                                android:id="@+id/title"
+                                android:text="User ID"
                                 android:paddingLeft="10dp"
                                 android:textStyle="bold"
-                                android:layout_centerVertical="true"
+                                android:layout_marginTop="5dp"
                                 style="@style/Profile_MainText_Style"
                                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                            <TextView
+                                android:id="@+id/user_key"
+                                android:layout_below="@+id/title"
+                                android:paddingLeft="10dp"
+                                style="@style/Profile_ShowText_Style" />
+
+                            <ImageView
+                                android:id="@+id/clipboard"
+                                android:src="@drawable/copy_key"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:paddingRight="10dp"
+                                android:clickable="true" />
 
                             <View
                                 android:layout_width="match_parent"
@@ -205,95 +130,26 @@
                                 android:layout_alignParentBottom="true"
                                 android:background="@android:color/darker_gray"/>
 
-                            <ImageView
-                                android:src="@drawable/ripple_arrow_right"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:paddingRight="10dp"
-                                android:clickable="true" />
-
                         </RelativeLayout>
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="55dp"
-                            android:background="@color/ic_launcher_background"
-                            android:elevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true">
+                    </com.google.android.material.card.MaterialCardView>
 
-                            <TextView
-                                android:text="Reset Security Question"
-                                android:paddingLeft="10dp"
-                                android:textStyle="bold"
-                                android:layout_centerVertical="true"
-                                style="@style/Profile_MainText_Style"
-                                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:layout_centerHorizontal="true"
-                                android:layout_alignParentBottom="true"
-                                android:background="@android:color/darker_gray"/>
-
-                            <ImageView
-                                android:src="@drawable/ripple_arrow_right"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:paddingRight="10dp"
-                                android:clickable="true" />
-
-                        </RelativeLayout>
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="55dp"
-                            android:background="@color/ic_launcher_background"
-                            android:elevation="2dp"
-                            android:clickable="true"
-                            android:focusable="true">
-
-                            <TextView
-                                android:text="Change Mobile Number"
-                                android:paddingLeft="10dp"
-                                android:textStyle="bold"
-                                android:layout_centerVertical="true"
-                                style="@style/Profile_MainText_Style"
-                                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="2dp"
-                                android:layout_centerHorizontal="true"
-                                android:layout_alignParentBottom="true"
-                                android:background="@android:color/darker_gray"/>
-
-                            <ImageView
-                                android:src="@drawable/ripple_arrow_right"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:layout_centerVertical="true"
-                                android:paddingRight="10dp"
-                                android:clickable="true" />
-
-                        </RelativeLayout>
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        app:cardCornerRadius="10dp">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:background="@color/ic_launcher_background"
+                            android:background="@drawable/ripple"
                             android:elevation="2dp"
                             android:clickable="true"
                             android:focusable="true">
 
                             <TextView
-                                android:text="Info"
+                                android:text="My Bank Card(s)"
                                 android:paddingLeft="10dp"
                                 android:textStyle="bold"
                                 android:layout_centerVertical="true"
@@ -318,23 +174,173 @@
 
                         </RelativeLayout>
 
-                    </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        app:cardCornerRadius="10dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:background="@drawable/ripple"
+                                android:elevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:text="Settings"
+                                    android:paddingLeft="10dp"
+                                    android:textStyle="bold"
+                                    android:layout_centerVertical="true"
+                                    style="@style/Profile_MainText_Style"
+                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:background="@android:color/darker_gray"/>
+
+                                <ImageView
+                                    android:src="@drawable/ripple_arrow_right"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:paddingRight="10dp"
+                                    android:clickable="true" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                android:background="@drawable/ripple"
+                                android:elevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:text="Reset Security Question"
+                                    android:paddingLeft="10dp"
+                                    android:textStyle="bold"
+                                    android:layout_centerVertical="true"
+                                    style="@style/Profile_MainText_Style"
+                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:background="@android:color/darker_gray"/>
+
+                                <ImageView
+                                    android:src="@drawable/ripple_arrow_right"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:paddingRight="10dp"
+                                    android:clickable="true" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="55dp"
+                                android:background="@drawable/ripple"
+                                android:elevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:text="Change Mobile Number"
+                                    android:paddingLeft="10dp"
+                                    android:textStyle="bold"
+                                    android:layout_centerVertical="true"
+                                    style="@style/Profile_MainText_Style"
+                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:background="@android:color/darker_gray"/>
+
+                                <ImageView
+                                    android:src="@drawable/ripple_arrow_right"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:paddingRight="10dp"
+                                    android:clickable="true" />
+
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:background="@drawable/ripple"
+                                android:elevation="2dp"
+                                android:clickable="true"
+                                android:focusable="true">
+
+                                <TextView
+                                    android:text="Info"
+                                    android:paddingLeft="10dp"
+                                    android:textStyle="bold"
+                                    android:layout_centerVertical="true"
+                                    style="@style/Profile_MainText_Style"
+                                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="2dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:background="@android:color/darker_gray"/>
+
+                                <ImageView
+                                    android:src="@drawable/ripple_arrow_right"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    android:paddingRight="10dp"
+                                    android:clickable="true" />
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
 
 
 
-                </com.google.android.material.card.MaterialCardView>
+                    </com.google.android.material.card.MaterialCardView>
 
 
 
 
 
-            </LinearLayout>
+                </LinearLayout>
 
-        </ScrollView>
+            </ScrollView>
 
 
 
-        <!--<ListView-->
+            <!--<ListView-->
             <!--android:id="@+id/profile_listView"-->
             <!--android:layout_below="@id/user_key_layer"-->
             <!--android:layout_width="match_parent"-->
@@ -345,20 +351,24 @@
             <!--android:background="@android:color/white"-->
             <!--android:elevation="2dp"/>-->
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/qr_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_for_qr_code"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:clickable="true"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="14dp"
-            android:elevation="3dp"
-            app:rippleColor="@android:color/white"/>
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/qr_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_for_qr_code"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:clickable="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="14dp"
+                android:elevation="3dp"
+                app:rippleColor="@android:color/white"/>
 
 
-    </RelativeLayout>
+        </RelativeLayout>
 
-</LinearLayout>
+    </LinearLayout>
+
+
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

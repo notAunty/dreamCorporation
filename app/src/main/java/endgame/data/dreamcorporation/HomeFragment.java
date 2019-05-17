@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -176,14 +177,49 @@ public class HomeFragment extends Fragment {
     builder.setView(temp).setPositiveButton("OK", new DialogInterface.OnClickListener() {
       @Override
       public void onClick(DialogInterface dialog, int which) {
-        String tempInput = tempKey.getText().toString();
-        Log.v("tempInput: ", tempInput);
-        if(!tempInput.equals(mAuth.getUid()))
-          Toast.makeText(getContext(), "Fuck you! 妈的，叫你填啦，干你！JIBAI！", Toast.LENGTH_LONG).show();
-        else if(!tempInput.equals(mAuth.getUid())&&tempInput.length()!=0)
-          Toast.makeText(getContext(),"妈的！是不会放对的是吗？！干你！",Toast.LENGTH_LONG).show();
-        else if(tempInput.equals(mAuth.getUid()))
-          Toast.makeText(getContext(),"终于对了！恭喜恭喜",Toast.LENGTH_LONG).show();
+        String result = tempKey.getText().toString();
+        Log.e("tempInput: ", result);
+        if (!result.isEmpty()) {
+          if (true) {
+
+          } else {
+            final String scannedUpline = result;
+
+            new AlertDialog.Builder(getContext())
+                    .setTitle("Pay RM50?")  //TODO make the amount dynamic
+                    .setMessage("Are you sure you want to pay the membership fee?")
+
+                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                    // The dialog is automatically dismissed when a dialog button is clicked.
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                      public void onClick(DialogInterface dialog, int which) {
+                        Balance.calcRev(scannedUpline);
+//                    addUpline();
+//                        uplineAccountAddDownline();
+//
+//                        onBackPressed();
+                      }
+                    })
+
+                    // A null listener allows the button to dismiss the dialog and take no further action.
+                    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                      public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getContext(), "Payment unsuccessful.", Toast.LENGTH_LONG).show();
+//                        onBackPressed();
+                      }
+                    })
+                    .show();
+          }
+        } else {
+          Toast.makeText(getContext(), "Input Error.", Toast.LENGTH_LONG).show();
+//          super.onActivityResult(requestCode, resultCoede, intent);
+        }
+//        if(!tempInput.equals(mAuth.getUid()))
+//          Toast.makeText(getContext(), "Fuck you! 妈的，叫你填啦，干你！JIBAI！", Toast.LENGTH_LONG).show();
+//        else if(!tempInput.equals(mAuth.getUid())&&tempInput.length()!=0)
+//          Toast.makeText(getContext(),"妈的！是不会放对的是吗？！干你！",Toast.LENGTH_LONG).show();
+//        else if(tempInput.equals(mAuth.getUid()))
+//          Toast.makeText(getContext(),"终于对了！恭喜恭喜",Toast.LENGTH_LONG).show();
       }
     });
     AlertDialog alert = builder.create();
