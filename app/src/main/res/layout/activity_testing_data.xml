@@ -147,7 +147,7 @@
         <!--android:calendarViewShown="true"-->
         <!--android:spinnersShown="false"/>-->
 
-        <!--<TimePicker-->
+        <!--<timePicker-->
         <!--android:id="@+id/testing_time"-->
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="wrap_content"-->

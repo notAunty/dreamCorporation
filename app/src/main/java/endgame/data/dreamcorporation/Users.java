@@ -9,14 +9,14 @@ public class Users {
   private String uplineUid;
   private String userName;
   private ArrayList<String> downlineUid;
-  private ArrayList<String> transactions;
+//  private ArrayList<String> transactions;
 
   public Users(String userName, String fullName, double balance) {
     this.userName = userName;
     this.fullName = fullName;
     this.balance = balance;
     this.downlineUid = new ArrayList<>();
-    this.transactions = new ArrayList<>();
+//    this.transactions = new ArrayList<>();
   }
 
   public String getFullName() {
@@ -51,11 +51,11 @@ public class Users {
     this.downlineUid = downlineUid;
   }
 
-  public ArrayList<String> getTransactions() {
-    return transactions;
-  }
-
-  public void setTransactions(ArrayList<String> transactions) {
-    this.transactions = transactions;
-  }
+//  public ArrayList<String> getTransactions() {
+//    return transactions;
+//  }
+//
+//  public void setTransactions(ArrayList<String> transactions) {
+//    this.transactions = transactions;
+//  }
 }

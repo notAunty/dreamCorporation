@@ -4,12 +4,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:opacity="opaque">
 
-    <time android:drawable="@color/white"/>
+    <item android:drawable="@color/white"/>
 
-    <time>
+    <item>
         <bitmap
             android:gravity="center"
             android:src="@drawable/dream_icon"/>
-    </time>
+    </item>
 
 </layer-list>

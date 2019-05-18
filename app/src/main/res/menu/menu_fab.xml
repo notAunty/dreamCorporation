@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <time
+    <item
         android:id="@+id/fabEnterDetails"
         android:title="Enter UID"
         android:icon="@drawable/edit_white"/>
 
-    <time
+    <item
         android:id="@+id/fabScanQR"
         android:title="Scan QR-Code"
         android:icon="@drawable/camera_white" />

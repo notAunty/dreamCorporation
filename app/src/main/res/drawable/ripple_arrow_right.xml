@@ -2,14 +2,14 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="#FFFFFFFF">
 
-    <time
+    <item
         android:id="@+id/copy_key">
         <shape android:shape="rectangle">
             <size
                 android:width="40dp"
                 android:height="40dp" />
         </shape>
-    </time>
-    <time android:drawable="@drawable/arrow_right">
-    </time>
+    </item>
+    <item android:drawable="@drawable/arrow_right">
+    </item>
 </ripple>

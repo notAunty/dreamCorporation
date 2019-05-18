@@ -134,17 +134,18 @@ public class HomeFragment extends Fragment {
       }
     });
 
+    displayList(v);
     return v;
   }
 
   public void showBalance(){
-
-
     balance = GetFirebase.getUsers(mAuth.getUid()).getBalance();
 
     balanceTextView.setText(getString(R.string.currency) + " " + balance);
 
-    if (balance >= 100 ) {
+    if (balance < 100) {
+      cardBg.setImageResource(R.color.sky_blue);
+    } else if (balance < 200){
       cardBg.setImageResource(R.drawable.silver);
       levelTextView.setText("Silver");
     } else if (balance < 300) {

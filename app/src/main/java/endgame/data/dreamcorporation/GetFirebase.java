@@ -72,7 +72,7 @@ public class GetFirebase {
     usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//        Log.e("At", "fetchUsers inside");
+        Log.e("At", "fetchUsers inside");
         HashMap<String, HashMap<String, Object>> tempUsers = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
 
         for (String tempUser : tempUsers.keySet()) {
@@ -108,7 +108,7 @@ public class GetFirebase {
 
   public static void fetchTransactions() {
 //    Log.e("At", "fetchUsers outside");
-    transRef.addValueEventListener(new ValueEventListener() {
+    transRef.addListenerForSingleValueEvent(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
       HashMap<String, HashMap<String, Object>> tempTrans = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
@@ -123,7 +123,7 @@ public class GetFirebase {
                   ((String) tempTran.get("r")),
                   ((String) tempTran.get("dwId")),
                   ((long) tempTran.get("tS")),
-                  ((double) tempTran.get("a"))
+                  (Double.parseDouble(tempTran.get("a").toString()))
           ));
         }
       }
