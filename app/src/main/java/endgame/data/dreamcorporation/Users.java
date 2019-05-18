@@ -7,10 +7,12 @@ public class Users {
   private String fullName;
   private double balance;
   private String uplineUid;
+  private String userName;
   private ArrayList<String> downlineUid;
   private ArrayList<String> transactions;
 
-  public Users(String fullName, double balance) {
+  public Users(String userName, String fullName, double balance) {
+    this.userName = userName;
     this.fullName = fullName;
     this.balance = balance;
     this.downlineUid = new ArrayList<>();
@@ -27,6 +29,10 @@ public class Users {
 
   public String getUplineUid() {
     return uplineUid;
+  }
+
+  public String getUserName() {
+    return userName;
   }
 
   public void setBalance(double balance) {

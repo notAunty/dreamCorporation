@@ -3,18 +3,18 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <!--<item name="android:fontFamily">@font/google_sans</item>-->
-        <!--<item name="fontFamily">@font/google_sans</item>-->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowContentTransitions">true</item>
+        <!--<time name="android:fontFamily">@font/google_sans</time>-->
+        <!--<time name="fontFamily">@font/google_sans</time>-->
+        <time name="colorPrimary">@color/colorPrimary</time>
+        <time name="colorPrimaryDark">@color/colorPrimaryDark</time>
+        <time name="colorAccent">@color/colorAccent</time>
+        <time name="android:windowContentTransitions">true</time>
     </style>
 
 
     <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
+        <time name="windowActionBar">false</time>
+        <time name="windowNoTitle">true</time>
     </style>
 
 
@@ -25,32 +25,32 @@
 
 
     <style name="Profile_MainText_Style">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">18dp</item>
-        <item name="android:textColor">#FF000000</item>
+        <time name="android:layout_width">match_parent</time>
+        <time name="android:layout_height">wrap_content</time>
+        <time name="android:textSize">18dp</time>
+        <time name="android:textColor">#FF000000</time>
     </style>
 
 
     <style name="Profile_ShowText_Style">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">15dp</item>
-        <item name="android:layout_marginTop">2dp</item>
+        <time name="android:layout_width">match_parent</time>
+        <time name="android:layout_height">wrap_content</time>
+        <time name="android:textSize">15dp</time>
+        <time name="android:layout_marginTop">2dp</time>
     </style>
 
 
     <style name="SplashTheme" parent="AppTheme">
-        <item name="android:windowBackground">@drawable/splash</item>
+        <time name="android:windowBackground">@drawable/splash</time>
     </style>
 
     <style name="QrDialogTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:dialogCornerRadius">12dp</item>
-        <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@android:color/transparent</item>
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsFloating">true</item>
-        <item name="android:backgroundDimEnabled">true</item>
+        <time name="android:dialogCornerRadius">12dp</time>
+        <time name="android:windowIsTranslucent">true</time>
+        <time name="android:windowBackground">@android:color/transparent</time>
+        <time name="android:windowContentOverlay">@null</time>
+        <time name="android:windowNoTitle">true</time>
+        <time name="android:windowIsFloating">true</time>
+        <time name="android:backgroundDimEnabled">true</time>
     </style>
 </resources>

@@ -41,7 +41,7 @@ public class SignupActivity extends AppCompatActivity {
       //On click function
       public void onClick(final View view) {
         final String userFn = ((EditText) findViewById(R.id.signup_fullName)).getText().toString();
-        String userId = ((EditText) findViewById(R.id.signup_userId)).getText().toString();
+        final String userId = ((EditText) findViewById(R.id.signup_userId)).getText().toString();
         String userPw = ((EditText) findViewById(R.id.signup_userPw)).getText().toString();
 
 //        //Create the intent to start another activity
@@ -51,6 +51,9 @@ public class SignupActivity extends AppCompatActivity {
         if (userPw.length() < 6 || userId.length() < 1) {
           Toast.makeText(view.getContext(), "Password longer a bit can ah??",
                   Toast.LENGTH_SHORT).show();
+        } else if (GetFirebase.existUser(userId)) {
+          Toast.makeText(view.getContext(), "Username unavailable",
+                  Toast.LENGTH_SHORT).show();
         } else {
           mAuth.createUserWithEmailAndPassword(userId + "@asdfggfdsa.com", userPw)
                   .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
@@ -59,6 +62,7 @@ public class SignupActivity extends AppCompatActivity {
                       if (task.isSuccessful()) {
                         // Add to database
                         String tempEncFn = encryption.encode(userFn);
+                        usersRef.child(mAuth.getUid()).child("uN").setValue(userId);
                         usersRef.child(mAuth.getUid()).child("fN").setValue(tempEncFn);
                         usersRef.child(mAuth.getUid()).child("b").setValue(0);
 

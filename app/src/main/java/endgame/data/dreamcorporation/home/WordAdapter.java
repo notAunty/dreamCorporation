@@ -1,4 +1,4 @@
-package endgame.data.dreamcorporation.profile;
+package endgame.data.dreamcorporation.home;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -28,11 +28,14 @@ public class WordAdapter extends ArrayAdapter<Word> {
         }
         Word current = getItem(position);
 
-        TextView titleTextView = (TextView) listView.findViewById(R.id.title);
+        TextView titleTextView = (TextView) listView.findViewById(R.id.recent_title);
         titleTextView.setText(current.getTitle());
 
-        TextView itemTextView = (TextView) listView.findViewById(R.id.item);
-        itemTextView.setText(current.getItem());
+        TextView subtitleTextView = (TextView) listView.findViewById(R.id.recent_subtitle);
+        subtitleTextView.setText(current.getTime());
+
+        TextView amountTextView = (TextView) listView.findViewById(R.id.recent_amount);
+        amountTextView.setText(current.getAmount());
 
 //        ImageView imageView = (ImageView)listView.findViewById(R.id.image);
 //        imageView.setImageResource(current.getImage());

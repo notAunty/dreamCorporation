@@ -56,7 +56,7 @@ public class DialogQrScanner extends AppCompatActivity{
         scannedUpline = result.getContents();
 
         new AlertDialog.Builder(DialogQrScanner.this)
-                .setTitle("Pay RM50?")  //TODO make the amount dynamic
+                .setTitle("Pay $" + GetFirebase.getFee() + "?")
                 .setMessage("Are you sure you want to pay the membership fee?")
 
                 // Specifying a listener allows you to take an action before dismissing the dialog.
@@ -91,8 +91,6 @@ public class DialogQrScanner extends AppCompatActivity{
 //  }
 
   public void uplineAccountAddDownline() {
-    // TODO fix this shit
-
     // Get upline punya downline Array
     GetFirebase.usersRef.child(scannedUpline).addListenerForSingleValueEvent(new ValueEventListener() {
       @Override

@@ -30,7 +30,7 @@ public class Balance {
 
 //    getOldBalance();
     calculate();
-    GetFirebase.addBalance(uplines, commission);
+    GetFirebase.addBalance(uplines, commission, mAuth.getUid());
     GetFirebase.getFirebase();
   }
 

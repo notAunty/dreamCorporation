@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="5dp"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/recent_title"
+            style="@style/Profile_MainText_Style"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/recent_subtitle"
+            style="@style/Profile_ShowText_Style" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/title"
-        style="@style/Profile_MainText_Style"
-        android:textAppearance="?android:attr/textAppearanceMedium"/>
-
-    <TextView
-        android:id="@+id/item"
-        android:layout_below="@+id/title"
-        style="@style/Profile_ShowText_Style"/>
+        android:id="@+id/recent_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:textColor="@android:color/holo_green_light"
+        android:textSize="24sp" />
 
     <!--<ImageView-->
-        <!--android:id="@+id/image"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:layout_marginRight="8dp"-->
-        <!--android:clickable="true"-->
-        <!--/>-->
+    <!--android:id="@+id/image"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:layout_marginRight="8dp"-->
+    <!--android:clickable="true"-->
+    <!--/>-->
 
 </RelativeLayout>

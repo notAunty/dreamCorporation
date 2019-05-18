@@ -2,18 +2,20 @@ package endgame.data.dreamcorporation;
 
 public class Transactions {
 
-  private String uplineId;
+  private String recipient;
   private String downlinesId;
   private long timeStamp;
+  private double amount;
 
-  public Transactions(String uplineId, String downlinesId, long timeStamp) {
-    this.uplineId = uplineId;
+  public Transactions(String recipient, String downlinesId, long timeStamp, double amount) {
+    this.recipient = recipient;
     this.downlinesId = downlinesId;
     this.timeStamp = timeStamp;
+    this.amount = amount;
   }
 
-  public String getUplineId() {
-    return uplineId;
+  public String getRecipient() {
+    return recipient;
   }
 
   public String getDownlinesId() {
@@ -22,5 +24,9 @@ public class Transactions {
 
   public long getTimeStamp() {
     return timeStamp;
+  }
+
+  public double getAmount() {
+    return amount;
   }
 }

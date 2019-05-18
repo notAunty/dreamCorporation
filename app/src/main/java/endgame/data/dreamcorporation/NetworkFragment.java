@@ -1,7 +1,6 @@
 package endgame.data.dreamcorporation;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +67,7 @@ public class NetworkFragment extends Fragment {
   private void initData() {
     List<TreeNode> treeNodes = new ArrayList<>();
 
-    root = new TreeNode<>(new ParentNode(getNameDirectly(uid)));
+    root = new TreeNode<>(new ParentNode(GetFirebase.getUsers(mAuth.getUid()).getUserName()));
     treeNodes.add(root);
 
     generateLine(uid, root);
@@ -176,13 +175,14 @@ public class NetworkFragment extends Fragment {
           ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
           for (String a: tempDw) {
             if (dataSnapshot.child(a).child("dwId").exists()) {
-              TreeNode r = new TreeNode<>(new ParentNode(encryption.decodeDirectly(GetFirebase.getUsers(mAuth.getUid()).getFullName())));
+//              TreeNode r = new TreeNode<>(new ParentNode(encryption.decodeDirectly(GetFirebase.getUsers(mAuth.getUid()).getFullName())));
+              TreeNode r = new TreeNode<>(new ParentNode(GetFirebase.getUsers(mAuth.getUid()).getUserName()));
               tempRef.addChild(r);
               generateLine(a, r); // Recursive
             } else {
 //              ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
 //              for (String a : tempDw) {
-                TreeNode r = new TreeNode<>(new LeafNode(encryption.decodeDirectly(GetFirebase.getUsers(mAuth.getUid()).getFullName())));
+                TreeNode r = new TreeNode<>(new LeafNode(GetFirebase.getUsers(mAuth.getUid()).getUserName()));
                 tempRef.addChild(r);
 //              }
             }
@@ -194,15 +194,17 @@ public class NetworkFragment extends Fragment {
     });
   }
 
-  protected String getNameDirectly(String uid) {
-    Log.e("getNameDirectly uid: ", uid);
-    String tempFullName;
-//    Log.e("uid: ", uid);
-    tempFullName = GetFirebase.getUsers(uid).getFullName();
-    Log.e("getNameD tempFullName: ", tempFullName);
-    tempFullName = encryption.decodeDirectly(tempFullName);
-    return tempFullName;
-  }
+//  protected String getNameDirectly(String uid) {
+//    Log.e("getNameDirectly uid: ", uid);
+//    String tempFullName;
+////    Log.e("uid: ", uid);
+//    tempFullName = GetFirebase.getUsers(uid).getFullName();
+//    Log.e("getNameD tempFullName: ", tempFullName);
+//    tempFullName = encryption.decodeDirectly(tempFullName);
+//    return tempFullName;
+//  }
+
+
 
 //  private void generateLine(String userId, TreeNode ref) {
 //    final TreeNode tempRef = ref;

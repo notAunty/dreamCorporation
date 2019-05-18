@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
+    <time>
         <shape android:shape="oval">
             <gradient
                 android:startColor="#000F57"
@@ -11,5 +11,5 @@
                 android:width="640dp"
                 android:height="640dp" />
         </shape>
-    </item>
+    </time>
 </selector>

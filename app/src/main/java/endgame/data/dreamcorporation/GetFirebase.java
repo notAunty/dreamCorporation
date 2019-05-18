@@ -12,6 +12,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 
 public class GetFirebase {
@@ -27,13 +28,14 @@ public class GetFirebase {
   private static ArrayList<String> usersUid = new ArrayList<>();
   private static ArrayList<Users> users = new ArrayList<>();
   private static ArrayList<String> transactionId = new ArrayList<>();
-  private static ArrayList<Users> transactions = new ArrayList<>();
+  private static ArrayList<Transactions> transactions = new ArrayList<>();
 
   public static void prepareFirebase() { mDatabase.setPersistenceEnabled(true); }
 
   public static void getFirebase() {
     fetchAdmin();
     fetchUsers();
+    fetchTransactions();
   }
 
   public static void fetchAdmin() {
@@ -49,6 +51,10 @@ public class GetFirebase {
 
       }
     });
+  }
+
+  public static ArrayList<Transactions> getTransactions() {
+    return transactions;
   }
 
   public static String getAdminUid() {
@@ -75,7 +81,7 @@ public class GetFirebase {
         }
 
         for (HashMap<String, Object> tempUser : tempUsers.values()) {
-          users.add(new Users(((String) tempUser.get("fN")), Double.valueOf(String.valueOf(tempUser.get("b")))));
+          users.add(new Users(((String) tempUser.get("uN")), ((String) tempUser.get("fN")), Double.valueOf(String.valueOf(tempUser.get("b")))));
 
           if (tempUser.containsKey("upId")) {
             users.get(users.size() - 1).setUplineUid(String.valueOf(tempUser.get("upId")));
@@ -102,7 +108,7 @@ public class GetFirebase {
 
   public static void fetchTransactions() {
 //    Log.e("At", "fetchUsers outside");
-    transRef.addListenerForSingleValueEvent(new ValueEventListener() {
+    transRef.addValueEventListener(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
       HashMap<String, HashMap<String, Object>> tempTrans = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
@@ -112,32 +118,13 @@ public class GetFirebase {
           transactionId.add(tempTran);
         }
 
-        for (HashMap<String, Object> tempUser : tempTrans.values()) {
-          users.add(new Users(((String) tempUser.get("fN")), Double.valueOf(String.valueOf(tempUser.get("b")))));
-
-          if (tempUser.containsKey("upId")) {
-            users.get(users.size() - 1).setUplineUid(String.valueOf(tempUser.get("upId")));
-          }
-
-          if (tempUser.containsKey("dwId")) {
-            ArrayList<String> tempDwArray = new ArrayList<>();
-
-            for (String tempDwId: ((ArrayList<String>) tempUser.get("dwId"))) {
-              tempDwArray.add(tempDwId);
-            }
-
-            users.get(users.size() - 1).setDownlineUid(tempDwArray);
-          }
-
-          if (tempUser.containsKey("dwId")) {
-            ArrayList<String> tempDwArray = new ArrayList<>();
-
-            for (String tempDwId: ((ArrayList<String>) tempUser.get("dwId"))) {
-              tempDwArray.add(tempDwId);
-            }
-
-            users.get(users.size() - 1).setDownlineUid(tempDwArray);
-          }
+        for (HashMap<String, Object> tempTran : tempTrans.values()) {
+          transactions.add(new Transactions(
+                  ((String) tempTran.get("r")),
+                  ((String) tempTran.get("dwId")),
+                  ((long) tempTran.get("tS")),
+                  ((double) tempTran.get("a"))
+          ));
         }
       }
 
@@ -178,7 +165,7 @@ public class GetFirebase {
     });
   }
 
-  public static void addBalance(final String uid[], final double amount[]) {
+  public static void addBalance(final String uid[], final double amount[], final String giver) {
     Log.e("uid length", String.valueOf(uid.length));
 
     usersRef.child(uid[0]).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -190,8 +177,14 @@ public class GetFirebase {
 
         usersRef.child(uid[0]).child("b").setValue(tempBalance);
 
+        String tempTransPushKey = transRef.push().getKey();
+        transRef.child(tempTransPushKey).child("r").setValue(uid[0]);
+        transRef.child(tempTransPushKey).child("dwId").setValue(giver);
+        transRef.child(tempTransPushKey).child("tS").setValue(new Date().getTime());
+        transRef.child(tempTransPushKey).child("a").setValue(amount[0]);
+
         if (uid.length > 1) {
-          addBalance(Arrays.copyOfRange(uid, 1, uid.length), Arrays.copyOfRange(amount, 1, amount.length));
+          addBalance(Arrays.copyOfRange(uid, 1, uid.length), Arrays.copyOfRange(amount, 1, amount.length), giver);
         }
       }
 

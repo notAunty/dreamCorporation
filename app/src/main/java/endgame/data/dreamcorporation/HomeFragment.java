@@ -26,9 +26,10 @@ import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-import endgame.data.dreamcorporation.profile.Word;
-import endgame.data.dreamcorporation.profile.WordAdapter;
+import endgame.data.dreamcorporation.home.Word;
+import endgame.data.dreamcorporation.home.WordAdapter;
 
 public class HomeFragment extends Fragment {
 
@@ -69,8 +70,7 @@ public class HomeFragment extends Fragment {
     CardView cardView = v.findViewById(R.id.card);
     cardBg = v.findViewById(R.id.card_background);
     levelTextView = v.findViewById(R.id.level);
-    showBalance();;
-    
+    showBalance();
 
 
 //    usersRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -117,8 +117,6 @@ public class HomeFragment extends Fragment {
 //      }
 //    });
 
-    displayList(v);
-
     swipeRefreshLayout = v.findViewById(R.id.swipe_container);
     swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
       @Override
@@ -132,6 +130,7 @@ public class HomeFragment extends Fragment {
           }
         }, 1000); // Delay in millis
         showBalance();
+        displayList(v);
       }
     });
 
@@ -139,13 +138,13 @@ public class HomeFragment extends Fragment {
   }
 
   public void showBalance(){
+
+
     balance = GetFirebase.getUsers(mAuth.getUid()).getBalance();
 
     balanceTextView.setText(getString(R.string.currency) + " " + balance);
 
-    if (balance < 50) {
-      cardBg.setImageResource(R.drawable.bronze);
-    } else if (balance < 150) {
+    if (balance >= 100 ) {
       cardBg.setImageResource(R.drawable.silver);
       levelTextView.setText("Silver");
     } else if (balance < 300) {
@@ -214,7 +213,7 @@ public class HomeFragment extends Fragment {
             final String scannedUpline = result;
 
             new AlertDialog.Builder(getContext())
-                    .setTitle("Pay RM50?")  //TODO make the amount dynamic
+                    .setTitle("Pay $" + GetFirebase.getFee() + "?")
                     .setMessage("Are you sure you want to pay the membership fee?")
 
                     // Specifying a listener allows you to take an action before dismissing the dialog.
@@ -242,8 +241,9 @@ public class HomeFragment extends Fragment {
           Toast.makeText(getContext(), "Input Error.", Toast.LENGTH_LONG).show();
 //          super.onActivityResult(requestCode, resultCoede, intent);
         }
+
 //        if(!tempInput.equals(mAuth.getUid()))
-//          Toast.makeText(getContext(), "Fuck you! 妈的，叫你填啦，干你！JIBAI！", Toast.LENGTH_LONG).show();
+//          Toast.makeText(getContext(), "妈的，叫你填啦，干你！", Toast.LENGTH_LONG).show();
 //        else if(!tempInput.equals(mAuth.getUid())&&tempInput.length()!=0)
 //          Toast.makeText(getContext(),"妈的！是不会放对的是吗？！干你！",Toast.LENGTH_LONG).show();
 //        else if(tempInput.equals(mAuth.getUid()))
@@ -256,19 +256,16 @@ public class HomeFragment extends Fragment {
 
   public void displayList(View view){
     words = new ArrayList<Word>();
-    words.add(new Word(getResources().getString(R.string.example),getResources().getString(R.string.example)));
-    words.add(new Word("CHANGE TO BETTER ONE, this no ripple then tapped",getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
+
+    for (Transactions t: GetFirebase.getTransactions()) {
+      if (t.getRecipient().equals(mAuth.getUid())) {
+        words.add(new Word(GetFirebase.getUsers(t.getDownlinesId()).getUserName(),
+                new Date(t.getTimeStamp()).toString(),
+                getString(R.string.currency) + " " + String.valueOf(t.getAmount())));
+      }
+    }
+
+
     WordAdapter itemAdapter = new WordAdapter(getActivity(),  words);
     listView = (ListView) view.findViewById(R.id.home_listView);
     listView.setAdapter(itemAdapter);
