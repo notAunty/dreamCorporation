@@ -5,6 +5,7 @@ import android.content.ClipboardManager;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,7 +35,7 @@ import endgame.data.dreamcorporation.profile.Word;
 import static android.content.Context.CLIPBOARD_SERVICE;
 
 
-public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class ProfileFragment extends Fragment {
 
   private String text;
   private String tempUID = "null";
@@ -68,6 +69,7 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
     encryptedFullName = GetFirebase.getUsers(mAuth.getUid()).getFullName();
 
     decrypt = (TextView) view.findViewById(R.id.profile_name);
+    final String tempStr = decrypt.getText().toString();
 
     decrypt.setOnClickListener(new View.OnClickListener() {
       @Override
@@ -185,14 +187,15 @@ public class ProfileFragment extends Fragment implements SwipeRefreshLayout.OnRe
       }
     });
 
+//    swipeRefreshLayout.setColorSchemeColors(
+//            getResources().getColor(android.R.color.holo_blue_bright),
+//            getResources().getColor(android.R.color.holo_green_light),
+//            getResources().getColor(android.R.color.holo_orange_light),
+//            getResources().getColor(android.R.color.holo_red_light)
+//    );
+
     return view;
   }
-
-  @Override
-  public void onRefresh() {
-    
-  }
-
 
 //  public void displayList(View view) {
 //    words = new ArrayList<Word>();

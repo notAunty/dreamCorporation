@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
@@ -38,6 +40,11 @@ public class HomeFragment extends Fragment {
   private ArrayList<Word> words;
   private SpeedDialView speedDial;
   private double balance;
+  private TextView balanceTextView;
+  private ImageView cardBg;
+  private TextView levelTextView;
+
+  private SwipeRefreshLayout swipeRefreshLayout;
 
   private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 //  private Users thisUser;
@@ -58,27 +65,13 @@ public class HomeFragment extends Fragment {
 //    mDatabase.setPersistenceEnabled(true);
 
     // Balance
-    TextView balanceTextView = v.findViewById(R.id.home_balance);
+    balanceTextView = v.findViewById(R.id.home_balance);
     CardView cardView = v.findViewById(R.id.card);
-    ImageView cardBg = v.findViewById(R.id.card_background);
-    TextView levelTextView = v.findViewById(R.id.level);
+    cardBg = v.findViewById(R.id.card_background);
+    levelTextView = v.findViewById(R.id.level);
+    showBalance();;
     
-    balance = GetFirebase.getUsers(mAuth.getUid()).getBalance();
-    
-    balanceTextView.setText(getString(R.string.currency) + " " + balance);
 
-    if (balance < 50) {
-      cardBg.setImageResource(R.drawable.bronze);
-    } else if (balance < 150) {
-      cardBg.setImageResource(R.drawable.silver);
-      levelTextView.setText("Silver");
-    } else if (balance < 300) {
-      cardBg.setImageResource(R.drawable.gold);
-      levelTextView.setText("Gold");
-    } else if (balance >= 300) {
-      cardBg.setImageResource(R.drawable.platinum);
-      levelTextView.setText("Platinum");
-    }
 
 //    usersRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
 //      @Override
@@ -126,7 +119,42 @@ public class HomeFragment extends Fragment {
 
     displayList(v);
 
+    swipeRefreshLayout = v.findViewById(R.id.swipe_container);
+    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+      @Override
+      public void onRefresh() {
+        Toast.makeText(getContext(), "Refreshed.", Toast.LENGTH_SHORT).show();
+        // To keep animation for 4 seconds
+        new Handler().postDelayed(new Runnable() {
+          @Override public void run() {
+            // Stop animation (This will be after 3 seconds)
+            swipeRefreshLayout.setRefreshing(false);
+          }
+        }, 1000); // Delay in millis
+        showBalance();
+      }
+    });
+
     return v;
+  }
+
+  public void showBalance(){
+    balance = GetFirebase.getUsers(mAuth.getUid()).getBalance();
+
+    balanceTextView.setText(getString(R.string.currency) + " " + balance);
+
+    if (balance < 50) {
+      cardBg.setImageResource(R.drawable.bronze);
+    } else if (balance < 150) {
+      cardBg.setImageResource(R.drawable.silver);
+      levelTextView.setText("Silver");
+    } else if (balance < 300) {
+      cardBg.setImageResource(R.drawable.gold);
+      levelTextView.setText("Gold");
+    } else if (balance >= 300) {
+      cardBg.setImageResource(R.drawable.platinum);
+      levelTextView.setText("Platinum");
+    }
   }
 
 //  private void scanQRCode(){
