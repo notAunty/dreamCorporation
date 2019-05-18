@@ -13,9 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,7 +67,7 @@ public class NetworkFragment extends Fragment {
     root = new TreeNode<>(new ParentNode(GetFirebase.getUsers(mAuth.getUid()).getUserName()));
     treeNodes.add(root);
 
-    generateLine(uid, root);
+    generateLine(GetFirebase.getUsers(uid).getUplineUid(), root);
 //    addTreeNode(node);
 
 //    List<TreeNode> treeNodes = new ArrayList<>();
@@ -152,46 +149,57 @@ public class NetworkFragment extends Fragment {
 //  }
 
   private void generateLine(String userId, TreeNode ref) {
-    final TreeNode tempRef = ref;
-    final String uid = userId;
+//    final TreeNode tempRef = ref;
+//    final String uid = userId;
 
-//    ArrayList<String> tempDw = GetFirebase.getUsers(userId).getDownlineUid();
-//
-//    if (tempDw.isEmpty()) {
-//
-//    } else {
-//
-//    }
-//
-//    if (tempDw == null) return;
-//    for (String a: tempDw) {
-//      if
-//    }
+    ArrayList<String> tempDw = GetFirebase.getUsers(userId).getDownlineUid();
 
-    GetFirebase.usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
-      @Override
-      public void onDataChange(DataSnapshot dataSnapshot) {
-        if (dataSnapshot.child(uid).child("dwId").exists()) {
-          ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
-          for (String a: tempDw) {
-            if (dataSnapshot.child(a).child("dwId").exists()) {
-//              TreeNode r = new TreeNode<>(new ParentNode(encryption.decodeDirectly(GetFirebase.getUsers(mAuth.getUid()).getFullName())));
-              TreeNode r = new TreeNode<>(new ParentNode(GetFirebase.getUsers(mAuth.getUid()).getUserName()));
-              tempRef.addChild(r);
-              generateLine(a, r); // Recursive
-            } else {
-//              ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
-//              for (String a : tempDw) {
-                TreeNode r = new TreeNode<>(new LeafNode(GetFirebase.getUsers(mAuth.getUid()).getUserName()));
-                tempRef.addChild(r);
-//              }
-            }
-          }
-        }
+    for (String a : tempDw) {
+      if (!GetFirebase.getUsers(a).getDownlineUid().isEmpty()) {
+        TreeNode r = new TreeNode<>(new ParentNode(GetFirebase.getUsers(a).getUserName()));
+        ref.addChild(r);
+        generateLine(a, r);
+      } else {
+        TreeNode r = new TreeNode<>(new LeafNode(GetFirebase.getUsers(a).getUserName()));
+        ref.addChild(r);
       }
-      @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {}
-    });
+    }
+
+//    if (!tempDw.isEmpty()) {
+//      for (String a : tempDw) {
+//        TreeNode r = new TreeNode<>(new ParentNode(GetFirebase.getUsers(a).getUserName()));
+//        ref.addChild(r);
+//        generateLine(a, r);
+//      }
+//    } else {
+//      TreeNode r = new TreeNode<>(new LeafNode(GetFirebase.getUsers(userId).getUserName()));
+//      ref.addChild(r);
+//    }
+
+//    GetFirebase.usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//      @Override
+//      public void onDataChange(DataSnapshot dataSnapshot) {
+//        if (dataSnapshot.child(uid).child("dwId").exists()) {
+//          ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
+//          for (String a: tempDw) {
+//            if (dataSnapshot.child(a).child("dwId").exists()) {
+////              TreeNode r = new TreeNode<>(new ParentNode(encryption.decodeDirectly(GetFirebase.getUsers(mAuth.getUid()).getFullName())));
+//              TreeNode r = new TreeNode<>(new ParentNode(GetFirebase.getUsers(mAuth.getUid()).getUserName()));
+//              tempRef.addChild(r);
+//              generateLine(a, r); // Recursive
+//            } else {
+////              ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
+////              for (String a : tempDw) {
+//                TreeNode r = new TreeNode<>(new LeafNode(GetFirebase.getUsers(mAuth.getUid()).getUserName()));
+//                tempRef.addChild(r);
+////              }
+//            }
+//          }
+//        }
+//      }
+//      @Override
+//      public void onCancelled(@NonNull DatabaseError databaseError) {}
+//    });
   }
 
 //  protected String getNameDirectly(String uid) {
