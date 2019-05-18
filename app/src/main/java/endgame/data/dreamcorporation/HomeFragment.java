@@ -245,9 +245,9 @@ public class HomeFragment extends Fragment {
         }
 
 //        if(!tempInput.equals(mAuth.getUid()))
-//          Toast.makeText(getContext(), "妈的，叫你填啦，干你！", Toast.LENGTH_LONG).show();
+//          Toast.makeText(getContext(), "叫你填啦！", Toast.LENGTH_LONG).show();
 //        else if(!tempInput.equals(mAuth.getUid())&&tempInput.length()!=0)
-//          Toast.makeText(getContext(),"妈的！是不会放对的是吗？！干你！",Toast.LENGTH_LONG).show();
+//          Toast.makeText(getContext(),"是不会放对的是吗？",Toast.LENGTH_LONG).show();
 //        else if(tempInput.equals(mAuth.getUid()))
 //          Toast.makeText(getContext(),"终于对了！恭喜恭喜",Toast.LENGTH_LONG).show();
       }
@@ -260,9 +260,11 @@ public class HomeFragment extends Fragment {
     words = new ArrayList<Word>();
 
     for (Transactions t: GetFirebase.getTransactions()) {
+      String tempDate = new Date(t.getTimeStamp()).toString();
+
       if (t.getRecipient().equals(mAuth.getUid())) {
         words.add(new Word(GetFirebase.getUsers(t.getDownlinesId()).getUserName(),
-                new Date(t.getTimeStamp()).toString(),
+                tempDate.replaceAll(" GMT.08:00", ""),
                 getString(R.string.currency) + " " + String.valueOf(t.getAmount())));
       }
     }
