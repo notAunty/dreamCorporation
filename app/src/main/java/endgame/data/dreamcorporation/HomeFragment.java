@@ -70,6 +70,7 @@ public class HomeFragment extends Fragment {
     CardView cardView = v.findViewById(R.id.card);
     cardBg = v.findViewById(R.id.card_background);
     levelTextView = v.findViewById(R.id.level);
+    displayList(v);
     showBalance();
 
 
@@ -134,7 +135,7 @@ public class HomeFragment extends Fragment {
       }
     });
 
-    displayList(v);
+
     return v;
   }
 

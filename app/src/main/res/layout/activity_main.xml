@@ -30,13 +30,14 @@
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        app:menu="@menu/bottom_nav"
         android:id="@+id/bottom_nav"
         app:labelVisibilityMode="selected"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorPrimary"
-        app:menu="@menu/bottom_nav"
+        android:background="@color/white"
+        android:elevation="24dp"
         app:itemIconTint="@drawable/nav_item_color_state"
         app:itemTextColor="@drawable/nav_item_color_state">
         <!--app:itemIconTint="@color/colorAccent"-->

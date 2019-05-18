@@ -1,7 +1,6 @@
 package endgame.data.dreamcorporation;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -77,7 +76,7 @@ public class HomeActivity extends AppCompatActivity {
         {
           bottomNav.getMenu().getItem(0).setChecked(false);
         }
-        Log.e("page", "onPageSelected: "+position);
+//        Log.e("page", "onPageSelected: "+position);
         bottomNav.getMenu().getItem(position).setChecked(true);
         prevMenuItem = bottomNav.getMenu().getItem(position);
 
