@@ -3,6 +3,7 @@ package endgame.data.dreamcorporation;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +47,7 @@ public class ProfileFragment extends Fragment {
   private ArrayList<Word> words;
   private QRGEncoder qrgEncoder;
   private TextView decrypt, user_key, adminTextView;
+  private RelativeLayout admin;
   private ImageView copy_key, qrImage;
   private ClipboardManager clipboardManager;
   private FloatingActionButton floatingActionButton;
@@ -64,8 +67,16 @@ public class ProfileFragment extends Fragment {
 //        TextView uidField = (TextView) view.findViewById(R.id.uid);
     if (!tempUID.isEmpty()) user_key.setText(mAuth.getUid());
 
-    adminTextView = (TextView) view.findViewById(R.id.profile_admin);
+    adminTextView = (TextView) view.findViewById(R.id.profile_admin_textview);
+    admin = (RelativeLayout) view.findViewById(R.id.profile_admin);
     if (mAuth.getUid().equals(GetFirebase.getAdminUid())) adminTextView.setText("Admin Tools");
+    admin.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(getContext(), ActivityTestingData.class);
+        startActivity(intent);
+      }
+    });
 
 
     encryptedFullName = GetFirebase.getUsers(mAuth.getUid()).getFullName();

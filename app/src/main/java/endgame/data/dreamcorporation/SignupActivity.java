@@ -16,14 +16,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignupActivity extends AppCompatActivity {
 
   private FirebaseAuth mAuth;
   private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-  private DatabaseReference usersRef = mDatabase.getReference("users");
 
   private Encryption encryption = new Encryption();
 
@@ -62,9 +60,9 @@ public class SignupActivity extends AppCompatActivity {
                       if (task.isSuccessful()) {
                         // Add to database
                         String tempEncFn = encryption.encode(userFn);
-                        usersRef.child(mAuth.getUid()).child("uN").setValue(userId);
-                        usersRef.child(mAuth.getUid()).child("fN").setValue(tempEncFn);
-                        usersRef.child(mAuth.getUid()).child("b").setValue(0);
+                        GetFirebase.usersRef.child(mAuth.getUid()).child("uN").setValue(userId);
+                        GetFirebase.usersRef.child(mAuth.getUid()).child("fN").setValue(tempEncFn);
+                        GetFirebase.usersRef.child(mAuth.getUid()).child("b").setValue(0);
 
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("signup: ", "createUserWithEmail:success");

@@ -25,10 +25,10 @@ public class GetFirebase {
 
   private static String adminUid;
   private static double fee;
-  private static ArrayList<String> usersUid = new ArrayList<>();
-  private static ArrayList<Users> users = new ArrayList<>();
-  private static ArrayList<String> transactionId = new ArrayList<>();
-  private static ArrayList<Transactions> transactions = new ArrayList<>();
+  protected static ArrayList<String> usersUid = new ArrayList<>();
+  protected static ArrayList<Users> users = new ArrayList<>();
+  protected static ArrayList<String> transactionId = new ArrayList<>();
+  protected static ArrayList<Transactions> transactions = new ArrayList<>();
 
   public static void prepareFirebase() { mDatabase.setPersistenceEnabled(true); }
 

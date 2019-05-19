@@ -136,6 +136,7 @@
                     app:cardCornerRadius="10dp">
 
                     <RelativeLayout
+                        android:id="@+id/profile_admin"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:background="@drawable/ripple"
@@ -144,7 +145,7 @@
                         android:focusable="true">
 
                         <TextView
-                            android:id="@+id/profile_admin"
+                            android:id="@+id/profile_admin_textview"
                             style="@style/Profile_MainText_Style"
                             android:layout_centerVertical="true"
                             android:paddingLeft="10dp"
@@ -246,7 +247,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerVertical="true"
-                                android:clickable="true"
+                                android:clickable="false"
                                 android:paddingRight="10dp"
                                 android:src="@drawable/ripple_arrow_right" />
 
@@ -280,7 +281,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerVertical="true"
-                                android:clickable="true"
+                                android:clickable="false"
                                 android:paddingRight="10dp"
                                 android:src="@drawable/ripple_arrow_right" />
 
@@ -314,7 +315,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
                                 android:layout_centerVertical="true"
-                                android:clickable="true"
+                                android:clickable="false"
                                 android:paddingRight="10dp"
                                 android:src="@drawable/ripple_arrow_right" />
 
