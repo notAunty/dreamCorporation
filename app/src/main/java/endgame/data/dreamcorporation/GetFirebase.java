@@ -148,6 +148,7 @@ public class GetFirebase {
     usersRef.addValueEventListener(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+        fetchUsers();
         Log.e("At", "fetchUsers inside");
         HashMap<String, HashMap<String, Object>> tempUsers = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
 
@@ -159,9 +160,7 @@ public class GetFirebase {
       }
 
       @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {
-
-      }
+      public void onCancelled(@NonNull DatabaseError databaseError) {}
     });
   }
 
@@ -189,8 +188,7 @@ public class GetFirebase {
       }
 
       @Override
-      public void onCancelled(@NonNull DatabaseError databaseError) {
-      }
+      public void onCancelled(@NonNull DatabaseError databaseError) {}
     });
   }
 
