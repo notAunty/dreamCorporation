@@ -17,7 +17,7 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="user_key">User Key</string>
     <string name="example">Placeholder example</string>
-    <string name="currency">$</string>
+    <string name="currency">RM</string>
     <string name="ic_email">&#xe087;</string>
     <string name="ic_folder">&#xe09d;</string>
     <string name="ic_keyboard_arrow_down">&#xe0c5;</string>

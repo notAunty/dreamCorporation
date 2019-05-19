@@ -127,11 +127,6 @@ public class HomeActivity extends AppCompatActivity {
               }
 
 
-              // PHILEMON SAY THIS IMPLEMETATION IS BAD, as it doesn't save state
-              // Use ViewPager, FragmentPagerAdapter, FragmentStatePagerAdapter
-              // But I'm too lazy haha
-
-
 //              getSupportFragmentManager().beginTransaction().
 //                      replace(R.id.fragment_container, selectedFragment).commit();
 

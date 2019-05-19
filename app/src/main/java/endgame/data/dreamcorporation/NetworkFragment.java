@@ -64,10 +64,14 @@ public class NetworkFragment extends Fragment {
   private void initData() {
     List<TreeNode> treeNodes = new ArrayList<>();
 
-    root = new TreeNode<>(new ParentNode(GetFirebase.getUsers(mAuth.getUid()).getUserName()));
+    root = new TreeNode<>(new ParentNode(GetFirebase.getUsers(GetFirebase.getUsers(uid).getUplineUid()).getUserName()));
     treeNodes.add(root);
 
-    generateLine(GetFirebase.getUsers(uid).getUplineUid(), root);
+    if (mAuth.getUid().equals(GetFirebase.getAdminUid())) {
+      generateLineAdmin(GetFirebase.getUsers(uid).getUplineUid(), root);
+    } else {
+      generateLine(GetFirebase.getUsers(uid).getUplineUid(), root);
+    }
 //    addTreeNode(node);
 
 //    List<TreeNode> treeNodes = new ArrayList<>();
@@ -148,7 +152,7 @@ public class NetworkFragment extends Fragment {
 //    }
 //  }
 
-  private void generateLine(String userId, TreeNode ref) {
+  private void generateLineAdmin(String userId, TreeNode ref) {
 //    final TreeNode tempRef = ref;
 //    final String uid = userId;
 
@@ -201,6 +205,56 @@ public class NetworkFragment extends Fragment {
 //      public void onCancelled(@NonNull DatabaseError databaseError) {}
 //    });
   }
+
+  private void generateLine(String userId, TreeNode ref) {
+//    final TreeNode tempRef = ref;
+//    final String uid = userId;
+
+    ArrayList<String> tempThisUser = GetFirebase.getUsers(userId).getDownlineUid();
+
+    TreeNode up = new TreeNode<>(new ParentNode(GetFirebase.getUsers(uid).getUserName()));
+    ref.addChild(up);
+
+    for (String a : tempThisUser) {
+      TreeNode r = new TreeNode<>(new LeafNode(GetFirebase.getUsers(a).getUserName()));
+      up.addChild(r);
+    }
+  }
+//    if (!tempDw.isEmpty()) {
+//      for (String a : tempDw) {
+//        TreeNode r = new TreeNode<>(new ParentNode(GetFirebase.getUsers(a).getUserName()));
+//        ref.addChild(r);
+//        generateLine(a, r);
+//      }
+//    } else {
+//      TreeNode r = new TreeNode<>(new LeafNode(GetFirebase.getUsers(userId).getUserName()));
+//      ref.addChild(r);
+//    }
+
+//    GetFirebase.usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+//      @Override
+//      public void onDataChange(DataSnapshot dataSnapshot) {
+//        if (dataSnapshot.child(uid).child("dwId").exists()) {
+//          ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
+//          for (String a: tempDw) {
+//            if (dataSnapshot.child(a).child("dwId").exists()) {
+////              TreeNode r = new TreeNode<>(new ParentNode(encryption.decodeDirectly(GetFirebase.getUsers(mAuth.getUid()).getFullName())));
+//              TreeNode r = new TreeNode<>(new ParentNode(GetFirebase.getUsers(mAuth.getUid()).getUserName()));
+//              tempRef.addChild(r);
+//              generateLine(a, r); // Recursive
+//            } else {
+////              ArrayList<String> tempDw = (ArrayList<String>) dataSnapshot.child(uid).child("dwId").getValue();
+////              for (String a : tempDw) {
+//                TreeNode r = new TreeNode<>(new LeafNode(GetFirebase.getUsers(mAuth.getUid()).getUserName()));
+//                tempRef.addChild(r);
+////              }
+//            }
+//          }
+//        }
+//      }
+//      @Override
+//      public void onCancelled(@NonNull DatabaseError databaseError) {}
+//    });
 
 //  protected String getNameDirectly(String uid) {
 //    Log.e("getNameDirectly uid: ", uid);
