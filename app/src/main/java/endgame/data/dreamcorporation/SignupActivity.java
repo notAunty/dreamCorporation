@@ -53,35 +53,37 @@ public class SignupActivity extends AppCompatActivity {
           Toast.makeText(view.getContext(), "Username unavailable",
                   Toast.LENGTH_SHORT).show();
         } else {
-          mAuth.createUserWithEmailAndPassword(userId + "@asdfggfdsa.com", userPw)
-                  .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                      if (task.isSuccessful()) {
-                        // Add to database
-                        String tempEncFn = encryption.encode(userFn);
-                        GetFirebase.usersRef.child(mAuth.getUid()).child("uN").setValue(userId);
-                        GetFirebase.usersRef.child(mAuth.getUid()).child("fN").setValue(tempEncFn);
-                        GetFirebase.usersRef.child(mAuth.getUid()).child("b").setValue(0);
+          if (!GetFirebase.existUser(userId.toString())) {
+            mAuth.createUserWithEmailAndPassword(userId + "@asdfggfdsa.com", userPw)
+                    .addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
+                      @Override
+                      public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                          // Add to database
+                          String tempEncFn = encryption.encode(userFn);
+                          GetFirebase.usersRef.child(mAuth.getUid()).child("uN").setValue(userId);
+                          GetFirebase.usersRef.child(mAuth.getUid()).child("fN").setValue(tempEncFn);
+                          GetFirebase.usersRef.child(mAuth.getUid()).child("b").setValue(0);
 
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("signup: ", "createUserWithEmail:success");
+                          // Sign in success, update UI with the signed-in user's information
+                          Log.d("signup: ", "createUserWithEmail:success");
 //                        FirebaseUser user = mAuth.getCurrentUser();
 //                        Toast.makeText(view.getContext(), "Signup completed. You may now login.",
 //                                Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(view.getContext(), MainActivity.class);
-                        startActivity(intent);
-                        onBackPressed(); // To close this activity
-                      } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w("signup: ", "createUserWithEmail:failure", task.getException());
-                        Toast.makeText(view.getContext(), "Signup failed.",
-                                Toast.LENGTH_SHORT).show();
+                          Intent intent = new Intent(view.getContext(), MainActivity.class);
+                          startActivity(intent);
+                          onBackPressed(); // To close this activity
+                        } else {
+                          // If sign in fails, display a message to the user.
+                          Log.w("signup: ", "createUserWithEmail:failure", task.getException());
+                          Toast.makeText(view.getContext(), "Signup failed.",
+                                  Toast.LENGTH_SHORT).show();
 //                      updateUI(null);
+                        }
+                        // ...
                       }
-                      // ...
-                    }
-                  });
+                    });
+          } else Toast.makeText(view.getContext(), "Username taken.", Toast.LENGTH_SHORT).show();
         }
       }
     });

@@ -19,6 +19,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+
 public class ActivityTestingData extends AppCompatActivity {
 
   private String selectedUserUid;
@@ -139,61 +141,66 @@ public class ActivityTestingData extends AppCompatActivity {
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
-        adminMode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-          @Override
-          public void onItemSelected(AdapterView<?> parent,final View view, int position, long id) {
+        int adminModePosition = adminMode.getSelectedItemPosition();
+        final View tempView = view;
 
-            switch (position) {
-              case 0:  //CREATE
-                if (password.length() < 6 || userName.length() < 1) {
-                  Toast.makeText(view.getContext(), "Password longer a bit can ah??",
-                          Toast.LENGTH_SHORT).show();
-                } else if (GetFirebase.existUser(userName.toString())) {
-                  Toast.makeText(view.getContext(), "Username unavailable",
-                          Toast.LENGTH_SHORT).show();
-                } else {
-                  mAuth.createUserWithEmailAndPassword(userName + "@asdfggfdsa.com", password.toString())
-                          .addOnCompleteListener(ActivityTestingData.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                              if (task.isSuccessful()) {
-                                // Add to database
-                                String tempEncFn = encryption.encode(fullName.toString());
-                                GetFirebase.usersRef.child(mAuth.getUid()).child("uN").setValue(userName);
-                                GetFirebase.usersRef.child(mAuth.getUid()).child("fN").setValue(tempEncFn);
-                                GetFirebase.usersRef.child(mAuth.getUid()).child("b").setValue(0);
+        switch (adminModePosition) {
+          case 0:  //CREATE
+            if (password.length() < 6 || userName.length() < 1) {
+              Toast.makeText(view.getContext(), "Password longer a bit can ah??",
+                      Toast.LENGTH_SHORT).show();
+            } else if (GetFirebase.existUser(userName.toString())) {
+              Toast.makeText(view.getContext(), "Username unavailable",
+                      Toast.LENGTH_SHORT).show();
+            } else {
+              if (!GetFirebase.existUser(userName.toString())) {
+                mAuth.createUserWithEmailAndPassword(userName + "@asdfggfdsa.com", password.toString())
+                        .addOnCompleteListener(ActivityTestingData.this, new OnCompleteListener<AuthResult>() {
+                          @Override
+                          public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                              // Add to database
+                              String tempEncFn = encryption.encode(fullName.toString());
+                              GetFirebase.usersRef.child(mAuth.getUid()).child("uN").setValue(userName);
+                              GetFirebase.usersRef.child(mAuth.getUid()).child("fN").setValue(tempEncFn);
+                              GetFirebase.usersRef.child(mAuth.getUid()).child("b").setValue(0);
 
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d("signup: ", "createUserWithEmail:success");
+                              // Sign in success, update UI with the signed-in user's information
+                              Log.d("signup: ", "createUserWithEmail:success");
 //                        FirebaseUser user = mAuth.getCurrentUser();
 //                        Toast.makeText(view.getContext(), "Signup completed. You may now login.",
 //                                Toast.LENGTH_SHORT).show();
-                              } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w("signup: ", "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(view.getContext(), "Signup failed.",
-                                        Toast.LENGTH_SHORT).show();
+                            } else {
+                              // If sign in fails, display a message to the user.
+                              Log.w("signup: ", "createUserWithEmail:failure", task.getException());
+                              Toast.makeText(tempView.getContext(), "Signup failed.",
+                                      Toast.LENGTH_SHORT).show();
 //                      updateUI(null);
-                              }
-                              // ...
                             }
-                          });
-                }
-
-              case 2: // UPDATE
-                GetFirebase.usersRef.child(selectedUserUid).child("uN").setValue(userName);
-                GetFirebase.usersRef.child(selectedUserUid).child("fN").setValue(encryption.encode(fullName.toString()));
-                GetFirebase.usersRef.child(selectedUserUid).child("b").setValue(Double.parseDouble(balance.toString()));
-                GetFirebase.usersRef.child(selectedUserUid).child("upId").setValue(upId);
-                encryption = new Encryption();
-              case 3: // DELETE
-                // TODO
+                            // ...
+                          }
+                        });
+              } else Toast.makeText(view.getContext(), "Username taken.", Toast.LENGTH_SHORT).show();
             }
-          }
 
-          @Override
-          public void onNothingSelected(AdapterView<?> parent) { }
-        });
+          case 2: // UPDATE
+            GetFirebase.usersRef.child(selectedUserUid).child("uN").setValue(userName.getText().toString());
+            GetFirebase.usersRef.child(selectedUserUid).child("fN").setValue(encryption.encode(fullName.getText().toString()));
+            GetFirebase.usersRef.child(selectedUserUid).child("b").setValue(Double.parseDouble(balance.getText().toString()));
+            GetFirebase.usersRef.child(selectedUserUid).child("upId").setValue(upId.getText().toString());
+            encryption = new Encryption();
+
+          case 3: // DELETE
+            String tempUpline = GetFirebase.getUsers(selectedUserUid).getUplineUid();
+            ArrayList<String> downlines = GetFirebase.getUsers(selectedUserUid).getDownlineUid();
+
+            for (String a : downlines) {
+              GetFirebase.usersRef.child(a).child("upId").setValue(tempUpline);
+            }
+
+            GetFirebase.usersRef.child(selectedUserUid).removeValue();
+        }
+        GetFirebase.fetchUsers();
 //        String uid = mAuth.getUid();
 //        String username = ((EditText) ActivityTestingData.this.findViewById(R.id.testing_username)).getText().toString();
 ////        String counter = ((EditText) ActivityTestingData.this.findViewById(R.id.testing_counter)).getText().toString();
