@@ -44,7 +44,7 @@ public class ProfileFragment extends Fragment {
   private ListView listView;
   private ArrayList<Word> words;
   private QRGEncoder qrgEncoder;
-  private TextView decrypt, user_key;
+  private TextView decrypt, user_key, adminTextView;
   private ImageView copy_key, qrImage;
   private ClipboardManager clipboardManager;
   private FloatingActionButton floatingActionButton;
@@ -63,6 +63,10 @@ public class ProfileFragment extends Fragment {
     user_key = (TextView) view.findViewById(R.id.user_key);
 //        TextView uidField = (TextView) view.findViewById(R.id.uid);
     if (!tempUID.isEmpty()) user_key.setText(mAuth.getUid());
+
+    adminTextView = (TextView) view.findViewById(R.id.profile_admin);
+    if (mAuth.getUid().equals(GetFirebase.getAdminUid())) adminTextView.setText("Admin Tools");
+
 
     encryptedFullName = GetFirebase.getUsers(mAuth.getUid()).getFullName();
 

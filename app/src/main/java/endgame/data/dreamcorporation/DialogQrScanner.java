@@ -102,7 +102,7 @@ public class DialogQrScanner extends AppCompatActivity{
           downlines = new ArrayList<String>();
           downlines.add(mAuth.getUid());
         } else {
-          downlines = (ArrayList<String>) dataSnapshot.getValue();
+          downlines = (ArrayList<String>) dataSnapshot.child("dwId").getValue();
           downlines.add(mAuth.getUid());
         }
 

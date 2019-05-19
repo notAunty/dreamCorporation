@@ -64,12 +64,17 @@ public class NetworkFragment extends Fragment {
   private void initData() {
     List<TreeNode> treeNodes = new ArrayList<>();
 
-    root = new TreeNode<>(new ParentNode(GetFirebase.getUsers(GetFirebase.getUsers(uid).getUplineUid()).getUserName()));
-    treeNodes.add(root);
+    if (uid.equals(GetFirebase.getAdminUid())) {
+      root = new TreeNode<>(new ParentNode(GetFirebase.getUsers(uid).getUserName()));
+      treeNodes.add(root);
 
-    if (mAuth.getUid().equals(GetFirebase.getAdminUid())) {
-      generateLineAdmin(GetFirebase.getUsers(uid).getUplineUid(), root);
+      generateLineAdmin(uid, root);
     } else {
+      String temp = GetFirebase.getUsers(uid).getUplineUid();
+      if (temp == null) return;
+      root = new TreeNode<>(new ParentNode(GetFirebase.getUsers(temp).getUserName()));
+      treeNodes.add(root);
+
       generateLine(GetFirebase.getUsers(uid).getUplineUid(), root);
     }
 //    addTreeNode(node);
@@ -162,7 +167,7 @@ public class NetworkFragment extends Fragment {
       if (!GetFirebase.getUsers(a).getDownlineUid().isEmpty()) {
         TreeNode r = new TreeNode<>(new ParentNode(GetFirebase.getUsers(a).getUserName()));
         ref.addChild(r);
-        generateLine(a, r);
+        generateLineAdmin(a, r);
       } else {
         TreeNode r = new TreeNode<>(new LeafNode(GetFirebase.getUsers(a).getUserName()));
         ref.addChild(r);
