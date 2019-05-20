@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -15,7 +16,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -137,7 +137,7 @@ public class ActivityTestingData extends AppCompatActivity {
 //    final View dialogView = View.inflate(ActivityTestingData.this, R.layout.ActivityTestingData, null);
 //    final AlertDialog alertDialog = new AlertDialog.Builder(ActivityTestingData.this).create();
 
-    FloatingActionButton fab = findViewById(R.id.testing_fab);
+    Button fab = findViewById(R.id.testing_fab);
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
@@ -191,6 +191,7 @@ public class ActivityTestingData extends AppCompatActivity {
             encryption = new Encryption();
 
           case 3: // DELETE
+            if (mAuth.getUid().equals(GetFirebase.getAdminUid())) return;
             String tempUpline = GetFirebase.getUsers(selectedUserUid).getUplineUid();
             ArrayList<String> downlines = GetFirebase.getUsers(selectedUserUid).getDownlineUid();
 

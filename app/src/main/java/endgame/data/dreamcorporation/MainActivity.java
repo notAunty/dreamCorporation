@@ -94,8 +94,8 @@ public class MainActivity extends AppCompatActivity {
 //                        FirebaseUser user = mAuth.getCurrentUser();
 
 
-                        Toast.makeText(view.getContext(), "UID is " + mAuth.getUid(),
-                                Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(view.getContext(), "UID is " + mAuth.getUid(),
+//                                Toast.LENGTH_SHORT).show();
 
                         //Create the intent to start another activity
                         Intent intent = new Intent(view.getContext(), HomeActivity.class);

@@ -70,6 +70,7 @@ public class HomeFragment extends Fragment {
     CardView cardView = v.findViewById(R.id.card);
     cardBg = v.findViewById(R.id.card_background);
     levelTextView = v.findViewById(R.id.level);
+    words = new ArrayList();
     displayList(v);
     showBalance();
 
@@ -132,6 +133,7 @@ public class HomeFragment extends Fragment {
           }
         }, 1000); // Delay in millis
         showBalance();
+        words = new ArrayList();
         displayList(v);
       }
     });
@@ -258,7 +260,7 @@ public class HomeFragment extends Fragment {
   }
 
   public void displayList(View view){
-    words = new ArrayList<Word>();
+//    words = new ArrayList<Word>();
 
     for (Transactions t: GetFirebase.getTransactions()) {
       String tempDate = new Date(t.getTimeStamp()).toString();

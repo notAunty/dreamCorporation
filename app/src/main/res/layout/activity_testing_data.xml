@@ -1,198 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ActivityTestingData">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/testing_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay"
-            app:title="Admin Tools" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="675dp"
-        android:layout_gravity="bottom"
-        android:background="@color/ic_launcher_background"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ActivityTestingData">
 
-        <Spinner
-            android:id="@+id/testing_mode"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown" />
+            android:theme="@style/AppTheme.AppBarOverlay">
 
-        <Spinner
-            android:id="@+id/testing_usersList"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/testing_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="?attr/colorPrimary"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                app:title="Admin Tools" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:spinnerMode="dropdown" />
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:background="@color/ic_launcher_background"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
 
-        <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Username*"
-            android:textColorHint="@android:color/black"
-            app:boxStrokeColor="@android:color/black">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/testing_username"
+            <Spinner
+                android:id="@+id/testing_mode"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@android:color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:spinnerMode="dropdown" />
 
-        <!--<com.google.android.material.textfield.TextInputLayout-->
-        <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
-        <!--android:layout_toRightOf="@id/walao_username"-->
-        <!--android:layout_width="128dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:hint="Counter"-->
-        <!--android:textColorHint="@android:color/black"-->
-        <!--app:boxStrokeColor="@android:color/black">-->
-
-        <!--<com.google.android.material.textfield.TextInputEditText-->
-        <!--android:id="@+id/testing_counter"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:inputType="text"-->
-        <!--android:textColor="@android:color/white" />-->
-        <!--</com.google.android.material.textfield.TextInputLayout>-->
-        <!--</RelativeLayout>-->
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Full Name*"
-            android:textColorHint="@android:color/black"
-            app:boxStrokeColor="@android:color/black">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/testing_fullName"
+            <Spinner
+                android:id="@+id/testing_usersList"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@android:color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:spinnerMode="dropdown" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Password*"
-            android:textColorHint="@android:color/black"
-            app:boxStrokeColor="@android:color/black"
-            app:passwordToggleEnabled="true">
+            <!--<RelativeLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content">-->
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/testing_pw"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:textColor="@android:color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="Username*"
+                android:textColorHint="@android:color/black"
+                app:boxStrokeColor="@android:color/black">
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Revenue"
-            android:textColorHint="@android:color/black"
-            app:boxStrokeColor="@android:color/black">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/testing_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@android:color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/testing_balance"
+            <!--<com.google.android.material.textfield.TextInputLayout-->
+            <!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+            <!--android:layout_toRightOf="@id/walao_username"-->
+            <!--android:layout_width="128dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="Counter"-->
+            <!--android:textColorHint="@android:color/black"-->
+            <!--app:boxStrokeColor="@android:color/black">-->
+
+            <!--<com.google.android.material.textfield.TextInputEditText-->
+            <!--android:id="@+id/testing_counter"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:inputType="text"-->
+            <!--android:textColor="@android:color/white" />-->
+            <!--</com.google.android.material.textfield.TextInputLayout>-->
+            <!--</RelativeLayout>-->
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="Full Name*"
+                android:textColorHint="@android:color/black"
+                app:boxStrokeColor="@android:color/black">
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Upline UID"
-            android:textColorHint="@android:color/black"
-            app:boxStrokeColor="@android:color/black">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/testing_fullName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@android:color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/testing_upline"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@android:color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="Password*"
+                android:textColorHint="@android:color/black"
+                app:boxStrokeColor="@android:color/black"
+                app:passwordToggleEnabled="true">
 
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Downlines UID"
-            android:textColorHint="@android:color/black"
-            app:boxStrokeColor="@android:color/black">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/testing_pw"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:textColor="@android:color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/testing_downline"
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@android:color/black" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:hint="Revenue"
+                android:textColorHint="@android:color/black"
+                app:boxStrokeColor="@android:color/black">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="4dp"
-            android:text="* is required when creating user"
-            android:textColor="#C0000000" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/testing_balance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <!--<Button-->
-        <!--android:id="@+id/testing_dateTime"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:paddingLeft="12dp"-->
-        <!--android:paddingRight="12dp"-->
-        <!--android:text="Date and time" />-->
-        <!--<DatePicker-->
-        <!--android:id="@+id/testing_date"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:calendarViewShown="true"-->
-        <!--android:spinnersShown="false"/>-->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Upline UID"
+                android:textColorHint="@android:color/black"
+                app:boxStrokeColor="@android:color/black">
 
-        <!--<timePicker-->
-        <!--android:id="@+id/testing_time"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="8dp"/>-->
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/testing_upline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@android:color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Downlines UID"
+                android:textColorHint="@android:color/black"
+                app:boxStrokeColor="@android:color/black">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/testing_downline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:textColor="@android:color/black" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="4dp"
+                android:text="* is required when creating user"
+                android:textColor="#C0000000" />
+
+            <!--<Button-->
+            <!--android:id="@+id/testing_dateTime"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:paddingLeft="12dp"-->
+            <!--android:paddingRight="12dp"-->
+            <!--android:text="Date and time" />-->
+            <!--<DatePicker-->
+            <!--android:id="@+id/testing_date"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:calendarViewShown="true"-->
+            <!--android:spinnersShown="false"/>-->
+
+            <!--<timePicker-->
+            <!--android:id="@+id/testing_time"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="8dp"/>-->
+
+            <Button
+                android:id="@+id/testing_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:text="Run"
+                android:layout_margin="@dimen/fab_margin"
+                app:srcCompat="@android:drawable/ic_menu_upload" />
+        </LinearLayout>
+
     </LinearLayout>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/testing_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_menu_upload" />
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</ScrollView>
