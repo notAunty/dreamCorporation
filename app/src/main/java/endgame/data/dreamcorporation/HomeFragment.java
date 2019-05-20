@@ -125,7 +125,7 @@ public class HomeFragment extends Fragment {
     swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
       @Override
       public void onRefresh() {
-        GetFirebase.fetchTransactions();
+//        GetFirebase.fetchTransactions();
         Toast.makeText(getContext(), "Refreshed.", Toast.LENGTH_SHORT).show();
         // To keep animation for 4 seconds
         new Handler().postDelayed(new Runnable() {
@@ -136,6 +136,7 @@ public class HomeFragment extends Fragment {
         }, 1000); // Delay in millis
         showBalance();
         homeFab();
+        words = new ArrayList();
         displayList(v);
       }
     });
