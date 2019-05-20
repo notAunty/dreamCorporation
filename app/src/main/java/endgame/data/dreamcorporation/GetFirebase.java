@@ -112,6 +112,8 @@ public class GetFirebase {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
       HashMap<String, HashMap<String, Object>> tempTrans = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
+      transactionId = new ArrayList<>();
+      transactions = new ArrayList<>();
 
         for (String tempTran : tempTrans.keySet()) {
           transactionId.add(tempTran);
