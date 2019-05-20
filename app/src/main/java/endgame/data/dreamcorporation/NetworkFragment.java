@@ -1,16 +1,19 @@
 package endgame.data.dreamcorporation;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -35,16 +38,37 @@ public class NetworkFragment extends Fragment {
   private TreeViewAdapter adapter;
   private TreeNode<ParentNode> root;
   private String uid = mAuth.getUid();
+  private SwipeRefreshLayout swipeRefreshLayout;
+  private View view;
 //  private Node node, tempNode;
 
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    View view = inflater.inflate(R.layout.fragment_network, container, false);
+    view = inflater.inflate(R.layout.fragment_network, container, false);
     rv = (RecyclerView) view.findViewById(R.id.rv);
     initData();
+    refresh();
 
     return view;
+  }
+
+  private void refresh(){
+    swipeRefreshLayout = view.findViewById(R.id.network_container);
+    swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+      @Override
+      public void onRefresh() {
+        Toast.makeText(getContext(), "Refreshed.", Toast.LENGTH_SHORT).show();
+        // To keep animation for 4 seconds
+        new Handler().postDelayed(new Runnable() {
+          @Override public void run() {
+            // Stop animation (This will be after 3 seconds)
+            swipeRefreshLayout.setRefreshing(false);
+          }
+        }, 1000); // Delay in millis
+        initData();
+      }
+    });
   }
 
   private void initData() {
