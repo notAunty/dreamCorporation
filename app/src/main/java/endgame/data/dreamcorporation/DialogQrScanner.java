@@ -22,13 +22,9 @@ import java.util.ArrayList;
 public class DialogQrScanner extends AppCompatActivity{
 
   private String scannedUpline;
-//  SurfaceView qrPreview;
 
 
   private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-//  private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-//  private DatabaseReference usersRef = mDatabase.getReference("users");
-//  private DatabaseReference transRef = mDatabase.getReference("transactions");
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +60,7 @@ public class DialogQrScanner extends AppCompatActivity{
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                   public void onClick(DialogInterface dialog, int which) {
                     Balance.calcRev(scannedUpline);
-//                    addUpline();
                     uplineAccountAddDownline();
-
                     onBackPressed();
                   }
                 })
@@ -75,7 +69,6 @@ public class DialogQrScanner extends AppCompatActivity{
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                   public void onClick(DialogInterface dialog, int which) {
                     Toast.makeText(getBaseContext(), "Payment unsuccessful.", Toast.LENGTH_LONG).show();
-
                     onBackPressed();
                   }
                 })
@@ -85,10 +78,6 @@ public class DialogQrScanner extends AppCompatActivity{
       super.onActivityResult(requestCode, resultCoede, intent);
     }
   }
-
-//  public void addUpline() {
-//    usersRef.child(mAuth.getUid()).child("upId").setValue(scannedUpline);
-//  }
 
   public void uplineAccountAddDownline() {
     // Get upline punya downline Array

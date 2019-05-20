@@ -39,16 +39,6 @@ public class HomeActivity extends AppCompatActivity {
             vpPager.setCurrentItem(2);
             break;
         }
-
-
-        // PHILEMON SAY THIS IMPLEMETATION IS BAD, as it doesn't save state
-        // Use ViewPager, FragmentPagerAdapter, FragmentStatePagerAdapter
-        // But I'm too lazy haha
-
-
-//              getSupportFragmentManager().beginTransaction().
-//                      replace(R.id.fragment_container, selectedFragment).commit();
-
         return true;
       }
     });
@@ -76,7 +66,6 @@ public class HomeActivity extends AppCompatActivity {
         {
           bottomNav.getMenu().getItem(0).setChecked(false);
         }
-//        Log.e("page", "onPageSelected: "+position);
         bottomNav.getMenu().getItem(position).setChecked(true);
         prevMenuItem = bottomNav.getMenu().getItem(position);
 
@@ -90,8 +79,6 @@ public class HomeActivity extends AppCompatActivity {
 
     setupViewPager(vpPager);
     vpPager.setOffscreenPageLimit(2);
-//    myAdapter = new TabsPagerAdapter(getSupportFragmentManager());
-//    vpPager.setAdapter(myAdapter);
   }
 
   private void setupViewPager(ViewPager viewPager) {
@@ -106,8 +93,6 @@ public class HomeActivity extends AppCompatActivity {
           new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-//              Fragment selectedFragment = null;
-
               switch (menuItem.getItemId()) {
                 case R.id.nav_home:
                   getSupportFragmentManager().beginTransaction().
@@ -125,13 +110,7 @@ public class HomeActivity extends AppCompatActivity {
                           replace(R.id.fragment_container, profileF).commit();
                   break;
               }
-
-
-//              getSupportFragmentManager().beginTransaction().
-//                      replace(R.id.fragment_container, selectedFragment).commit();
-
               return true;
             }
           };
-
 }

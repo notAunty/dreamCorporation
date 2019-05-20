@@ -1,18 +1,18 @@
 package endgame.data.dreamcorporation;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.ClipData;
 import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,49 +22,30 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.zxing.WriterException;
 
 import java.util.ArrayList;
 
-import androidmads.library.qrgenearator.QRGContents;
-import androidmads.library.qrgenearator.QRGEncoder;
-import endgame.data.dreamcorporation.home.Word;
-
 import static android.content.Context.CLIPBOARD_SERVICE;
-
 
 public class ProfileFragment extends Fragment {
 
   private String text;
   private String tempUID = "null";
   private String encryptedFullName;
-
-  private Button done;
   private Encryption encryption = new Encryption();
-  private ListView listView;
-  private ArrayList<Word> words;
-  private QRGEncoder qrgEncoder;
   private TextView decrypt, user_key, adminTextView;
-  private RelativeLayout admin;
-  private ImageView copy_key, qrImage;
+  private RelativeLayout admin, copy_key, log_out;
   private ClipboardManager clipboardManager;
-  private FloatingActionButton floatingActionButton;
-
   private FirebaseAuth mAuth;
-  private GetFirebase firebase = new GetFirebase();
-
 
   @Nullable
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable final Bundle savedInstanceState) {
     mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Auth, IMPORTANT
     View view = inflater.inflate(R.layout.fragment_profile, container, false);
-//    final FragmentManager manager = getFragmentManager();
 
     user_key = (TextView) view.findViewById(R.id.user_key);
-//        TextView uidField = (TextView) view.findViewById(R.id.uid);
     if (!tempUID.isEmpty()) user_key.setText(mAuth.getUid());
 
     adminTextView = (TextView) view.findViewById(R.id.profile_admin_textview);
@@ -87,15 +68,10 @@ public class ProfileFragment extends Fragment {
     decrypt.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
-//        keyDialog.show(getFragmentManager(), "a");
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-
         // Get the layout inflater
         LayoutInflater inflater = requireActivity().getLayoutInflater();
-
-//        builder.setTitle("Title");
-//        builder.setMessage("Do you want to delete ?");
         View temp = inflater.inflate(R.layout.dialog_key, null);
         final EditText key = (EditText) temp.findViewById(R.id.key);
 
@@ -111,53 +87,16 @@ public class ProfileFragment extends Fragment {
               decrypt.setText(tempDec);
               decrypt.setEnabled(false);
             }
-
-//                    if (key.getText().toString().equals(mAuth.getUid())) {
-//                      Toast.makeText(getContext(),
-//                              "Welcome, " + "TAN WEI PENG" + " !", Toast.LENGTH_LONG).show();
-//                      decrypt.setText("TAN WEI PENG");
-//                    } else
-//                      Toast.makeText(getContext(),
-//                              "Wrong! Please try again!", Toast.LENGTH_SHORT).show();
-
-
-//                                Toast.makeText(getContext(),
-//                                        "Welcome, " + key.getText() + " !", Toast.LENGTH_LONG).show();
-//                                decrypt.setText(key.getText());
           }
         });
 
         AlertDialog alert = builder.create();
         alert.show();
-//        LayoutInflater layoutInflater = LayoutInflater.from(context);
-//        View temp = layoutInflater.inflate(R.layout.dialog,null);
-//        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-//        builder.setView(temp);
-//        final EditText editText = (EditText)temp.findViewById(R.id.Text);
-//        builder.setCancelable(false).setPositiveButton("OK",new DialogInterface.OnClickListener() {
-//          public void onClick(DialogInterface dialog,int id) {
-//          // get user input and set it to result
-//            // edit text
-//            textView.setText(editText.getText());
-//          }
-//        }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-//          public void onClick(DialogInterface dialog,int id) {
-//            dialog.cancel();
-//          }
-//        });
-//
-//        // create alert dialog
-//        AlertDialog alertDialog = builder.create();
-//
-//        // show it
-//        alertDialog.show();
       }
     });
 
-//    displayList(view);
-
     clipboardManager = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
-    copy_key = (ImageView) view.findViewById(R.id.clipboard);
+    copy_key = view.findViewById(R.id.clipboard);
     copy_key.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
@@ -168,56 +107,21 @@ public class ProfileFragment extends Fragment {
       }
     });
 
-
-//    swipeRefreshLayout.setColorSchemeColors(
-//            getResources().getColor(android.R.color.holo_blue_bright),
-//            getResources().getColor(android.R.color.holo_green_light),
-//            getResources().getColor(android.R.color.holo_orange_light),
-//            getResources().getColor(android.R.color.holo_red_light)
-//    );
+    log_out = view.findViewById(R.id.log_out);
+    log_out.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        GetFirebase.usersUid = new ArrayList();
+        GetFirebase.users = new ArrayList();
+        GetFirebase.transactions = new ArrayList();
+        GetFirebase.transactionId = new ArrayList();
+        Intent backToLogIn = new Intent(getContext(), MainActivity.class);
+        backToLogIn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        getActivity().finish();
+        startActivity(backToLogIn);
+      }
+    });
 
     return view;
   }
-
-//  public void displayList(View view) {
-//    words = new ArrayList<Word>();
-////        words.add(new Word(getResources().getString(R.string.user_key), tempUID));
-//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-//    words.add(new Word("CHANGE TO BETTER ONE, this no ripple then tapped", getResources().getString(R.string.example)));
-//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-//    words.add(new Word(getResources().getString(R.string.example), getResources().getString(R.string.example)));
-//    WordAdapter itemAdapter = new WordAdapter(getActivity(), words);
-//    listView = (ListView) view.findViewById(R.id.profile_listView);
-//    listView.setAdapter(itemAdapter);
-//  }
-
-
-//  public void onCreateDialog() {
-//    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-//    // Get the layout inflater
-//    LayoutInflater inflater = requireActivity().getLayoutInflater();
-//
-//    // Inflate and set the layout for the dialog
-//    // Pass null as the parent view because its going in the dialog layout
-//    builder.setView(inflater.inflate(R.layout.dialog_key, null))
-//            // Add action buttons
-//            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//              @Override
-//              public void onClick(DialogInterface dialog, int id) {
-////                key = ((EditText) getActivity().findViewById(R.id.login_userid)).getText().toString();
-//              }
-//            });
-//    AlertDialog dialog = builder.create();
-//    dialog.create();
-////    return builder.create();
-//  }
 }

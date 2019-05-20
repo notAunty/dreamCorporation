@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-//    GetFirebase.prepareFirebase();
     GetFirebase.getFirebase();
 
 
@@ -45,9 +44,6 @@ public class MainActivity extends AppCompatActivity {
                 }
               })
               .show();
-
-//      Toast.makeText(getApplicationContext(), "Connect to Internet and restart app.",
-//              Toast.LENGTH_LONG).show();
     }
 
     super.onCreate(savedInstanceState);
@@ -62,28 +58,21 @@ public class MainActivity extends AppCompatActivity {
       @Override
       //On click function
       public void onClick(final View view) {
-
         String userId = ((EditText) findViewById(R.id.login_userid)).getText().toString();
         String userPw = ((EditText) findViewById(R.id.login_userpw)).getText().toString();
 
-        // TODO remove this
-        if (userPw.length() == 0 || userId.length() == 0) {
-          //Create the intent to start another activity
-          Intent intent = new Intent(view.getContext(), HomeActivity.class);
-          startActivity(intent);
-
-          onBackPressed(); // To close this activity
-        }
+//        // TODO remove this
+//        if (userPw.length() == 0 || userId.length() == 0) {
+//          //Create the intent to start another activity
+//          Intent intent = new Intent(view.getContext(), HomeActivity.class);
+//          startActivity(intent);
+//          onBackPressed(); // To close this activity
+//        }
 
         if (userPw.length() < 6 || userId.length() < 1) {
           Toast.makeText(view.getContext(), "Invalid username or password.",
                   Toast.LENGTH_SHORT).show();
         } else {
-//          //Create the intent to start another activity
-//          Intent intent = new Intent(view.getContext(), HomeActivity.class);
-//          startActivity(intent);
-//          onBackPressed(); // To close this activity
-
           mAuth.signInWithEmailAndPassword(userId + "@asdfggfdsa.com", userPw)
                   .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -91,25 +80,16 @@ public class MainActivity extends AppCompatActivity {
                       if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("login: ", "signInWithEmail:success");
-//                        FirebaseUser user = mAuth.getCurrentUser();
-
-
-//                        Toast.makeText(view.getContext(), "UID is " + mAuth.getUid(),
-//                                Toast.LENGTH_SHORT).show();
-
                         //Create the intent to start another activity
                         Intent intent = new Intent(view.getContext(), HomeActivity.class);
                         startActivity(intent);
-
                         onBackPressed(); // To close this activity
                       } else {
                         // If sign in fails, display a message to the user.
                         Log.w("login: ", "signInWithEmail:failure", task.getException());
                         Toast.makeText(view.getContext(), "Invalid username or password.",
                                 Toast.LENGTH_SHORT).show();
-//                      updateUI(null);
                       }
-                      // ...
                     }
                   });
         }

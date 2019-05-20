@@ -42,10 +42,6 @@ public class SignupActivity extends AppCompatActivity {
         final String userId = ((EditText) findViewById(R.id.signup_userId)).getText().toString();
         String userPw = ((EditText) findViewById(R.id.signup_userPw)).getText().toString();
 
-//        //Create the intent to start another activity
-//        Intent intent = new Intent(view.getContext(), HomeActivity.class);
-//        startActivity(intent);
-
         if (userPw.length() < 6 || userId.length() < 1) {
           Toast.makeText(view.getContext(), "Password longer a bit can ah??",
                   Toast.LENGTH_SHORT).show();
@@ -67,9 +63,6 @@ public class SignupActivity extends AppCompatActivity {
 
                           // Sign in success, update UI with the signed-in user's information
                           Log.d("signup: ", "createUserWithEmail:success");
-//                        FirebaseUser user = mAuth.getCurrentUser();
-//                        Toast.makeText(view.getContext(), "Signup completed. You may now login.",
-//                                Toast.LENGTH_SHORT).show();
                           Intent intent = new Intent(view.getContext(), MainActivity.class);
                           startActivity(intent);
                           onBackPressed(); // To close this activity
@@ -78,17 +71,13 @@ public class SignupActivity extends AppCompatActivity {
                           Log.w("signup: ", "createUserWithEmail:failure", task.getException());
                           Toast.makeText(view.getContext(), "Signup failed.",
                                   Toast.LENGTH_SHORT).show();
-//                      updateUI(null);
                         }
-                        // ...
                       }
                     });
           } else Toast.makeText(view.getContext(), "Username taken.", Toast.LENGTH_SHORT).show();
         }
       }
     });
-
-
 
     login.setOnClickListener(new View.OnClickListener() {
       @Override

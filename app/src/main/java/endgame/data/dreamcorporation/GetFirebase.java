@@ -108,14 +108,12 @@ public class GetFirebase {
   }
 
   public static void fetchTransactions() {
-//    Log.e("At", "fetchUsers outside");
     transRef.addValueEventListener(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
       HashMap<String, HashMap<String, Object>> tempTrans = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
 
         for (String tempTran : tempTrans.keySet()) {
-//          Log.e("added userId", tempTran);
           transactionId.add(tempTran);
         }
 
@@ -139,11 +137,7 @@ public class GetFirebase {
   }
 
   public static Users getUsers(String uid) {
-//    Log.e("uid", uid);
-//    Log.e("usersUid", usersUid.toString());
     int tempPosition = usersUid.indexOf(uid);
-//    Log.e("usersUid", usersUid.toString());
-//    Log.e("tempPos", String.valueOf(tempPosition));
     return users.get(tempPosition);
   }
 
@@ -157,7 +151,6 @@ public class GetFirebase {
         users = new ArrayList<>();
 
         for (String tempUser : tempUsers.keySet()) {
-//          Log.e("added userId", tempUser);
           usersUid.add(tempUser);
         }
 
@@ -180,9 +173,6 @@ public class GetFirebase {
             }
           }
 
-//        Log.e("At", "updateBalance()");
-//        HashMap<String, HashMap<String, Object>> tempUsers = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
-
           int i = 0;
 
           for (HashMap<String, Object> tempUser : tempUsers.values()) {
@@ -196,19 +186,6 @@ public class GetFirebase {
     });
   }
 
-
-//  public static void updateBalance() {
-//    usersRef.child(mAuth.getUid()).child("b").addValueEventListener(new ValueEventListener() {
-//      @Override
-//      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//        GetFirebase.getUsers(mAuth.getUid()).setBalance(Double.valueOf(dataSnapshot.getValue().toString()));
-//      }
-//
-//      @Override
-//      public void onCancelled(@NonNull DatabaseError databaseError) {}
-//    });
-//  }
-
   public static void addBalance(final String uid[], final double amount[], final String giver) {
     Log.e("uid length", String.valueOf(uid.length));
 
@@ -221,16 +198,12 @@ public class GetFirebase {
 
         usersRef.child(uid[0]).child("b").setValue(tempBalance);
 
-
-
         // Add transaction
         String tempTransPushKey = transRef.push().getKey();
         transRef.child(tempTransPushKey).child("r").setValue(uid[0]);
         transRef.child(tempTransPushKey).child("dwId").setValue(giver);
         transRef.child(tempTransPushKey).child("tS").setValue(new Date().getTime());
         transRef.child(tempTransPushKey).child("a").setValue(amount[0]);
-
-
 
         if (uid.length > 1) {
           addBalance(Arrays.copyOfRange(uid, 1, uid.length), Arrays.copyOfRange(amount, 1, amount.length), giver);

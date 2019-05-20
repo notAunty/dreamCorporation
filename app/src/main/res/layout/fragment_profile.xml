@@ -89,6 +89,7 @@
                     app:cardCornerRadius="10dp">
 
                     <RelativeLayout
+                        android:id="@+id/clipboard"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         android:background="@drawable/ripple"
@@ -113,7 +114,6 @@
                             android:paddingLeft="10dp" />
 
                         <ImageView
-                            android:id="@+id/clipboard"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -337,13 +337,13 @@
                     android:layout_marginBottom="10dp">
 
                     <RelativeLayout
+                        android:id="@+id/log_out"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
                         android:background="@drawable/ripple"
                         android:clickable="true"
                         android:elevation="2dp"
                         android:focusable="true">
-
 
                         <TextView
                             android:layout_width="wrap_content"

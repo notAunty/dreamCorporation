@@ -67,7 +67,6 @@ public class ActivityTestingData extends AppCompatActivity {
 
     final Spinner usersListSpinner = findViewById(R.id.testing_usersList);
     String[] usersList = GetFirebase.usersUid.toArray(new String[GetFirebase.usersUid.size()]);
-//    ArrayAdapter<String> usersListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, usersList);
     ArrayAdapter<String> usersListAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item);
     usersListAdapter.add("Select user");
     usersListAdapter.addAll(usersList);
@@ -93,49 +92,6 @@ public class ActivityTestingData extends AppCompatActivity {
       @Override
       public void onNothingSelected(AdapterView<?> parent) { }
     });
-
-//    dateTimeDialogFragment = SwitchDateTimeDialogFragment.newInstance("Select date and time",
-//            "OK", "Cancel"); // Initialize date and time dialog
-//
-//    // Assign values
-//    dateTimeDialogFragment.startAtCalendarView();
-//    dateTimeDialogFragment.set24HoursMode(true);
-//    dateTimeDialogFragment.setMinimumDateTime(new GregorianCalendar(2019, Calendar.JANUARY, 1).getTime());
-//    dateTimeDialogFragment.setMaximumDateTime(new GregorianCalendar(2099, Calendar.DECEMBER, 31).getTime());
-//    dateTimeDialogFragment.setDefaultDateTime(new GregorianCalendar().getTime());
-//    dateTime = new Date();
-
-
-
-//    Button dateTimeButton = (Button) findViewById(R.id.testing_dateTime);
-//    dateTimeButton.setOnClickListener(new View.OnClickListener() {
-//      @Override
-//      public void onClick(View v) {
-//        // Define new day and month format
-//        try {
-//          dateTimeDialogFragment.setSimpleDateMonthAndDayFormat(new SimpleDateFormat("dd MMMM", Locale.getDefault()));
-//        } catch (SwitchDateTimeDialogFragment.SimpleDateMonthAndDayFormatException e) {
-//          Log.e("dateTime: ", e.getMessage());
-//        }
-//
-//        // Set listener
-//        dateTimeDialogFragment.setOnButtonClickListener(new SwitchDateTimeDialogFragment.OnButtonClickListener() {
-//          @Override
-//          public void onPositiveButtonClick(Date date) {
-//            dateTime = date;
-//          }
-//
-//          @Override
-//          public void onNegativeButtonClick(Date date) {}
-//        });
-//
-//        // Show
-//        dateTimeDialogFragment.show(getSupportFragmentManager(), "dialog_time");
-//      }
-//    });
-
-//    final View dialogView = View.inflate(ActivityTestingData.this, R.layout.ActivityTestingData, null);
-//    final AlertDialog alertDialog = new AlertDialog.Builder(ActivityTestingData.this).create();
 
     Button fab = findViewById(R.id.testing_fab);
     fab.setOnClickListener(new View.OnClickListener() {
@@ -167,17 +123,12 @@ public class ActivityTestingData extends AppCompatActivity {
 
                               // Sign in success, update UI with the signed-in user's information
                               Log.d("signup: ", "createUserWithEmail:success");
-//                        FirebaseUser user = mAuth.getCurrentUser();
-//                        Toast.makeText(view.getContext(), "Signup completed. You may now login.",
-//                                Toast.LENGTH_SHORT).show();
                             } else {
                               // If sign in fails, display a message to the user.
                               Log.w("signup: ", "createUserWithEmail:failure", task.getException());
                               Toast.makeText(tempView.getContext(), "Signup failed.",
                                       Toast.LENGTH_SHORT).show();
-//                      updateUI(null);
                             }
-                            // ...
                           }
                         });
               } else Toast.makeText(view.getContext(), "Username taken.", Toast.LENGTH_SHORT).show();
@@ -202,61 +153,7 @@ public class ActivityTestingData extends AppCompatActivity {
             GetFirebase.usersRef.child(selectedUserUid).removeValue();
         }
         GetFirebase.fetchUsers();
-//        String uid = mAuth.getUid();
-//        String username = ((EditText) ActivityTestingData.this.findViewById(R.id.testing_username)).getText().toString();
-////        String counter = ((EditText) ActivityTestingData.this.findViewById(R.id.testing_counter)).getText().toString();
-//        String fullName = ((EditText) ActivityTestingData.this.findViewById(R.id.testing_fullName)).getText().toString();
-//        String pw = ((EditText) ActivityTestingData.this.findViewById(R.id.testing_pw)).getText().toString();
-//        String uplineUid = ((EditText) ActivityTestingData.this.findViewById(R.id.testing_upline)).getText().toString();
-//        String downlineUid = ((EditText) ActivityTestingData.this.findViewById(R.id.testing_downline)).getText().toString();
-//
-//        String all = "UID: " + uid + "\nUsername: " + username +
-////                "\nCounter: " + counter +
-//                "\nFull Name:" + fullName + "\nPassword :" + pw + "\nUpline: " + uplineUid +
-//                "\nDownline: " + downlineUid + "\nTimecode: " + dateTime.toString();
-//
-//        Toast.makeText(view.getContext(), "Details: \n" + all + "\nWill start add to database now", Toast.LENGTH_SHORT).show();
-//
-//        // Start database adding
-//        usersRef.child(uid).child("uN").setValue(username);
-//        usersRef.child(uid).child("fN").setValue(fullName);
-//        usersRef.child(uid).child("pw").setValue(pw);
-//        usersRef.child(uid).child("upId").setValue(uplineUid);
-//
-//        // Get latest balance to do sum
-//        final int[] tempBalance = new int[1];
-//        usersRef.child(uid).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
-//          @Override
-//          public void onDataChange(DataSnapshot dataSnapshot) {
-//            tempBalance[0] = Integer.valueOf(dataSnapshot.getValue().toString());
-//          }
-//
-//          @Override
-//          public void onCancelled(@NonNull DatabaseError databaseError) {}
-//        });
-//
-//        usersRef.child(uid).child("b").setValue(tempBalance[0] + 50);
-//        usersRef.child(uid).child("dwId").child(downlineUid).push();
-//
-//
-////        DatePicker datePicker = (DatePicker) view.findViewById(R.id.testing_date);
-////        TimePicker timePicker = (TimePicker) view.findViewById(R.id.testing_time);
-////
-////        Calendar cal = new GregorianCalendar(datePicker.getYear(),
-////                datePicker.getMonth(),
-////                datePicker.getDayOfMonth(),
-////                timePicker.getHour(),
-////                timePicker.getMinute());
-////
-////        long time = cal.getTimeInMillis();
-////        String temp = String.valueOf(datePicker.getYear() +
-////                datePicker.getMonth() + datePicker.getDayOfMonth() +
-////                timePicker.getHour() + timePicker.getMinute());
-////        //SimpleDateFormat();
       }});
-//    dialogView.findViewById(R.id.testing_date).setOnClickListener();
-//    alertDialog.setView(dialogView);
-//    alertDialog.show();
   }
 
 }

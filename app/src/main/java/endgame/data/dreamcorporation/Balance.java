@@ -9,7 +9,6 @@ public class Balance {
   private static double second = 0.12 + 0.03;
   private static String[] uplines = new String[6];
   private static double[] commission= new double[6];
-//  private static double[] oldBalance= new double[5];
 
   private static double fee;
   private static String adminUid;
@@ -28,7 +27,6 @@ public class Balance {
 
     Log.e("Fee", String.valueOf(fee));
 
-//    getOldBalance();
     calculate();
     GetFirebase.addBalance(uplines, commission, mAuth.getUid());
     GetFirebase.getFirebase();
@@ -42,30 +40,6 @@ public class Balance {
       uplines[i] = tempUid;
       getUplines(tempUid, i + 1);
     } else getUplines(adminUid, i + 1);
-
-//    if (i == 5) {
-//      getOldBalance();
-//      calculate();
-//      addBalance();
-//      return;
-//    }
-//
-//    usersRef.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-//      @Override
-//      public void onDataChange(DataSnapshot dataSnapshot) {
-//        if (dataSnapshot.child("upId").exists()) {
-//          String upId = dataSnapshot.child("upId").getValue().toString();
-//          uplines[i] = upId;
-//          Log.e(i + "", upId);
-//          getUplines(upId,  i + 1);
-//        } else {
-//          uplines[i] = adminUid;
-//        }
-//      }
-//      @Override
-//      public void onCancelled(@NonNull DatabaseError databaseError) {
-//      }
-//    });
   }
 
   public static void calculate() {
@@ -83,40 +57,4 @@ public class Balance {
       }
     }
   }
-
-//  public static void getOldBalance() {
-////    Log.e("uplines", uplines.toString());
-//    // mAuth.getUid() will get current logged in user punya UID
-//    // This block of code will get the latest balance of the user from Firebase
-//    for (int i = 0; i < 5; i++){
-//      oldBalance[i] = GetFirebase.getUsers(uplines[i]).getBalance();
-//    }
-//  }
-
-//  public static void addBalance() {
-//    for (int i = 0; i < 5; i++) {
-//      GetFirebase.addBalance(uplines[i], commission[i]);
-////      tempbaby=i;
-////      oldBalance[i] = oldBalance[i] + commission[i];
-//////      Log.e("soh", String.valueOf(oldBalance[i]));
-////      GetFirebase.usersRef.child(uplines[i]).child("b").setValue(oldBalance[i]);
-////      if (uplines[i].equals(adminUid)) {
-////        adminRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
-////          @Override
-////          public void onDataChange(DataSnapshot dataSnapshot) {
-////            temporary = Double.parseDouble(dataSnapshot.getValue().toString());
-////            temporary = temporary + commission[tempbaby];
-////          }
-////
-////          @Override
-////          public void onCancelled(@NonNull DatabaseError databaseError) {
-////          }
-////        });
-////        usersRef.child(adminUid).child("b").setValue(temporary);
-////      }
-//    }
-//  }
-//  public static String getDirectUplineUid() {
-//    return uplines[0];
-//  }
 }

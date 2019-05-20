@@ -13,7 +13,6 @@ public class Encryption {
   public Encryption() {}
 
   public String encode(String name) {
-//    key = Integer.parseInt(uid.replaceAll("[^0-9]", ""));
     String temp = name;
     char[] c = new char[temp.length()];
     for (int shu = 1; shu <= key; shu++) {
@@ -41,7 +40,6 @@ public class Encryption {
   }
 
   public String decode(String cipher, String check) {
-//    key = Integer.parseInt(check.replaceAll("[^0-9]", ""));
     if(check.equals(uid)){
       String temp = cipher;
       char[] c = new char[temp.length()];
@@ -74,7 +72,6 @@ public class Encryption {
   }
 
   public String decodeDirectly(String cipher) {
-//    key = Integer.parseInt(uid.replaceAll("[^0-9]", ""));
     String temp = cipher;
     char[] c = new char[temp.length()];
     for (int shu = 1; shu <= key; shu++) {
