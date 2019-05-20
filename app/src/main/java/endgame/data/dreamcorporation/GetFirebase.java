@@ -151,15 +151,44 @@ public class GetFirebase {
     usersRef.addValueEventListener(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        fetchUsers();
-        Log.e("At", "fetchUsers inside");
+        // To fetchUsers();
         HashMap<String, HashMap<String, Object>> tempUsers = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
+        usersUid = new ArrayList<>();
+        users = new ArrayList<>();
 
-        int i = 0;
-
-        for (HashMap<String, Object> tempUser : tempUsers.values()) {
-          users.get(i++).setBalance(Double.valueOf(tempUser.get("b").toString()));
+        for (String tempUser : tempUsers.keySet()) {
+//          Log.e("added userId", tempUser);
+          usersUid.add(tempUser);
         }
+
+        try {
+          for (HashMap<String, Object> tempUser : tempUsers.values()) {
+            users.add(new Users(((String) tempUser.get("uN")), ((String) tempUser.get("fN")), Double.valueOf(String.valueOf(tempUser.get("b")))));
+
+            if (tempUser.containsKey("upId")) {
+              users.get(users.size() - 1).setUplineUid(String.valueOf(tempUser.get("upId")));
+            }
+
+            if (tempUser.containsKey("dwId")) {
+              ArrayList<String> tempDwArray = new ArrayList<>();
+
+              for (String tempDwId: ((ArrayList<String>) tempUser.get("dwId"))) {
+                tempDwArray.add(tempDwId);
+              }
+
+              users.get(users.size() - 1).setDownlineUid(tempDwArray);
+            }
+          }
+
+//        Log.e("At", "updateBalance()");
+//        HashMap<String, HashMap<String, Object>> tempUsers = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
+
+          int i = 0;
+
+          for (HashMap<String, Object> tempUser : tempUsers.values()) {
+            users.get(i++).setBalance(Double.valueOf(tempUser.get("b").toString()));
+          }
+        } catch (Exception e) {}
       }
 
       @Override
