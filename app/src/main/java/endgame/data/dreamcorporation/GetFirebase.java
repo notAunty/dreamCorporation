@@ -145,38 +145,38 @@ public class GetFirebase {
     return users.get(tempPosition);
   }
 
-//  public static void updateBalance() {
-//    usersRef.child()addValueEventListener(new ValueEventListener() {
-//      @Override
-//      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//        fetchUsers();
-//        Log.e("At", "fetchUsers inside");
-//        HashMap<String, HashMap<String, Object>> tempUsers = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
-//
-//        int i = 0;
-//
-//        for (HashMap<String, Object> tempUser : tempUsers.values()) {
-//          users.get(i++).setBalance(Double.valueOf(tempUser.get("b").toString()));
-//        }
-//      }
-//
-//      @Override
-//      public void onCancelled(@NonNull DatabaseError databaseError) {}
-//    });
-//  }
-
-
   public static void updateBalance() {
-    usersRef.child(mAuth.getUid()).child("b").addValueEventListener(new ValueEventListener() {
+    usersRef.addValueEventListener(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        GetFirebase.getUsers(mAuth.getUid()).setBalance(Double.valueOf(dataSnapshot.getValue().toString()));
+        fetchUsers();
+        Log.e("At", "fetchUsers inside");
+        HashMap<String, HashMap<String, Object>> tempUsers = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
+
+        int i = 0;
+
+        for (HashMap<String, Object> tempUser : tempUsers.values()) {
+          users.get(i++).setBalance(Double.valueOf(tempUser.get("b").toString()));
+        }
       }
 
       @Override
       public void onCancelled(@NonNull DatabaseError databaseError) {}
     });
   }
+
+
+//  public static void updateBalance() {
+//    usersRef.child(mAuth.getUid()).child("b").addValueEventListener(new ValueEventListener() {
+//      @Override
+//      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//        GetFirebase.getUsers(mAuth.getUid()).setBalance(Double.valueOf(dataSnapshot.getValue().toString()));
+//      }
+//
+//      @Override
+//      public void onCancelled(@NonNull DatabaseError databaseError) {}
+//    });
+//  }
 
   public static void addBalance(final String uid[], final double amount[], final String giver) {
     Log.e("uid length", String.valueOf(uid.length));
