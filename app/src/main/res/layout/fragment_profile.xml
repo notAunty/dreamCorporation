@@ -27,7 +27,7 @@
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_centerInParent="true"
-                android:src="@drawable/profile" />
+                android:src="@drawable/profile"/>
 
             <TextView
                 android:id="@+id/profile_name"
@@ -41,7 +41,11 @@
                 android:textAlignment="center"
                 android:textColor="@android:color/white"
                 android:textSize="30sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:shadowRadius="4"
+                android:shadowColor="@android:color/darker_gray"
+                android:shadowDx="0"
+                android:shadowDy="6"/>
         </RelativeLayout>
 
 
@@ -326,6 +330,46 @@
 
                 </com.google.android.material.card.MaterialCardView>
 
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@drawable/ripple"
+                        android:clickable="true"
+                        android:elevation="2dp"
+                        android:focusable="true">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Log Out"
+                            android:textColor="@color/zxing_viewfinder_laser"
+                            android:textStyle="bold"
+                            android:textSize="20sp"
+                            android:shadowRadius="2"
+                            android:shadowColor="@android:color/darker_gray"
+                            android:shadowDx="0"
+                            android:shadowDy="4"
+                            android:layout_centerInParent="true"
+                            android:paddingBottom="5dp"/>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="2dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:background="@android:color/darker_gray" />
+
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
 
             </LinearLayout>
 
@@ -342,19 +386,6 @@
         <!--android:orientation="vertical"-->
         <!--android:background="@android:color/white"-->
         <!--android:elevation="2dp"/>-->
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/qr_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="14dp"
-            android:clickable="true"
-            android:elevation="3dp"
-            android:src="@drawable/ic_for_qr_code"
-            app:rippleColor="@android:color/white" />
 
 
     </RelativeLayout>

@@ -3,15 +3,19 @@ package endgame.data.dreamcorporation;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,15 +25,22 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.zxing.WriterException;
 import com.leinardi.android.speeddial.SpeedDialActionItem;
 import com.leinardi.android.speeddial.SpeedDialView;
 
 import java.util.ArrayList;
 import java.util.Date;
 
+import androidmads.library.qrgenearator.QRGContents;
+import androidmads.library.qrgenearator.QRGEncoder;
 import endgame.data.dreamcorporation.home.Word;
 import endgame.data.dreamcorporation.home.WordAdapter;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class HomeFragment extends Fragment {
 
@@ -44,6 +55,12 @@ public class HomeFragment extends Fragment {
   private TextView balanceTextView;
   private ImageView cardBg;
   private TextView levelTextView;
+  private RelativeLayout relativeLayout;
+  private WordAdapter itemAdapter;
+  private QRGEncoder qrgEncoder;
+  private FloatingActionButton floatingActionButton;
+  private Button done;
+  private ImageView qrImage;
 
   private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -71,8 +88,11 @@ public class HomeFragment extends Fragment {
     cardBg = v.findViewById(R.id.card_background);
     levelTextView = v.findViewById(R.id.level);
     words = new ArrayList();
+
+    homeFab();
     displayList(v);
     showBalance();
+
 
 
 //    usersRef.child(mAuth.getUid()).child("b").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -85,26 +105,8 @@ public class HomeFragment extends Fragment {
 //      public void onCancelled(@NonNull DatabaseError databaseError) {}
 //    });
 
-    speedDial = v.findViewById(R.id.home_fab);
-    speedDial.inflate(R.menu.menu_fab);
 
-    speedDial.setOnActionSelectedListener(new SpeedDialView.OnActionSelectedListener() {
-      @Override
-      public boolean onActionSelected(SpeedDialActionItem speedDialActionItem) {
-        switch (speedDialActionItem.getId()) {
-          case R.id.fabScanQR:
-//            scanQR();
-            Intent toQr = new Intent(getActivity(), DialogQrScanner.class);
-            startActivity(toQr);
-            return false;
-          case R.id.fabEnterDetails:
-            enterUID();
-            return false;
-          default:
-            return false;
-        }
-      }
-    });
+    listView.setOnScrollListener(onScrollListener());
 
 //    usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
 //      @Override
@@ -133,14 +135,47 @@ public class HomeFragment extends Fragment {
           }
         }, 1000); // Delay in millis
         showBalance();
-        words = new ArrayList();
+        homeFab();
         displayList(v);
       }
     });
 
-
     return v;
   }
+
+  public AbsListView.OnScrollListener onScrollListener(){
+    return new AbsListView.OnScrollListener() {
+      @Override
+      public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+      }
+
+      @Override
+      public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+        relativeLayout = v.findViewById(R.id.speedDial);
+        if (firstVisibleItem == 0) {
+          // check if we reached the top or bottom of the list
+          View v = listView.getChildAt(0);
+          int offset = (v == null) ? 0 : v.getTop();
+          if (offset == 0) {
+            // reached the top: visible header and footer
+            relativeLayout.setVisibility(VISIBLE);
+          }
+        }else if (totalItemCount - visibleItemCount > firstVisibleItem) {
+          // on scrolling
+          relativeLayout.setVisibility(GONE);
+        }else if (totalItemCount - visibleItemCount < firstVisibleItem) {
+          // on scrolling
+          relativeLayout.setVisibility(VISIBLE);
+        }
+        }
+      };
+    }
+
+  private void setViewStatus(SpeedDialView vg2, int status) {
+    vg2.setVisibility(status);
+  }
+
 
   public void showBalance(){
     balance = GetFirebase.getUsers(mAuth.getUid()).getBalance();
@@ -212,8 +247,8 @@ public class HomeFragment extends Fragment {
         String result = tempKey.getText().toString();
         Log.e("tempInput: ", result);
         if (!result.isEmpty()) {
-          if (true) {
-
+          if (!GetFirebase.existUser(result)) {
+            Toast.makeText(getContext(), "Input Error.", Toast.LENGTH_LONG).show();
           } else {
             final String scannedUpline = result;
 
@@ -246,13 +281,6 @@ public class HomeFragment extends Fragment {
           Toast.makeText(getContext(), "Input Error.", Toast.LENGTH_LONG).show();
 //          super.onActivityResult(requestCode, resultCoede, intent);
         }
-
-//        if(!tempInput.equals(mAuth.getUid()))
-//          Toast.makeText(getContext(), "叫你填啦！", Toast.LENGTH_LONG).show();
-//        else if(!tempInput.equals(mAuth.getUid())&&tempInput.length()!=0)
-//          Toast.makeText(getContext(),"是不会放对的是吗？",Toast.LENGTH_LONG).show();
-//        else if(tempInput.equals(mAuth.getUid()))
-//          Toast.makeText(getContext(),"终于对了！恭喜恭喜",Toast.LENGTH_LONG).show();
       }
     });
     AlertDialog alert = builder.create();
@@ -273,8 +301,71 @@ public class HomeFragment extends Fragment {
     }
 
 
-    WordAdapter itemAdapter = new WordAdapter(getActivity(),  words);
+    itemAdapter = new WordAdapter(getActivity(),  words);
     listView = (ListView) view.findViewById(R.id.home_listView);
     listView.setAdapter(itemAdapter);
+  }
+
+  private void homeFab(){
+    RelativeLayout speedDialLayout = v.findViewById(R.id.speed_dial_layout);
+    RelativeLayout qrCodeLayout = v.findViewById(R.id.qr_code_layout);
+    if(GetFirebase.getUsers(mAuth.getUid()).getUplineUid() == null) {
+      speedDialLayout.setVisibility(VISIBLE);
+      qrCodeLayout.setVisibility(GONE);
+      speedDial = v.findViewById(R.id.home_fab);
+      speedDial.inflate(R.menu.menu_fab);
+
+      speedDial.setOnActionSelectedListener(new SpeedDialView.OnActionSelectedListener() {
+        @Override
+        public boolean onActionSelected(SpeedDialActionItem speedDialActionItem) {
+          switch (speedDialActionItem.getId()) {
+            case R.id.fabScanQR:
+//            scanQR();
+              Intent toQr = new Intent(getActivity(), DialogQrScanner.class);
+              startActivity(toQr);
+              return false;
+            case R.id.fabEnterDetails:
+              enterUID();
+              return false;
+            default:
+              return false;
+          }
+        }
+      });
+    }else{
+      speedDialLayout.setVisibility(GONE);
+      qrCodeLayout.setVisibility(VISIBLE);
+      floatingActionButton = v.findViewById(R.id.qr_code);
+      floatingActionButton.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+          androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
+          LayoutInflater inflater = requireActivity().getLayoutInflater();
+          View temp = inflater.inflate(R.layout.qr_code, null);
+
+          done = (Button) temp.findViewById(R.id.back);
+          qrImage = (ImageView) temp.findViewById(R.id.qr_image);
+          String word = mAuth.getUid();
+          qrgEncoder = new QRGEncoder(word, null, QRGContents.Type.TEXT, 800);
+          builder.setView(temp);
+          try {
+            Bitmap bitmap = qrgEncoder.encodeAsBitmap();
+            qrImage.setImageBitmap(bitmap);
+          } catch (WriterException e) {
+            Toast.makeText(getContext(), "No QR Code", Toast.LENGTH_SHORT);
+          }
+          final androidx.appcompat.app.AlertDialog alertDialog = builder.create();
+          done.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              alertDialog.dismiss();
+            }
+          });
+
+
+          alertDialog.show();
+        }
+      });
+    }
   }
 }

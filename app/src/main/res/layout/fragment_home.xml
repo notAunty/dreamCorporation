@@ -1,131 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/swipe_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background">
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/swipe_container">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:id="@+id/card"
+                android:layout_height="230dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/grad1"
+                android:foregroundGravity="center_horizontal"
+                app:cardBackgroundColor="#00000000"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="16dp">
+
+                <ImageView
+                    android:id="@+id/card_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="top"
+                    android:paddingLeft="12dp"
+                    android:paddingTop="8dp"
+                    android:text="@string/app_name"
+                    android:textColor="#F0000000"
+                    android:textSize="16sp"
+                    android:shadowRadius="2"
+                    android:shadowColor="@android:color/darker_gray"
+                    android:shadowDx="0"
+                    android:shadowDy="4"/>
+
+                <TextView
+                    android:id="@+id/level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingTop="8dp"
+                    android:paddingRight="12dp"
+                    android:text="Member"
+                    android:textColor="#F0000000"
+                    android:textSize="16sp"
+                    android:shadowRadius="2"
+                    android:shadowColor="@android:color/darker_gray"
+                    android:shadowDx="0"
+                    android:shadowDy="4"/>
+
+                <TextView
+                    android:id="@+id/home_balance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:fontFamily="@font/google_sans_bold"
+                    android:paddingLeft="15dp"
+                    android:paddingBottom="8dp"
+                    android:text="..."
+                    android:textColor="#000000"
+                    android:textSize="40sp"
+                    android:shadowRadius="5"
+                    android:shadowColor="@android:color/darker_gray"
+                    android:shadowDx="0"
+                    android:shadowDy="8"/>
+            </androidx.cardview.widget.CardView>
+
+
+
+            <!--<android.support.design.widget.CoordinatorLayout-->
+            <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+            <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
+
+            <!--&lt;!&ndash; Main content &ndash;&gt;-->
+
+            <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
+            <!--android:id="@+id/floating_action_button"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="bottom|right"-->
+            <!--android:layout_margin="16dp"-->
+            <!--app:srcCompat="@drawable"/>-->
+
+            <!--</android.support.design.widget.CoordinatorLayout>-->
+
+        </RelativeLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="278dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card"
-            android:layout_width="match_parent"
-            android:layout_height="230dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginRight="16dp"
-            android:background="@drawable/grad1"
-            android:foregroundGravity="center_horizontal"
-            app:cardBackgroundColor="#00000000"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="16dp">
-
-            <ImageView
-                android:id="@+id/card_background"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitXY" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="top"
-                android:paddingLeft="12dp"
-                android:paddingTop="8dp"
-                android:text="@string/app_name"
-                android:textColor="#F0000000"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/level"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="right"
-                android:paddingTop="8dp"
-                android:paddingRight="12dp"
-                android:text="Member"
-                android:textColor="#F0000000"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/home_balance"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:fontFamily="@font/google_sans_bold"
-                android:paddingLeft="15dp"
-                android:paddingBottom="8dp"
-                android:text="..."
-                android:textColor="#000000"
-                android:textSize="40sp" />
-        </androidx.cardview.widget.CardView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@id/card"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginRight="16dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/recentTransactions"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:fontFamily="@font/google_sans_bold"
-                android:text="@string/recentTrans"
-                android:textColor="@android:color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-
-            <ListView
-                android:id="@+id/home_listView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical" />
-
-        </LinearLayout>
-
-        <com.leinardi.android.speeddial.SpeedDialOverlayLayout
-            android:id="@+id/speedDialOverlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-        <com.leinardi.android.speeddial.SpeedDialView
-            android:id="@+id/home_fab"
+        <TextView
+            android:id="@+id/recentTransactions"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:clickable="true"
-            android:focusable="true"
-            app:elevation="3dp"
-            app:sdMainFabClosedSrc="@drawable/ic_add"
-            app:sdOverlayLayout="@id/speedDialOverlay" />
+            android:layout_marginStart="3dp"
+            android:fontFamily="@font/google_sans_bold"
+            android:text="@string/recentTrans"
+            android:textColor="@android:color/black"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:shadowRadius="2"
+            android:shadowColor="@android:color/darker_gray"
+            android:shadowDx="0"
+            android:shadowDy="4"/>
 
-        <!--<android.support.design.widget.CoordinatorLayout-->
-        <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-        <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent">-->
+        <ListView
+            android:id="@+id/home_listView"
+            android:layout_below="@id/recentTransactions"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" />
 
-        <!--&lt;!&ndash; Main content &ndash;&gt;-->
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/speedDial">
 
-        <!--<com.google.android.material.floatingactionbutton.FloatingActionButton-->
-        <!--android:id="@+id/floating_action_button"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="bottom|right"-->
-        <!--android:layout_margin="16dp"-->
-        <!--app:srcCompat="@drawable"/>-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/speed_dial_layout">
 
-        <!--</android.support.design.widget.CoordinatorLayout>-->
+                <com.leinardi.android.speeddial.SpeedDialOverlayLayout
+                    android:id="@+id/speedDialOverlay"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+                <com.leinardi.android.speeddial.SpeedDialView
+                    android:id="@+id/home_fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:elevation="3dp"
+                    app:sdMainFabClosedSrc="@drawable/ic_add"
+                    app:sdOverlayLayout="@id/speedDialOverlay" />
+
+            </RelativeLayout>
+            
+            <RelativeLayout
+                android:id="@+id/qr_code_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/qr_code"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="4dp"
+                    android:clickable="true"
+                    android:elevation="3dp"
+                    android:backgroundTint="@color/bright_yellow"
+                    app:useCompatPadding="true"
+                    app:borderWidth="0dp"
+                    android:src="@drawable/ic_for_qr_code"
+                    app:rippleColor="@android:color/white" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
 
     </RelativeLayout>
 
-</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+</RelativeLayout>

@@ -168,37 +168,6 @@ public class ProfileFragment extends Fragment {
       }
     });
 
-    floatingActionButton = view.findViewById(R.id.qr_code);
-    floatingActionButton.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-        LayoutInflater inflater = requireActivity().getLayoutInflater();
-        View temp = inflater.inflate(R.layout.qr_code, null);
-
-        done = (Button) temp.findViewById(R.id.back);
-        qrImage = (ImageView) temp.findViewById(R.id.qr_image);
-        String word = mAuth.getUid();
-        qrgEncoder = new QRGEncoder(word, null, QRGContents.Type.TEXT, 800);
-        builder.setView(temp);
-        try {
-          Bitmap bitmap = qrgEncoder.encodeAsBitmap();
-          qrImage.setImageBitmap(bitmap);
-        } catch (WriterException e) {
-          Toast.makeText(getContext(), "No QR Code", Toast.LENGTH_SHORT);
-        }
-        final AlertDialog alertDialog = builder.create();
-        done.setOnClickListener(new View.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            alertDialog.dismiss();
-          }
-        });
-
-
-        alertDialog.show();
-      }
-    });
 
 //    swipeRefreshLayout.setColorSchemeColors(
 //            getResources().getColor(android.R.color.holo_blue_bright),
