@@ -4,7 +4,6 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -18,7 +17,6 @@ import java.util.HashMap;
 
 public class GetFirebase {
 
-  private static FirebaseAuth mAuth = FirebaseAuth.getInstance();
   private static FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
   protected static DatabaseReference adminRef = mDatabase.getReference("admin");
   protected static DatabaseReference usersRef = mDatabase.getReference("users");
