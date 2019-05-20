@@ -125,6 +125,7 @@ public class HomeFragment extends Fragment {
     swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
       @Override
       public void onRefresh() {
+        GetFirebase.fetchTransactions();
         Toast.makeText(getContext(), "Refreshed.", Toast.LENGTH_SHORT).show();
         // To keep animation for 4 seconds
         new Handler().postDelayed(new Runnable() {
