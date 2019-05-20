@@ -125,7 +125,6 @@ public class HomeFragment extends Fragment {
     swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
       @Override
       public void onRefresh() {
-        GetFirebase.fetchTransactions();
         Toast.makeText(getContext(), "Refreshed.", Toast.LENGTH_SHORT).show();
         // To keep animation for 4 seconds
         new Handler().postDelayed(new Runnable() {
@@ -184,6 +183,7 @@ public class HomeFragment extends Fragment {
 
     if (balance < 100) {
       cardBg.setImageResource(R.color.sky_blue);
+      levelTextView.setText("Member");
     } else if (balance < 200){
       cardBg.setImageResource(R.drawable.silver);
       levelTextView.setText("Silver");

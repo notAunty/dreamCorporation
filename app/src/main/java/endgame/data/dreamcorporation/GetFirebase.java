@@ -109,7 +109,7 @@ public class GetFirebase {
 
   public static void fetchTransactions() {
 //    Log.e("At", "fetchUsers outside");
-    transRef.addListenerForSingleValueEvent(new ValueEventListener() {
+    transRef.addValueEventListener(new ValueEventListener() {
       @Override
       public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
       HashMap<String, HashMap<String, Object>> tempTrans = (HashMap<String, HashMap<String, Object>>) dataSnapshot.getValue();
@@ -119,14 +119,16 @@ public class GetFirebase {
           transactionId.add(tempTran);
         }
 
-        for (HashMap<String, Object> tempTran : tempTrans.values()) {
-          transactions.add(new Transactions(
-                  ((String) tempTran.get("r")),
-                  ((String) tempTran.get("dwId")),
-                  ((long) tempTran.get("tS")),
-                  (Double.parseDouble(tempTran.get("a").toString()))
-          ));
-        }
+        try {
+          for (HashMap<String, Object> tempTran : tempTrans.values()) {
+            transactions.add(new Transactions(
+                    ((String) tempTran.get("r")),
+                    ((String) tempTran.get("dwId")),
+                    ((long) tempTran.get("tS")),
+                    (Double.parseDouble(tempTran.get("a").toString()))
+            ));
+          }
+        } catch (Exception e) {}
       }
 
       @Override
