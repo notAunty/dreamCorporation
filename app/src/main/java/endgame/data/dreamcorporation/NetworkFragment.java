@@ -75,7 +75,7 @@ public class NetworkFragment extends Fragment {
       root = new TreeNode<>(new ParentNode(GetFirebase.getUsers(temp).getUserName()));
       treeNodes.add(root);
 
-      generateLine(GetFirebase.getUsers(uid).getUplineUid(), root);
+      generateLine(temp, root);
     }
 //    addTreeNode(node);
 
@@ -215,14 +215,19 @@ public class NetworkFragment extends Fragment {
 //    final TreeNode tempRef = ref;
 //    final String uid = userId;
 
-    ArrayList<String> tempThisUser = GetFirebase.getUsers(userId).getDownlineUid();
+    ArrayList<String> tempThisUser = GetFirebase.getUsers(uid).getDownlineUid();
 
-    TreeNode up = new TreeNode<>(new ParentNode(GetFirebase.getUsers(uid).getUserName()));
-    ref.addChild(up);
+    if (tempThisUser.isEmpty()) {
+      TreeNode up = new TreeNode<>(new LeafNode(GetFirebase.getUsers(uid).getUserName()));
+      ref.addChild(up);
+    } else {
+      TreeNode up = new TreeNode<>(new ParentNode(GetFirebase.getUsers(uid).getUserName()));
+      ref.addChild(up);
 
-    for (String a : tempThisUser) {
-      TreeNode r = new TreeNode<>(new LeafNode(GetFirebase.getUsers(a).getUserName()));
-      up.addChild(r);
+      for (String a : tempThisUser) {
+        TreeNode r = new TreeNode<>(new LeafNode(GetFirebase.getUsers(a).getUserName()));
+        up.addChild(r);
+      }
     }
   }
 //    if (!tempDw.isEmpty()) {
