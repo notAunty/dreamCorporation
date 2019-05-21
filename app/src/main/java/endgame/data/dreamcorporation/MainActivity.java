@@ -29,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
+    GetFirebase.prepareFirebase();
     GetFirebase.getFirebase();
-
 
     if(!isConnectedToInternet()) {
       new AlertDialog.Builder(MainActivity.this)
@@ -65,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
         loading = (RelativeLayout)findViewById(R.id.login_loading);
         loading.setVisibility(View.VISIBLE);
 
-//        // TODO remove this
 //        if (userPw.length() == 0 || userId.length() == 0) {
 //          //Create the intent to start another activity
 //          Intent intent = new Intent(view.getContext(), HomeActivity.class);
