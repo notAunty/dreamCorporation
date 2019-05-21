@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,8 @@ public class SignupActivity extends AppCompatActivity {
 
   private Encryption encryption = new Encryption();
 
+  private RelativeLayout loading;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -41,13 +44,17 @@ public class SignupActivity extends AppCompatActivity {
         final String userFn = ((EditText) findViewById(R.id.signup_fullName)).getText().toString();
         final String userId = ((EditText) findViewById(R.id.signup_userId)).getText().toString();
         String userPw = ((EditText) findViewById(R.id.signup_userPw)).getText().toString();
+        loading = findViewById(R.id.signup_loading);
+        loading.setVisibility(View.VISIBLE);
 
         if (userPw.length() < 6 || userId.length() < 1) {
           Toast.makeText(view.getContext(), "Password longer a bit can ah??",
                   Toast.LENGTH_SHORT).show();
+          loading.setVisibility(View.GONE);
         } else if (GetFirebase.existUser(userId)) {
           Toast.makeText(view.getContext(), "Username unavailable",
                   Toast.LENGTH_SHORT).show();
+          loading.setVisibility(View.GONE);
         } else {
           if (!GetFirebase.existUser(userId.toString())) {
             mAuth.createUserWithEmailAndPassword(userId + "@asdfggfdsa.com", userPw)
@@ -71,6 +78,7 @@ public class SignupActivity extends AppCompatActivity {
                           Log.w("signup: ", "createUserWithEmail:failure", task.getException());
                           Toast.makeText(view.getContext(), "Signup failed.",
                                   Toast.LENGTH_SHORT).show();
+                          loading.setVisibility(View.GONE);
                         }
                       }
                     });

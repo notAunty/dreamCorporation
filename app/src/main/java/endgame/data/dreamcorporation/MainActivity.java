@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
   private FirebaseAuth mAuth;
+  private RelativeLayout loading;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_login);
 
-    Button login_button = (Button) findViewById(R.id.login_button);
+    final Button login_button = (Button) findViewById(R.id.login_button);
     TextView signup = (TextView) findViewById(R.id.to_signup_screen);
     mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Auth  //wp use this
 
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
       public void onClick(final View view) {
         String userId = ((EditText) findViewById(R.id.login_userid)).getText().toString();
         String userPw = ((EditText) findViewById(R.id.login_userpw)).getText().toString();
+        loading = (RelativeLayout)findViewById(R.id.login_loading);
+        loading.setVisibility(View.VISIBLE);
 
 //        // TODO remove this
 //        if (userPw.length() == 0 || userId.length() == 0) {
@@ -72,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         if (userPw.length() < 6 || userId.length() < 1) {
           Toast.makeText(view.getContext(), "Invalid username or password.",
                   Toast.LENGTH_SHORT).show();
+          loading.setVisibility(View.GONE);
         } else {
           mAuth.signInWithEmailAndPassword(userId + "@asdfggfdsa.com", userPw)
                   .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
@@ -89,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.w("login: ", "signInWithEmail:failure", task.getException());
                         Toast.makeText(view.getContext(), "Invalid username or password.",
                                 Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.GONE);
                       }
                     }
                   });

@@ -130,7 +130,7 @@
                             android:id="@+id/signup_button"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/grad1"
+                            android:background="@drawable/ripple_grad1"
                             android:text="Sign Up"
                             android:paddingLeft="8dp"
                             android:paddingRight="8dp"
@@ -152,4 +152,22 @@
             </LinearLayout>
         </RelativeLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/signup_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#A0000000"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
 </RelativeLayout>
