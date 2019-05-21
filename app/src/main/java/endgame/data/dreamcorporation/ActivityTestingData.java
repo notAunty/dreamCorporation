@@ -34,6 +34,7 @@ public class ActivityTestingData extends AppCompatActivity {
   private EditText balance;
   private EditText upId;
   private EditText dwId;
+  private EditText fee;
 
 
   @Override
@@ -51,6 +52,7 @@ public class ActivityTestingData extends AppCompatActivity {
     balance = (EditText) findViewById(R.id.testing_balance);
     upId = (EditText) findViewById(R.id.testing_upline);
     dwId = (EditText) findViewById(R.id.testing_downline);
+    fee = (EditText) findViewById(R.id.testing_fee);
 
     Toolbar toolbar = findViewById(R.id.testing_toolbar);
     setSupportActionBar(toolbar);
@@ -85,6 +87,7 @@ public class ActivityTestingData extends AppCompatActivity {
         fullName.setText(encryption.decodeDirectly(thisUser.getFullName()));
         encryption = new Encryption();
         balance.setText(String.valueOf(thisUser.getBalance()));
+        fee.setText(String.valueOf(GetFirebase.getFee()));
         upId.setText(thisUser.getUplineUid());
         dwId.setText(thisUser.getDownlineUid().toString());
       }
@@ -135,10 +138,13 @@ public class ActivityTestingData extends AppCompatActivity {
             }
 
           case 2: // UPDATE
-            GetFirebase.usersRef.child(selectedUserUid).child("uN").setValue(userName.getText().toString());
-            GetFirebase.usersRef.child(selectedUserUid).child("fN").setValue(encryption.encode(fullName.getText().toString()));
-            GetFirebase.usersRef.child(selectedUserUid).child("b").setValue(Double.parseDouble(balance.getText().toString()));
-            GetFirebase.usersRef.child(selectedUserUid).child("upId").setValue(upId.getText().toString());
+            if (!userName.getText().toString().isEmpty()) {
+              GetFirebase.usersRef.child(selectedUserUid).child("uN").setValue(userName.getText().toString());
+              GetFirebase.usersRef.child(selectedUserUid).child("fN").setValue(encryption.encode(fullName.getText().toString()));
+              GetFirebase.usersRef.child(selectedUserUid).child("b").setValue(Double.parseDouble(balance.getText().toString()));
+              GetFirebase.usersRef.child(selectedUserUid).child("upId").setValue(upId.getText().toString());
+            }
+            GetFirebase.adminRef.child("fee").setValue(Double.parseDouble(fee.getText().toString()));
             encryption = new Encryption();
 
           case 3: // DELETE

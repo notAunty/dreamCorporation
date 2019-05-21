@@ -42,7 +42,7 @@ dependencies {
     implementation 'com.google.zxing:core:3.3.2'
     implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
     implementation 'com.github.florent37:shapeofview:1.4.7'
-    //    implementation 'com.github.Kunzisoft:Android-SwitchDateTimePicker:2.0'
+//    implementation 'com.github.Kunzisoft:Android-SwitchDateTimePicker:2.0'
 //    implementation 'com.github.bmelnychuk:atv:1.2.9'
 //    implementation 'com.github.johnkil.print:print:1.2.2'
 //    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.12'
