@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
-    GetFirebase.prepareFirebase();
     GetFirebase.getFirebase();
 
     if(!isConnectedToInternet()) {

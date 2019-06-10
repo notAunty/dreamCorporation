@@ -18,9 +18,9 @@ import java.util.HashMap;
 public class GetFirebase {
 
   private static FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
-  protected static DatabaseReference adminRef;
-  protected static DatabaseReference usersRef;
-  protected static DatabaseReference transRef;
+  protected static DatabaseReference adminRef = mDatabase.getReference("admin");
+  protected static DatabaseReference usersRef = mDatabase.getReference("users");
+  protected static DatabaseReference transRef = mDatabase.getReference("transactions");
 
   private static String adminUid;
   private static double fee;
@@ -31,10 +31,7 @@ public class GetFirebase {
 
   public static void prepareFirebase() {
     mDatabase.setPersistenceEnabled(true);
-    adminRef = mDatabase.getReference("admin");
-    usersRef = mDatabase.getReference("users");
-    transRef = mDatabase.getReference("transactions");
-  }
+    }
 
   public static void getFirebase() {
     fetchAdmin();
