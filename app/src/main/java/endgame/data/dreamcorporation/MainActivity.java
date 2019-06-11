@@ -24,46 +24,48 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
-  private FirebaseAuth mAuth;
-  private RelativeLayout loading;
+    private FirebaseAuth mAuth;
+    private RelativeLayout loading;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    GetFirebase.getFirebase();
-
-    if(!isConnectedToInternet()) {
-      new AlertDialog.Builder(MainActivity.this)
-              .setTitle("Not connection")
-              .setCancelable(false)
-              .setMessage("Connect to Internet and restart app.")
-
-              // Specifying a listener allows you to take an action before dismissing the dialog.
-              // The dialog is automatically dismissed when a dialog button is clicked.
-              .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int which) {
-                  android.os.Process.killProcess(android.os.Process.myPid());
-                }
-              })
-              .show();
-    }
-
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_login);
-
-    final Button login_button = (Button) findViewById(R.id.login_button);
-    TextView signup = (TextView) findViewById(R.id.to_signup_screen);
-    mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Auth  //wp use this
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        GetFirebase.getFirebase();
 
 
-    login_button.setOnClickListener(new View.OnClickListener() {
-      @Override
-      //On click function
-      public void onClick(final View view) {
-        String userId = ((EditText) findViewById(R.id.login_userid)).getText().toString();
-        String userPw = ((EditText) findViewById(R.id.login_userpw)).getText().toString();
-        loading = (RelativeLayout)findViewById(R.id.login_loading);
-        loading.setVisibility(View.VISIBLE);
+        if(!isConnectedToInternet()) {
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Not connection")
+                    .setCancelable(false)
+                    .setMessage("Connect to Internet and restart app.")
 
+                    // Specifying a listener allows you to take an action before dismissing the dialog.
+                    // The dialog is automatically dismissed when a dialog button is clicked.
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            android.os.Process.killProcess(android.os.Process.myPid());
+                        }
+                    })
+                    .show();
+        }
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_login);
+
+        final Button login_button = (Button) findViewById(R.id.login_button);
+        TextView signup = (TextView) findViewById(R.id.to_signup_screen);
+        mAuth = FirebaseAuth.getInstance(); // Initialize Firebase Auth  //wp use this
+
+
+        login_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //On click function
+            public void onClick(final View view) {
+                String userId = ((EditText) findViewById(R.id.login_userid)).getText().toString();
+                String userPw = ((EditText) findViewById(R.id.login_userpw)).getText().toString();
+                loading = (RelativeLayout)findViewById(R.id.login_loading);
+                loading.setVisibility(View.VISIBLE);
+
+//        // TODO remove this
 //        if (userPw.length() == 0 || userId.length() == 0) {
 //          //Create the intent to start another activity
 //          Intent intent = new Intent(view.getContext(), HomeActivity.class);
@@ -71,59 +73,59 @@ public class MainActivity extends AppCompatActivity {
 //          onBackPressed(); // To close this activity
 //        }
 
-        if (userPw.length() < 6 || userId.length() < 1) {
-          Toast.makeText(view.getContext(), "Invalid username or password.",
-                  Toast.LENGTH_SHORT).show();
-          loading.setVisibility(View.GONE);
-        } else {
-          mAuth.signInWithEmailAndPassword(userId + "@asdfggfdsa.com", userPw)
-                  .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                      if (task.isSuccessful()) {
-                        // Sign in success, update UI with the signed-in user's information
-                        Log.d("login: ", "signInWithEmail:success");
-                        //Create the intent to start another activity
-                        Intent intent = new Intent(view.getContext(), HomeActivity.class);
-                        startActivity(intent);
-                        onBackPressed(); // To close this activity
-                      } else {
-                        // If sign in fails, display a message to the user.
-                        Log.w("login: ", "signInWithEmail:failure", task.getException());
-                        Toast.makeText(view.getContext(), "Invalid username or password.",
-                                Toast.LENGTH_SHORT).show();
-                        loading.setVisibility(View.GONE);
-                      }
-                    }
-                  });
-        }
-      }
-    });
+                if (userPw.length() < 6 || userId.length() < 1) {
+                    Toast.makeText(view.getContext(), "Invalid username or password.",
+                            Toast.LENGTH_SHORT).show();
+                    loading.setVisibility(View.GONE);
+                } else {
+                    mAuth.signInWithEmailAndPassword(userId + "@asdfggfdsa.com", userPw)
+                            .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d("login: ", "signInWithEmail:success");
+                                        //Create the intent to start another activity
+                                        Intent intent = new Intent(view.getContext(), HomeActivity.class);
+                                        startActivity(intent);
+                                        onBackPressed(); // To close this activity
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w("login: ", "signInWithEmail:failure", task.getException());
+                                        Toast.makeText(view.getContext(), "Invalid username or password.",
+                                                Toast.LENGTH_SHORT).show();
+                                        loading.setVisibility(View.GONE);
+                                    }
+                                }
+                            });
+                }
+            }
+        });
 
-    signup.setOnClickListener(new View.OnClickListener() {
-      @Override
-      //On click function
-      public void onClick(View view) {
-        //Create the intent to start another activity
-        onBackPressed();
-        Intent intent = new Intent(view.getContext(), SignupActivity.class);
-        startActivity(intent);
-      }
-    });
-  }
-
-  public boolean isConnectedToInternet(){
-    ConnectivityManager connectivity = (ConnectivityManager)getApplicationContext().getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
-    if (connectivity != null)
-    {
-      NetworkInfo[] info = connectivity.getAllNetworkInfo();
-      if (info != null)
-        for (int i = 0; i < info.length; i++)
-          if (info[i].getState() == NetworkInfo.State.CONNECTED)
-          {
-            return true;
-          }
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            //On click function
+            public void onClick(View view) {
+                //Create the intent to start another activity
+                onBackPressed();
+                Intent intent = new Intent(view.getContext(), SignupActivity.class);
+                startActivity(intent);
+            }
+        });
     }
-    return false;
-  }
+
+    public boolean isConnectedToInternet(){
+        ConnectivityManager connectivity = (ConnectivityManager)getApplicationContext().getSystemService(getApplicationContext().CONNECTIVITY_SERVICE);
+        if (connectivity != null)
+        {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null)
+                for (int i = 0; i < info.length; i++)
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED)
+                    {
+                        return true;
+                    }
+        }
+        return false;
+    }
 }

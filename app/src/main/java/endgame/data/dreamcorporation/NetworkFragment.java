@@ -121,7 +121,7 @@ public class NetworkFragment extends Fragment {
       if (!GetFirebase.getUsers(a).getDownlineUid().isEmpty()) {
         TreeNode r = new TreeNode<>(new ParentNode(GetFirebase.getUsers(a).getUserName()));
         ref.addChild(r);
-        generateLineAdmin(a, r);
+        generateLineAdmin(a, r); //Recursive
       } else {
         TreeNode r = new TreeNode<>(new LeafNode(GetFirebase.getUsers(a).getUserName()));
         ref.addChild(r);
