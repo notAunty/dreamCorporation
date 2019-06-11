@@ -38,6 +38,7 @@ public class ProfileFragment extends Fragment {
   private RelativeLayout admin, copy_key, log_out;
   private ClipboardManager clipboardManager;
   private FirebaseAuth mAuth;
+  private ImageView copy_image_key;
 
   @Nullable
   @Override
@@ -98,6 +99,16 @@ public class ProfileFragment extends Fragment {
     clipboardManager = (ClipboardManager) getActivity().getSystemService(CLIPBOARD_SERVICE);
     copy_key = view.findViewById(R.id.clipboard);
     copy_key.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        text = mAuth.getUid();
+        ClipData clipData = ClipData.newPlainText("Text", text);
+        clipboardManager.setPrimaryClip(clipData);
+        Toast.makeText(getContext(), "Copied to clipboard", Toast.LENGTH_SHORT).show();
+      }
+    });
+    copy_image_key = view.findViewById(R.id.user_key_image);
+    copy_image_key.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View v) {
         text = mAuth.getUid();
